@@ -1,0 +1,6 @@
+@Voam.Server_HostAddress = http://localhost:5157
+
+GET {{Voam.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
