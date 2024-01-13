@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Voam.Server.props" />
+</Project>

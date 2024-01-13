@@ -1,0 +1,1 @@
+C:\vs project\GitHub\Voam\voam.client\obj\Debug\voam.client.esproj.CoreCompileInputs.cache
