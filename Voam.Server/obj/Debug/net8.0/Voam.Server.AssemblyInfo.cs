@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Voam.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9914b965b2a252fe0a7d17bbf581bd4cf1b0e25")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c0904507096e90bfb58a5eb3e7765dad4b50910")]
 [assembly: System.Reflection.AssemblyProductAttribute("Voam.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Voam.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

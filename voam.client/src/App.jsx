@@ -4,6 +4,7 @@ import Path from "./utils/paths.js";
 
 import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
+import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
             <Routes>
                 <Route path={Path.Home} element={<Home />} />
             </Routes>
+            <Footer/>
         </div>
     );
 }

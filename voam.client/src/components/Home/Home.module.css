@@ -1,0 +1,22 @@
+.home {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3b444b;
+    padding: 48px 0;
+}
+
+.title {
+    font-size: 5.5rem;
+    color: #ffffec;
+}
+
+.slogan {
+    font-size: 2rem;
+    color: #aaabaa;
+}
+
+.baner{
+    width:55vw;
+}

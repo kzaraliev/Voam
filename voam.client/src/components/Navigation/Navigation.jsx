@@ -8,7 +8,7 @@ import Path from "../../utils/paths.js"
 
 function Navigation() {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
             <Container>
                 <Navbar.Brand as={Link} to={Path.Home}>Voam</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -18,6 +18,10 @@ function Navigation() {
                         <Nav.Link as={Link} to={Path.Items}>Items</Nav.Link>
                         <Nav.Link as={Link} to={Path.About}>About</Nav.Link>
                         <Nav.Link as={Link} to={Path.Contacts}>Contact</Nav.Link>
+                    </Nav>
+                    <Nav>
+                        <Nav.Link href="#deets">Profile</Nav.Link>
+                        <Nav.Link href="#memes">Shopping Cart</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
