@@ -6,6 +6,8 @@ const Path = {
     Login: "/login",
     Logout: "/logout",
     Register: "/register",
+    Profile: "/profile",
+    ShoppingCart: "/shopping-cart",
 };
 
 export default Path;
