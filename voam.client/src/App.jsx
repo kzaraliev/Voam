@@ -6,6 +6,7 @@ import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import Footer from "./components/Footer/Footer.jsx";
 import About from "./components/About/About.jsx";
+import Contact from "./components/Contact/Contact.jsx";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
             <Routes>
                 <Route path={Path.Home} element={<Home />} />
                 <Route path={Path.About} element={<About />} />
+                <Route path={Path.Contacts} element={<Contact />} />
             </Routes>
             <Footer/>
         </div>
