@@ -16,7 +16,7 @@
 .subtitle {
     font-size: 1.5rem;
     color: #aaabaa;
-    width: 70%;
+    width: 80%;
     text-align: center;
     margin: 24px 0;
 }
@@ -25,8 +25,8 @@
     list-style-type: none;
     padding: 52px 0;
     display: flex;
-    justify-content: space-between;
-    width: 50%;
+    justify-content: space-evenly;
+    width: 60%;
 }
 
 .contactElement {
@@ -38,7 +38,7 @@
 
 .icon {
     font-size: 125px;
-    padding: 32px;
+    padding: 25%;
     background-color: #949494;
     color: black;
     border-radius: 100%;
@@ -58,7 +58,7 @@
 }
 
 .accordion {
-    width: 50%;
+    width: 65%;
 }
 
 .accordionTitle {
@@ -66,4 +66,32 @@
     text-align: center;
     padding: 18px;
     color: #ffffec;
+}
+
+@media screen and (max-width: 720px){
+    .title {
+        font-size: 2.5rem;
+        color: #ffffec;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .contacts{
+        width: 70%
+    }
+
+    .icon {
+        font-size: 50px;
+        padding: 25%;
+    }
+
+    .contactTitle{
+        font-size: 1rem;
+    }
+
+    .accordionTitle {
+        font-size: 1.4rem;
+    }
 }
