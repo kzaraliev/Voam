@@ -1,12 +1,5 @@
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
 .contact {
-    height: 100%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,7 +23,7 @@ body {
 
 .contacts {
     list-style-type: none;
-    padding: 2px 0;
+    padding: 52px 0;
     display: flex;
     justify-content: space-between;
     width: 50%;
@@ -50,11 +43,12 @@ body {
     color: black;
     border-radius: 100%;
     transition: 0.3s;
+    opacity: 0.7;
 }
 
 .icon:hover {
-    color: black;
-    background-color: #707070;
+    opacity: 1;
+    cursor: pointer;
 }
 
 .contactTitle {
@@ -63,4 +57,13 @@ body {
     color: #dbdbdb;
 }
 
+.accordion {
+    width: 50%;
+}
 
+.accordionTitle {
+    font-size: 3rem;
+    text-align: center;
+    padding: 18px;
+    color: #ffffec;
+}

@@ -20,8 +20,8 @@ function Navigation() {
                         <Nav.Link as={Link} to={Path.Contacts}>Contact</Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">Profile</Nav.Link>
-                        <Nav.Link href="#memes">Shopping Cart</Nav.Link>
+                        <Nav.Link as={Link} to={Path.Profile}>Profile</Nav.Link>
+                        <Nav.Link as={Link} to={Path.ShoppingCart}>Shopping Cart</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
