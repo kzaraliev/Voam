@@ -5,4 +5,25 @@
     text-align: center;
     background-color: #2b3035;
     color: #e4eced;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyright{
+    margin-bottom: 6px;
+    padding: 0;
+}
+
+.privacyPolicy{
+    text-decoration: underline;
+    width: fit-content;
+    opacity: 0.8;
+    padding: 12px;
+}
+
+.privacyPolicy:hover{
+    cursor: pointer;
+    opacity: 1;
 }
