@@ -13,6 +13,9 @@
     <Folder Include="src\components\Footer\" />
     <Folder Include="src\components\About\" />
     <Folder Include="src\components\Contact\" />
+    <Folder Include="src\components\Login\" />
+    <Folder Include="src\components\Register\" />
+    <Folder Include="src\styles\" />
     <Folder Include="src\utils\" />
   </ItemGroup>
 </Project>
