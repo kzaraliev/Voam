@@ -23,6 +23,7 @@ function Navigation() {
                         <Nav.Link as={Link} to={Path.Profile}>Profile</Nav.Link>
                         <Nav.Link as={Link} to={Path.ShoppingCart}>Shopping Cart</Nav.Link>
                         <Nav.Link as={Link} to={Path.Login}>Login</Nav.Link>
+                        <Nav.Link as={Link} to={Path.Register}>Register</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

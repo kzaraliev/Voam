@@ -8,6 +8,7 @@ import Footer from "./components/Footer/Footer.jsx";
 import About from "./components/About/About.jsx";
 import Contact from "./components/Contact/Contact.jsx";
 import Login from "./components/Login/Login.jsx";
+import Register from "./components/Register/Register.jsx";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
                 <Route path={Path.About} element={<About />} />
                 <Route path={Path.Contacts} element={<Contact />} />
                 <Route path={Path.Login} element={<Login />} />
+                <Route path={Path.Register} element={< Register/>}/>
             </Routes>
             <Footer />
         </div>
