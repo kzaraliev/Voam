@@ -133,38 +133,6 @@ export default function Register() {
           </div>
         </Form.Group>
 
-        <Form.Group className="mb-3">
-          {errors[RegisterFormKeys.ConfirmPassword] &&
-            touched[RegisterFormKeys.ConfirmPassword] && (
-              <p className={styles.invalid}>
-                {errors[RegisterFormKeys.ConfirmPassword]}
-              </p>
-            )}
-          <div className={styles.inputContainer}>
-            <FloatingLabel
-              htmlFor={RegisterFormKeys.ConfirmPassword}
-              label="Enter password again : )"
-              className="mb-3"
-            >
-            <Form.Control
-              type={showConfirmPassword ? "text" : "password"}
-              name={RegisterFormKeys.ConfirmPassword}
-              id="confirmPassword"
-              placeholder="Enter password again : )"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values[RegisterFormKeys.ConfirmPassword]}
-            />
-            </FloatingLabel>
-            <div
-              className={styles.showPassword}
-              onClick={confirmPasswordVisibilityToggle}
-            >
-              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-            </div>
-          </div>
-        </Form.Group>
-
         <Link to={Path.Login} className={styles.ref}>
           *Already have an account?
         </Link>

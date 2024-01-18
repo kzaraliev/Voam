@@ -1,82 +1,109 @@
 .containerForm {
-    height: 91.6dvh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .form {
-    padding: 32px 38px;
-    padding-top: 0;
-    width: 33%;
-    background-color: #2b30358f;
-    border: 5px dashed #212529;
-    border-radius: 12px;
+  padding: 32px 38px;
+  padding-top: 0;
+  width: 33%;
+  max-height: 95%;
+  background-color: #2b30358f;
+  border: 5px dashed #212529;
+  border-radius: 12px;
 }
 
 .title {
-    text-align: center;
-    margin-bottom: 32px;
-    margin-top: 24px;
-    color: #ffffec;
+  text-align: center;
+  margin-bottom: 32px;
+  margin-top: 24px;
+  color: #ffffec;
 }
 
 .submitButton {
-    padding: 12px 0;
-    width: 30%;
-    background-color: #23272beb;
-    border: 3px solid #1e1e1e;
-    border-radius: 12px;
-    color: #ffffec;
-    transition-duration: 0.4s;
-    margin: 24px 0 auto;
-    font-weight: bold;
-    opacity: 0.7;
+  padding: 12px 0;
+  width: 35%;
+  background-color: #23272beb;
+  border: 3px solid #1e1e1e;
+  border-radius: 12px;
+  color: #ffffec;
+  transition-duration: 0.4s;
+  margin-top: 24px;
+  font-weight: bold;
+  opacity: 0.7;
 }
 
-    .submitButton:hover {
-       opacity: 1;
-    }
+.submitButton:hover {
+  opacity: 1;
+}
 
 .invalid {
-    animation: alternate;
-    transition-duration: 0.4s;
-    font-size: large;
-    color: red;
-    margin-bottom: 6px;
+  animation: alternate;
+  transition-duration: 0.4s;
+  font-size: large;
+  color: red;
+  margin-bottom: 6px;
 }
 
 /* Login and Register */
 
 .inputContainer {
-    position: relative;
+  position: relative;
 }
 
 .showPassword {
-    /* cursor: pointer;
+  /* cursor: pointer;
   width: fit-content;*/
-    font-size: x-large;
-    position: absolute;
-    right: 25px;
-    top: 33%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
+  font-size: x-large;
+  position: absolute;
+  right: 25px;
+  top: 33%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
 }
 
 .ref {
-    width: fit-content;
-    display: block;
-    float: right;
-    color: #aaabaa;
+  width: fit-content;
+  display: block;
+  float: right;
+  color: #aaabaa;
 }
 
 /* ------------------ */
 
-@media screen and (max-width: 720px) {
-    .form {
-        width: 85%;
-    }
+@media screen and (max-width: 768px) {
+  .form {
+    width: 90%;
+    padding: 32px 20px;
+    overflow: scroll;
+  }
+
+  .submitButton {
+    width: 45%;
+    font-size: small;
+  }
+
+  .title {
+    margin-top: 0;
+    margin-bottom: 32px;
+  }
+  
+  .ref, .invalid{
+    font-size: small;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .form {
+    width: 60%;
+  }
+
+  .submitButton {
+    width: 30%;
+  }
 }
