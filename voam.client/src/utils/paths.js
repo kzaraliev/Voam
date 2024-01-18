@@ -8,6 +8,7 @@ const Path = {
     Register: "/register",
     Profile: "/profile",
     ShoppingCart: "/shopping-cart",
+    NotFound: "*",
 };
 
 export default Path;
