@@ -80,7 +80,6 @@
   .form {
     width: 90%;
     padding: 32px 20px;
-    overflow: scroll;
   }
 
   .submitButton {

@@ -14,7 +14,7 @@ function Footer() {
       />
       <div className={styles.privacyPolicy} onClick={() => setModalShow(true)}>PRIVACY POLICY</div>
       <p className={styles.copyright}>
-        Copyright � 2023 Voam Clothing. All Rights Reserved
+        Copyright © 2023 Voam Clothing. All Rights Reserved
       </p>
     </div>
   );
