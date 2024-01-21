@@ -2,8 +2,6 @@ import mouth from "../../assets/mouth-voam.png"
 import logo from "../../assets/logo.png"
 import styles from "./About.module.css";
 
-import Figure from "react-bootstrap/Figure";
-
 export default function About() {
     return (
         <div className={styles.aboutContainer}>
@@ -15,10 +13,10 @@ export default function About() {
                         Voam is a Clothing brand with roots located in Bulgaria. Within our first year we have managed to sell out multiple drops. We saw potential and decided to keep going. All the motivation comes from our clients and all the positive feedback we get. Our main goal is to deliver pleasurable experience to every single client along with a high-quality product representing the wave we are currently on.
                     </p>
                 </div>
-                <Figure.Image width={450} src={mouth} />
+                <img className={styles.image} src={mouth} />
             </div>
             <div className={styles.sections}>
-                <Figure.Image width={371} src={logo} />
+                <img className={styles.image} src={logo} />
                 <div className={styles.text}>
                     <h2 className={styles.subtitle}>Our Mission</h2>
                     <p>
