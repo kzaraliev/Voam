@@ -25,7 +25,7 @@
     list-style-type: none;
     padding: 52px 0;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 60%;
 }
 
@@ -71,7 +71,6 @@
 @media screen and (max-width: 720px){
     .title {
         font-size: 2.5rem;
-        color: #ffffec;
     }
 
     .subtitle {
@@ -79,7 +78,7 @@
     }
 
     .contacts{
-        width: 70%
+        width: 75%
     }
 
     .icon {
@@ -93,5 +92,9 @@
 
     .accordionTitle {
         font-size: 1.4rem;
+    }
+
+    .accordion {
+        width: 80%;
     }
 }

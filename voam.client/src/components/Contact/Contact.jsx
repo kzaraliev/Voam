@@ -11,12 +11,12 @@ function Contact() {
             <p className={styles.subtitle}>Feel free to connect with us by sending a message or finding us on social media. We are eager to hear from you, and your thoughts and feedback are always welcome!</p>
             <ul className={styles.contacts}>
                 <li className={styles.contactElement}>
-                    <a href="https://www.instagram.com/voamclothing_/" target="_blank" rel="noreferrer"><FaInstagram className={styles.icon} /></a>
-                    <h3 className={styles.contactTitle}>Instagram</h3>
-                </li>
-                <li className={styles.contactElement}>
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=voaminfo@gmail.com" target="_blank" rel="noreferrer"><MdEmail className={styles.icon} /></a>
                     <h3 className={styles.contactTitle}>E-mail</h3>
+                </li>
+                <li className={styles.contactElement}>
+                    <a href="https://www.instagram.com/voamclothing_/" target="_blank" rel="noreferrer"><FaInstagram className={styles.icon} /></a>
+                    <h3 className={styles.contactTitle}>Instagram</h3>
                 </li>
                 <li className={styles.contactElement}>
                     <a href="https://www.tiktok.com/@voamclothing" target="_blank" rel="noreferrer"><FaTiktok className={styles.icon} /></a>
