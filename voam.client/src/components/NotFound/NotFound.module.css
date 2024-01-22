@@ -53,7 +53,6 @@
 }
 
 .notfound .notfound_404 h1 {
-  font-family: cabin,sans-serif;
   color: #000;
   font-weight: 700;
   margin: 0;
@@ -70,7 +69,6 @@
 }
 
 .notfound h2 {
-  font-family: cabin,sans-serif;
   font-size: 33px;
   font-weight: 700;
   text-transform: uppercase;
@@ -79,14 +77,12 @@
 }
 
 .notfound p {
-  font-family: cabin,sans-serif;
   font-size: 16px;
   color: #aaabaa;
   font-weight: 400
 }
 
 .notfound a {
-  font-family: cabin,sans-serif;
   display: inline-block;
   padding: 10px 25px;
   background-color: #8f8f8f;
