@@ -11,10 +11,9 @@ namespace Voam.Server.Data.Models
         [Required]
         public int Quantity { get; set; }
 
+        [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
 
-        // Navigation property for Product
-        [ForeignKey("ProductId")]
         public required virtual Product Product { get; set; }
     }
 }

@@ -15,11 +15,11 @@ namespace Voam.Server.Data.Models
         [Column(TypeName = "decimal(10, 2)")]
         public decimal TotalAmount { get; set; }
 
+        [ForeignKey(nameof(Customer))]
         public int CustomerId { get; set; }
 
-        // Navigation properties
-        [ForeignKey("CustomerId")]
         public required virtual Customer Customer { get; set; }
+
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }
 }

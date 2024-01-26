@@ -8,21 +8,20 @@ namespace Voam.Server.Data.Models
         [Key]
         public int Id { get; set; }
 
-        public int OrderId { get; set; }
-
-        public int ProductId { get; set; }
-
         public int Quantity { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(10, 2)")]
         public decimal Price { get; set; }
 
-        // Navigation properties
-        [ForeignKey("OrderId")]
+        [ForeignKey(nameof(Order))]
+        public int OrderId { get; set; }
+
         public required virtual Order Order { get; set; }
 
-        [ForeignKey("ProductId")]
+        [ForeignKey(nameof(Product))]
+        public int ProductId { get; set; }
+
         public required virtual Product Product { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Voam.Server.Constants;
 
 namespace Voam.Server.Data.Models
 {
@@ -9,7 +10,7 @@ namespace Voam.Server.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(255)]
+        [StringLength(ProductConstants.NameMaxLength)]
         public required string Name { get; set; }
 
         public required string Description { get; set; }

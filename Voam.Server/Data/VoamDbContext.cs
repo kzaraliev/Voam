@@ -8,13 +8,6 @@ namespace Voam.Server.Models
         public VoamDbContext(DbContextOptions<VoamDbContext> options) : base(options)
         { }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Product>().HasData();
-        //
-        //    base.OnModelCreating(modelBuilder);
-        //}
-
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }

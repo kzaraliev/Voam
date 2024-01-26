@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Voam.Server.Constants;
 
 namespace Voam.Server.Data.Models
 {
@@ -8,28 +9,30 @@ namespace Voam.Server.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(CustomerConstants.FirstnameMaxLength)]
         public required string FirstName { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(CustomerConstants.LastnameMaxLength)]
         public required string LastName { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(CustomerConstants.EmailMaxLength)]
         [EmailAddress]
         public required string Email { get; set; }
+        
+        [Required]
+        [MaxLength(CustomerConstants.PasswordMaxLength)]
+        public required string Password {  get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(CustomerConstants.AddressMaxLength)]
         public required string Address { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(CustomerConstants.PhoneNumberMaxLength)]
         public required string PhoneNumber { get; set; }
 
-        // Navigation property for Orders
         public required virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-        // New property for shopping cart
         public virtual ICollection<CartItem> ShoppingCart { get; set; } = new List<CartItem>();
     }
 }

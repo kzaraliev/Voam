@@ -9,22 +9,19 @@ namespace Voam.Server.Data.Models
         public int Id { get; set; }
 
         [Required]
-        public int ProductId { get; set; }
-
-        [Required]
-        public int CustomerId { get; set; }
-
-        [Required]
         public double Rating { get; set; }
 
         [Required]
         public DateTime ReviewDate { get; set; }
 
-        // Navigation properties
-        [ForeignKey("ProductId")]
+        [ForeignKey(nameof(Product))]
+        public int ProductId { get; set; }
+
         public required virtual Product Product { get; set; }
 
-        [ForeignKey("CustomerId")]
+        [ForeignKey(nameof(Customer))]
+        public int CustomerId { get; set; }
+
         public required virtual Customer Customer { get; set; }
     }
 }
