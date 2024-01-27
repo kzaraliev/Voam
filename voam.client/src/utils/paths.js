@@ -1,6 +1,6 @@
 const Path = {
     Home: "/",
-    Items: "/items",
+    Products: "/products",
     About: "/about",
     Contacts: "/contacts",
     Login: "/login",

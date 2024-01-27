@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Voam.Server.Models;
 
@@ -11,9 +12,11 @@ using Voam.Server.Models;
 namespace Voam.Server.Migrations
 {
     [DbContext(typeof(VoamDbContext))]
-    partial class VoamDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240127210527_SeedSizes")]
+    partial class SeedSizes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

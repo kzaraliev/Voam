@@ -5,4 +5,43 @@
 .title {
     font-size: 3.5rem;
     color: #ffffec;
+    text-align: center;
+    margin: 24px 0;
+}
+
+.containerProducts {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 24px 0;
+    align-items: center;
+    justify-items: center;
+}
+
+.img {
+    height: 40%;
+    width: 24rem;
+    height: 24rem;
+    object-fit: cover;
+    background: #ccc;
+}
+
+.card {
+    background-color: #2b3035bf !important;
+    border: 2px solid #2b3035 !important;
+
+}
+
+.cardBody {
+    color: #ffff !important;
+}
+
+.cardTitle{
+    font-size: xx-large !important;
+}
+
+.cardPrice {
+    color: #aaabaa !important;
 }

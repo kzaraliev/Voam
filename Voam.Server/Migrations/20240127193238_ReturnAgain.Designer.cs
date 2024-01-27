@@ -12,8 +12,8 @@ using Voam.Server.Models;
 namespace Voam.Server.Migrations
 {
     [DbContext(typeof(VoamDbContext))]
-    [Migration("20240126162736_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240127193238_ReturnAgain")]
+    partial class ReturnAgain
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,6 +75,11 @@ namespace Voam.Server.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -154,6 +159,13 @@ namespace Voam.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -161,13 +173,6 @@ namespace Voam.Server.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10, 2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Size")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(1)");
 
                     b.HasKey("Id");
 
@@ -201,6 +206,31 @@ namespace Voam.Server.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductReviews");
+                });
+
+            modelBuilder.Entity("Voam.Server.Data.Models.Size", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SizeChar")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(1)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("Voam.Server.Data.Models.CartItem", b =>
@@ -267,6 +297,17 @@ namespace Voam.Server.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Voam.Server.Data.Models.Size", b =>
+                {
+                    b.HasOne("Voam.Server.Data.Models.Product", "Product")
+                        .WithMany("Sizes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Voam.Server.Data.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
@@ -282,6 +323,8 @@ namespace Voam.Server.Migrations
             modelBuilder.Entity("Voam.Server.Data.Models.Product", b =>
                 {
                     b.Navigation("Reviews");
+
+                    b.Navigation("Sizes");
                 });
 #pragma warning restore 612, 618
         }

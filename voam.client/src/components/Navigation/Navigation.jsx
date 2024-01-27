@@ -35,9 +35,9 @@ function Navigation() {
           <Nav className="me-auto">
             <Nav.Link as={Link} to={Path.Home} onClick={handleNavItemClick}>
               Home
-            </Nav.Link>
-            <Nav.Link as={Link} to={Path.Items} onClick={handleNavItemClick}>
-              Items
+                      </Nav.Link>
+                      <Nav.Link as={Link} to={Path.Products} onClick={handleNavItemClick}>
+              Products
             </Nav.Link>
             <Nav.Link as={Link} to={Path.About} onClick={handleNavItemClick}>
               About

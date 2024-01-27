@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Voam.Server.Models;
 
@@ -11,9 +12,11 @@ using Voam.Server.Models;
 namespace Voam.Server.Migrations
 {
     [DbContext(typeof(VoamDbContext))]
-    partial class VoamDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240127194238_SeedProducts")]
+    partial class SeedProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -275,113 +278,6 @@ namespace Voam.Server.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Sizes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ProductId = 1,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ProductId = 1,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ProductId = 1,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ProductId = 2,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ProductId = 2,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ProductId = 2,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ProductId = 3,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ProductId = 3,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ProductId = 3,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ProductId = 4,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ProductId = 4,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ProductId = 4,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            ProductId = 5,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            ProductId = 5,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            ProductId = 5,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        });
                 });
 
             modelBuilder.Entity("Voam.Server.Data.Models.CartItem", b =>
