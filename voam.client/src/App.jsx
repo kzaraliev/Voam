@@ -11,6 +11,7 @@ import Login from "./components/Login/Login.jsx";
 import Register from "./components/Register/Register.jsx";
 import NotFound from "./components/NotFound/NotFound.jsx";
 import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
+import CreateProduct from "./components/CreateProduct/CreateProduct.jsx"
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path={Path.Login} element={<Login />} />
                 <Route path={Path.Register} element={<Register />} />
                 <Route path={Path.NotFound} element={<NotFound />} />
+                <Route path={Path.CreateProduct} element={<CreateProduct/> } />
             </Routes>
             <Footer />
         </div>

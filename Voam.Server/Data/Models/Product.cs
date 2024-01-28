@@ -19,13 +19,13 @@ namespace Voam.Server.Data.Models
         [Column(TypeName = "decimal(10, 2)")]
         public decimal Price { get; set; }
 
-        public required byte[] Image { get; set; }
-
         [Required]
         public bool IsAvailable { get; set; }
 
-        public ICollection<Review> Reviews { get; set; } = new List<Review>();
+        public virtual ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
 
-        public ICollection<Size> Sizes { get; set; } = new List<Size>();
+        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+
+        public virtual ICollection<Size> Sizes { get; set; } = new List<Size>();
     }
 }

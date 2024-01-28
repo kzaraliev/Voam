@@ -31,7 +31,7 @@ namespace Voam.Server.Data.Models
         [MaxLength(CustomerConstants.PhoneNumberMaxLength)]
         public required string PhoneNumber { get; set; }
 
-        public required virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
         public virtual ICollection<CartItem> ShoppingCart { get; set; } = new List<CartItem>();
     }

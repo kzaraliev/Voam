@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Voam.Server.Data.Models;
+using Voam.Server.DTOs;
 using Voam.Server.Models;
 
 namespace Voam.Server.Controllers
@@ -39,6 +41,24 @@ namespace Voam.Server.Controllers
             var product = context.Products.FirstOrDefault(p => p.Id == id);
 
             return StatusCode(StatusCodes.Status200OK, product);
+        }
+
+        [HttpPost]
+        [Route("CreateProduct")]
+        public IActionResult CreateProduct([FromBody] CreateProductDTO data)
+        {
+            Product product = new Product()
+            {
+                Name = data.name,
+                Price = data.price,
+                Description = data.description,
+                IsAvailable = data.isAvailable,
+            };
+
+            context.Products.Add(product);
+            context.SaveChanges();
+
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }

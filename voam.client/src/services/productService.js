@@ -20,8 +20,8 @@ export const getOne = async (productId) => {
     return result;
 };
 
-export const create = async (bookData) => {
-    const result = await request.post(baseUrl, bookData);
+export const create = async (productData) => {
+    const result = await request.post(`${baseUrl}/CreateProduct`, productData);
 
     return result;
 };

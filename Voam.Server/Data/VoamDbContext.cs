@@ -11,55 +11,56 @@ namespace Voam.Server.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Seed data for Products
-            modelBuilder.Entity<Product>().HasData(
-                new Product
-                {
-                    Id = 1,
-                    Name = "Hoodie 1",
-                    Description = "A comfortable cotton hoodie.",
-                    Price = 19.99m,
-                    IsAvailable = true,
-                    Image = ImageConverter.GetImageDataFromFile("./hoodie1.png"),
-                },
-                new Product
-                {
-                    Id = 2,
-                    Name = "Hoodie 2",
-                    Description = "A comfortable hoodie",
-                    Price = 19.99m,
-                    IsAvailable = true,
-                    Image = ImageConverter.GetImageDataFromFile("./hoodie2.png")
-                },
-                new Product
-                {
-                    Id = 3,
-                    Name = "Cap",
-                    Description = "A comfortable cotton Cap.",
-                    Price = 7.99m,
-                    IsAvailable = true,
-                    Image = ImageConverter.GetImageDataFromFile("./cap.png")
-                },
-                new Product
-                {
-                    Id = 4,
-                    Name = "Hoodie 3",
-                    Description = "A comfortable cotton hoodie.",
-                    Price = 9.99m,
-                    IsAvailable = true,
-                    Image = ImageConverter.GetImageDataFromFile("./hoodie3.png")
-                },
-                new Product
-                {
-                    Id = 5,
-                    Name = "Hoodie 4",
-                    Description = "A comfortable cotton hoodie number 4.",
-                    Price = 99.99m,
-                    IsAvailable = true,
-                    Image = ImageConverter.GetImageDataFromFile("./hoodie4.png")
-                }
 
-            );
+            // Seed data for Products
+            //modelBuilder.Entity<Product>().HasData(
+            //    new Product
+            //    {
+            //        Id = 1,
+            //        Name = "Hoodie 1",
+            //        Description = "A comfortable cotton hoodie.",
+            //        Price = 19.99m,
+            //        IsAvailable = true,
+            //        Image = ImageConverter.GetImageDataFromFile("./hoodie1.png"),
+            //    },
+            //    new Product
+            //    {
+            //        Id = 2,
+            //        Name = "Hoodie 2",
+            //        Description = "A comfortable hoodie",
+            //        Price = 19.99m,
+            //        IsAvailable = true,
+            //        Image = ImageConverter.GetImageDataFromFile("./hoodie2.png")
+            //    },
+            //    new Product
+            //    {
+            //        Id = 3,
+            //        Name = "Cap",
+            //        Description = "A comfortable cotton Cap.",
+            //        Price = 7.99m,
+            //        IsAvailable = true,
+            //        Image = ImageConverter.GetImageDataFromFile("./cap.png")
+            //    },
+            //    new Product
+            //    {
+            //        Id = 4,
+            //        Name = "Hoodie 3",
+            //        Description = "A comfortable cotton hoodie.",
+            //        Price = 9.99m,
+            //        IsAvailable = true,
+            //        Image = ImageConverter.GetImageDataFromFile("./hoodie3.png")
+            //    },
+            //    new Product
+            //    {
+            //        Id = 5,
+            //        Name = "Hoodie 4",
+            //        Description = "A comfortable cotton hoodie number 4.",
+            //        Price = 99.99m,
+            //        IsAvailable = true,
+            //        Image = ImageConverter.GetImageDataFromFile("./hoodie4.png")
+            //    }
+            //
+            //);
             modelBuilder.Entity<Size>().HasData(
                 new Size()
                 {
@@ -176,5 +177,6 @@ namespace Voam.Server.Models
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Review> ProductReviews { get; set; }
         public DbSet<Size> Sizes { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
     }
 }

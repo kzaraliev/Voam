@@ -11,12 +11,14 @@ export const RegisterFormKeys = {
 };
 
 export const CreateFormKeys = {
-    Title: "title",
-    Author: "author",
-    Year: "year",
-    Genre: "genre",
+    Name: "name",
     Description: "description",
-    ImageUrl: "imageUrl",
+    Price: "price",
+    IsAvailable: "isAvailable",
+    SizeS: "sizeS",
+    SizeM: "sizeM",
+    SizeL: "sizeL",
+    Images: "images"
 };
 
 export const EditFormKeys = {
