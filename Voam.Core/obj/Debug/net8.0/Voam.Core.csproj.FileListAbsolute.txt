@@ -1,0 +1,16 @@
+C:\vs project\GitHub\Voam\Voam.Core\bin\Debug\net8.0\Voam.Core.deps.json
+C:\vs project\GitHub\Voam\Voam.Core\bin\Debug\net8.0\Voam.Core.dll
+C:\vs project\GitHub\Voam\Voam.Core\bin\Debug\net8.0\Voam.Core.pdb
+C:\vs project\GitHub\Voam\Voam.Core\bin\Debug\net8.0\Voam.Infrastructure.dll
+C:\vs project\GitHub\Voam\Voam.Core\bin\Debug\net8.0\Voam.Infrastructure.pdb
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\Voam.Core.csproj.AssemblyReference.cache
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\Voam.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\Voam.Core.AssemblyInfoInputs.cache
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\Voam.Core.AssemblyInfo.cs
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\Voam.Core.csproj.CoreCompileInputs.cache
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\Voam.Core.sourcelink.json
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\Voam.Core.csproj.CopyComplete
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\Voam.Core.dll
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\refint\Voam.Core.dll
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\Voam.Core.pdb
+C:\vs project\GitHub\Voam\Voam.Core\obj\Debug\net8.0\ref\Voam.Core.dll

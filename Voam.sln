@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voam.Server", "Voam.Server\Voam.Server.csproj", "{20B8EEF4-C77F-4550-BD5F-AD319FE656BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voam.Server", "Voam.Server\Voam.Server.csproj", "{20B8EEF4-C77F-4550-BD5F-AD319FE656BC}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "voam.client", "voam.client\voam.client.esproj", "{80D91031-1DAD-448E-9CDD-E346B2B4EF7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voam.Infrastructure", "Voam.Infrastructure\Voam.Infrastructure.csproj", "{BCADEB57-6D31-43FC-87DE-1CD6EF05E033}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voam.Core", "Voam.Core\Voam.Core.csproj", "{F91B3883-3633-4B72-8D02-D6CEF2EC0014}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +27,14 @@ Global
 		{80D91031-1DAD-448E-9CDD-E346B2B4EF7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80D91031-1DAD-448E-9CDD-E346B2B4EF7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{80D91031-1DAD-448E-9CDD-E346B2B4EF7B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BCADEB57-6D31-43FC-87DE-1CD6EF05E033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCADEB57-6D31-43FC-87DE-1CD6EF05E033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCADEB57-6D31-43FC-87DE-1CD6EF05E033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCADEB57-6D31-43FC-87DE-1CD6EF05E033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F91B3883-3633-4B72-8D02-D6CEF2EC0014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91B3883-3633-4B72-8D02-D6CEF2EC0014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91B3883-3633-4B72-8D02-D6CEF2EC0014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91B3883-3633-4B72-8D02-D6CEF2EC0014}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

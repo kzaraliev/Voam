@@ -1,0 +1,3 @@
+fix methods in the controller
+all the blogic need to go in Voam.Core library
+implement IProductService with all the methods

@@ -9,9 +9,11 @@
       "Voam.Server/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.SpaProxy": "8.0.1",
+          "Microsoft.EntityFrameworkCore.Design": "8.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.1",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.1",
-          "Swashbuckle.AspNetCore": "6.5.0"
+          "Swashbuckle.AspNetCore": "6.5.0",
+          "Voam.Core": "1.0.0"
         },
         "runtime": {
           "Voam.Server.dll": {}
@@ -904,6 +906,22 @@
             "fileVersion": "6.0.21.52210"
           }
         }
+      },
+      "Voam.Core/1.0.0": {
+        "dependencies": {
+          "Voam.Infrastructure": "1.0.0"
+        },
+        "runtime": {
+          "Voam.Core.dll": {}
+        }
+      },
+      "Voam.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.1"
+        },
+        "runtime": {
+          "Voam.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -1486,6 +1504,16 @@
       "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
+    },
+    "Voam.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Voam.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

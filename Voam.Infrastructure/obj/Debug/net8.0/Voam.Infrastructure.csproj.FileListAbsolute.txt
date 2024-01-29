@@ -1,0 +1,15 @@
+C:\vs project\GitHub\Voam\Voam.Infrastructure\bin\Debug\net8.0\Voam.Infrastructure.deps.json
+C:\vs project\GitHub\Voam\Voam.Infrastructure\bin\Debug\net8.0\Voam.Infrastructure.runtimeconfig.json
+C:\vs project\GitHub\Voam\Voam.Infrastructure\bin\Debug\net8.0\Voam.Infrastructure.dll
+C:\vs project\GitHub\Voam\Voam.Infrastructure\bin\Debug\net8.0\Voam.Infrastructure.pdb
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\Voam.Infrastructure.csproj.AssemblyReference.cache
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\Voam.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\Voam.Infrastructure.AssemblyInfoInputs.cache
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\Voam.Infrastructure.AssemblyInfo.cs
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\Voam.Infrastructure.csproj.CoreCompileInputs.cache
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\Voam.Infrastructure.sourcelink.json
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\Voam.Infrastructure.dll
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\refint\Voam.Infrastructure.dll
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\Voam.Infrastructure.pdb
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\Voam.Infrastructure.genruntimeconfig.cache
+C:\vs project\GitHub\Voam\Voam.Infrastructure\obj\Debug\net8.0\ref\Voam.Infrastructure.dll

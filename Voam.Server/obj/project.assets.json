@@ -1579,6 +1579,32 @@
             "rid": "win"
           }
         }
+      },
+      "Voam.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Voam.Infrastructure": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Voam.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Voam.Core.dll": {}
+        }
+      },
+      "Voam.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.1"
+        },
+        "compile": {
+          "bin/placeholder/Voam.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Voam.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -4461,14 +4487,26 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Voam.Core/1.0.0": {
+      "type": "project",
+      "path": "../Voam.Core/Voam.Core.csproj",
+      "msbuildProject": "../Voam.Core/Voam.Core.csproj"
+    },
+    "Voam.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Voam.Infrastructure/Voam.Infrastructure.csproj",
+      "msbuildProject": "../Voam.Infrastructure/Voam.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.AspNetCore.SpaProxy >= 8.*-*",
+      "Microsoft.EntityFrameworkCore.Design >= 8.0.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.1",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.1",
-      "Swashbuckle.AspNetCore >= 6.5.0"
+      "Swashbuckle.AspNetCore >= 6.5.0",
+      "Voam.Core >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4497,7 +4535,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\vs project\\GitHub\\Voam\\Voam.Core\\Voam.Core.csproj": {
+              "projectPath": "C:\\vs project\\GitHub\\Voam\\Voam.Core\\Voam.Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -4513,6 +4555,12 @@
           "Microsoft.AspNetCore.SpaProxy": {
             "target": "Package",
             "version": "[8.*-*, )"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.0.1, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",

@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Voam.Core.Services;
+using Voam.Server.Contracts;
 using Voam.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -23,6 +24,9 @@ builder.Services.AddCors(options =>
 // Add EF Core context
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<VoamDbContext>(opt => opt.UseSqlServer(connectionString));
+
+//Add services
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 
