@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Voam.Server.Data.Models;
+using Voam.Infrastructure.Data.Models;
 
-namespace Voam.Server.Models
+namespace Voam.Infrastructure.Data
 {
     public class VoamDbContext : DbContext
     {

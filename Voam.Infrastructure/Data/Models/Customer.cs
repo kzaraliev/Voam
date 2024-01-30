@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Voam.Server.Constants;
 
-namespace Voam.Server.Data.Models
+namespace Voam.Infrastructure.Data.Models
 {
     public class Customer
     {
@@ -20,10 +20,10 @@ namespace Voam.Server.Data.Models
         [MaxLength(CustomerConstants.EmailMaxLength)]
         [EmailAddress]
         public required string Email { get; set; }
-        
+
         [Required]
         [MaxLength(CustomerConstants.PasswordMaxLength)]
-        public required string Password {  get; set; }
+        public required string Password { get; set; }
 
         [MaxLength(CustomerConstants.AddressMaxLength)]
         public required string Address { get; set; }

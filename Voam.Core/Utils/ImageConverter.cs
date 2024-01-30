@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace Voam.Server.Utils
+﻿namespace Voam.Core.Utils
 {
     public class ImageConverter
     {

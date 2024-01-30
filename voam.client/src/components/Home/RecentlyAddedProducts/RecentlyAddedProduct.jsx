@@ -7,9 +7,9 @@ import Path from "../../../utils/paths"
 import { Link } from "react-router-dom";
 
 export default function RecentlyAddedProduct({ id, name, price, image }) {
-
-    const imgSrc = `data:image/jpeg;base64, ${image}`;
-
+    console.log(image);
+    const imgSrc = `data:image/jpeg;base64,${image}`;
+    console.log(imgSrc);
     return (
         <Card className={styles.card} style={{ width: "24rem" }}>
             <Card.Img variant="top" src={imgSrc} className={styles.img} />

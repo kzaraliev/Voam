@@ -20,7 +20,7 @@ function RecentlyAddedProducts() {
 
             <div className={styles.containerProducts}>
                 {products === undefined ? <p>Loading...</p> : products.map((product) => (
-                    <RecentlyAddedProduct key={product.id} {...product} />
+                    <RecentlyAddedProduct key={product.id} id={product.id} name={product.name} price={product.price} image={product.image.imageData} />
                 ))}
             </div>
         </div>

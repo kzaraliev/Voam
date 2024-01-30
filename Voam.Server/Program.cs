@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Voam.Core.Contracts;
 using Voam.Core.Services;
-using Voam.Server.Contracts;
-using Voam.Server.Models;
+using Voam.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +27,8 @@ builder.Services.AddDbContext<VoamDbContext>(opt => opt.UseSqlServer(connectionS
 
 //Add services
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
+builder.Services.AddScoped<IImageService, ImageService>();
 
 var app = builder.Build();
 

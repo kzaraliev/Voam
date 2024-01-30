@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Voam.Server.Constants;
 
-namespace Voam.Server.Data.Models
+namespace Voam.Infrastructure.Data.Models
 {
     public class Product
     {

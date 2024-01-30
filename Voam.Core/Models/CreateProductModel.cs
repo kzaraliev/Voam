@@ -1,6 +1,6 @@
-﻿namespace Voam.Server.DTOs
+﻿namespace Voam.Core.Models
 {
-    public class CreateProductDTO
+    public class CreateProductModel
     {
         public string name { get; set; }
 
