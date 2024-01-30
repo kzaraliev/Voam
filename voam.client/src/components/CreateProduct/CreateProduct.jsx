@@ -58,7 +58,7 @@ export default function CreateProduct() {
         try {
             const { id } = await productService.create(values);
 
-            //navigate(`${Path.Products}/${id}`);
+            navigate(`${Path.Products}/${id}`);
         } catch (error) {
             if (error.code === 401) {
                 resetForm();

@@ -3,16 +3,12 @@ import styles from "./RecentlyAddedProducts.module.css";
 import RecentlyAddedProduct from "./RecentlyAddedProduct";
 import * as productService from "../../../services/productService"
 
-
 function RecentlyAddedProducts() {
-    /*Fetch recently added products*/
-
     const [products, setProducts] = useState();
 
     useEffect(() => {
         productService.getLatest().then(res => setProducts(res))
     }, []);
-
 
     return (
         <div className={styles.recentProducts}>

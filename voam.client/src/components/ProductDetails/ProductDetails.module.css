@@ -1,0 +1,80 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.content {
+    padding: 32px 28px;
+    width: 80%;
+    height: 85%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.carousel{
+    width:50%;
+    align-items: center;
+    justify-content:center;
+}
+
+.productDetails {
+    padding: 3px 64px;
+    width: 50%;
+}
+
+.productImg {
+    width:100%;
+}
+
+.productName {
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+.productInfo {
+    font-size: larger;
+    border-bottom: 1px solid black;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.description {
+    overflow-y: scroll;
+    max-height: 12vh;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+    .description::-webkit-scrollbar {
+        display: none;
+    }
+
+
+.editAndDeleteContainer {
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+
+.editButton,
+.deleteButton {
+    padding: 6px 12px;
+    background-color: #e4d5b794;
+    border: 2px solid #d9b99b;
+    border-radius: 12px;
+    color: rgba(0, 0, 0, 0.795);
+    transition-duration: 0.4s;
+    font-weight: 500;
+    font-size: 1.3rem;
+}
+
+    .editButton:hover,
+    .deleteButton:hover {
+        background-color: #e4d5b7;
+        color: rgb(0, 0, 0);
+    }
