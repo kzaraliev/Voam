@@ -12,6 +12,7 @@ import Register from "./components/Register/Register.jsx";
 import NotFound from "./components/NotFound/NotFound.jsx";
 import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx"
+import Products from "./components/Products/Products.jsx";
 
 function App() {
     return (
@@ -19,7 +20,8 @@ function App() {
             <Navigation />
             <Routes>
                 <Route path={Path.Home} element={<Home />} />
-                <Route path={`${Path.Products}/:id`} element={<ProductDetails />} />
+                <Route path={Path.Items} element={<Products/> }/>
+                <Route path={`${Path.Items}/:id`} element={<ProductDetails />} />
                 <Route path={Path.About} element={<About />} />
                 <Route path={Path.Contacts} element={<Contact />} />
                 <Route path={Path.Login} element={<Login />} />

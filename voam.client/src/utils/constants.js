@@ -29,3 +29,8 @@ export const EditFormKeys = {
     Description: "description",
     ImageUrl: "imageUrl",
 };
+
+export const OrderFormKeys = {
+    Size: "size",
+    Amount: "amount"
+}

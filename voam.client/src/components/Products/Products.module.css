@@ -1,0 +1,140 @@
+.grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 9px;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 24px 0;
+    align-items: center;
+    justify-items: center;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardBackground {
+    background-color: #2b3035bf !important;
+    border: 2px solid #2b3035 !important;
+}
+
+.cardImg {
+    width: 24rem;
+    height: 24rem;
+    object-fit: cover;
+    background: #ccc;
+}
+
+.cardBody {
+    color: #ffff !important;
+}
+
+.cardTitle {
+    font-size: xx-large !important;
+}
+
+.price {
+    color: #aaabaa;
+    font-size: large;
+}
+
+.products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+}
+
+.button {
+    padding: 12px 0 12px;
+    width: 30%;
+    color: #ffff;
+    font-weight: 600;
+    font-size: large;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+    .button:hover {
+        text-decoration: underline;
+        opacity: 1;
+    }
+
+.icon {
+    margin-bottom: 2.2px;
+    margin-left: 6px;
+}
+
+.empty {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.emptyText {
+    font-size: xx-large;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    font-size: x-large;
+}
+
+    .link:hover {
+        text-decoration: underline;
+    }
+
+.pageLink {
+    padding: 10px 16px;
+    text-decoration: none;
+    margin: 4px;
+    user-select: none;
+    border-radius: 12px;
+    color: #ffffec;
+    background-color: #2f353b;
+    border: 1px solid #23272b;
+    opacity: 0.8;
+}
+
+    .pageLink:hover {
+        cursor: pointer;
+        opacity: 1;
+    }
+
+
+.header {
+    margin: 24px 12px auto;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    align-items: center;
+}
+
+.title {
+    font-size: 4rem;
+    margin-bottom: 24px;
+    color: #ffffec;
+}
+
+.dropdown {
+    align-self: flex-end;
+    margin-bottom: 0;
+}
+
+.dropdownButton {
+    background-color: #2f353b !important;
+    border: 2px solid #23272b !important;
+    color: #ffffec !important;
+    opacity: 0.8;
+    margin-bottom: 24px
+}
+
+.dropdownButton:hover{
+    opacity: 1;
+}
