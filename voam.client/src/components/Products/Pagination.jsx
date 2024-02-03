@@ -1,11 +1,15 @@
-import styles from "./Books.module.css"
+import styles from "./Products.module.css"
 
 export default function Pagination({ productsPerPage, totalProducts, paginate }) {
   const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
     pageNumbers.push(i);
-  }
+    }
+
+    if (pageNumbers < 2) {
+        return
+    }
 
   return (
     <nav>

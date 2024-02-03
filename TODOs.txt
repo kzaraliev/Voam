@@ -1,0 +1,1 @@
+Add some kind of validation for uploading images when creating a product

@@ -15,10 +15,10 @@ const initialValues = {
     [CreateFormKeys.Name]: "",
     [CreateFormKeys.Description]: "",
     [CreateFormKeys.Price]: "",
-    [CreateFormKeys.IsAvailable]: "",
-    [CreateFormKeys.SizeS]: "",
-    [CreateFormKeys.SizeM]: "",
-    [CreateFormKeys.SizeL]: "",
+    [CreateFormKeys.IsAvailable]: false,
+    [CreateFormKeys.SizeS]: 0,
+    [CreateFormKeys.SizeM]: 0,
+    [CreateFormKeys.SizeL]: 0,
     [CreateFormKeys.Images]: [],
 };
 
@@ -34,6 +34,7 @@ export default function CreateProduct() {
         handleSubmit,
         isSubmitting,
         setFieldValue,
+        setFieldError,
         resetForm,
     } = useFormik({
         initialValues,
@@ -43,6 +44,9 @@ export default function CreateProduct() {
 
 
     async function onSubmit() {
+        if (checkImagesLength()) {
+            return;
+        }
 
         let imagesArray = [];
 
@@ -51,8 +55,7 @@ export default function CreateProduct() {
             imagesArray.push(result);
         }
 
-        values.images = imagesArray;
-
+        values.images = imagesArray;     
 
         console.log(values)
         try {
@@ -68,6 +71,16 @@ export default function CreateProduct() {
                 //navigate(Path.Login);
             }
         }
+    }
+
+    function checkImagesLength() {
+        // If no image is found, return false
+        if (values.images.length === 0) {
+            setFieldError(CreateFormKeys.Images, 'Upload at least one image');
+            return true;
+        }
+
+        return false;
     }
 
     return (
@@ -148,9 +161,11 @@ export default function CreateProduct() {
                         touched[CreateFormKeys.IsAvailable] && (
                             <p className={styles.invalid}>{errors[CreateFormKeys.IsAvailable]}</p>
                         )}
-                    <Form.Check
-                        type="checkbox"
-                        id={`checkbox`}
+                    
+
+                    <Form.Check // prettier-ignore
+                        type="switch"
+                        id="custom-switch"
                         name={CreateFormKeys.IsAvailable}
                         label={`Is this product available?`}
                         onChange={handleChange}
@@ -228,6 +243,10 @@ export default function CreateProduct() {
 
 
                 <Form.Group controlId="formFileMultiple" className="mb-3">
+                    {errors[CreateFormKeys.Images] &&
+                        touched[CreateFormKeys.Images] && (
+                        <p className={styles.invalid}>{errors[CreateFormKeys.Images]}</p>
+                        )}
                     <label htmlFor={CreateFormKeys.Images}></label>
 
                     <input

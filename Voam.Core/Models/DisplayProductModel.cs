@@ -13,6 +13,6 @@ namespace Voam.Core.Models
 
         public bool IsAvailable { get; set; }
 
-        public ProductImageModel Image { get; set; } = null!;
+        public ProductImageModel? Image { get; set; } = null!;
     }
 }

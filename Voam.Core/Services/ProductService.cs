@@ -19,6 +19,7 @@ namespace Voam.Core.Services
         public async Task<IEnumerable<DisplayProductModel>> GetAllProductsAsync()
         {
             return await context.Products
+                .Where(p => p.IsAvailable == true)
                 .Select(p => new DisplayProductModel()
                 {
                     Id = p.Id,
@@ -33,6 +34,7 @@ namespace Voam.Core.Services
                         })
                         .FirstOrDefault(),
                 })
+                .OrderByDescending(p => p.Id)
                 .AsNoTracking()
                 .ToListAsync();
         }
