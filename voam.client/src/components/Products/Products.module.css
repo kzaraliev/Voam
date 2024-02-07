@@ -19,6 +19,7 @@
 .cardBackground {
     background-color: #2b3035bf !important;
     border: 2px solid #2b3035 !important;
+    width: 90%;
 }
 
 .cardImg {
@@ -114,6 +115,7 @@
     flex-direction: column;
     width: 60%;
     align-items: center;
+    text-align: center
 }
 
 .title {
@@ -135,6 +137,31 @@
     margin-bottom: 24px
 }
 
-.dropdownButton:hover{
-    opacity: 1;
+    .dropdownButton:hover {
+        opacity: 1;
+    }
+
+@media screen and (max-width: 768px) {
+    .header{
+        width: 90%;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+
+    .grid {
+        max-width: 90%;
+    }
+
+    .cardTitle {
+        font-size: x-large !important;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+
+    .grid {
+        max-width: 90%;
+    }
 }

@@ -16,7 +16,7 @@ import Products from "./components/Products/Products.jsx";
 
 function App() {
     return (
-        <div style={{ backgroundColor: "#3b444b" }}>
+        <div style={{ backgroundColor: "#3b444b"}}>
             <Navigation />
             <Routes>
                 <Route path={Path.Home} element={<Home />} />

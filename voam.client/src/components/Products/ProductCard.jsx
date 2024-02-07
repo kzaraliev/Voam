@@ -10,7 +10,7 @@ export default function ProductCard({ id, name, price, image }) {
 
     return (
         <>
-            <Card style={{ width: "22rem" }} className={styles.cardBackground}>
+            <Card className={styles.cardBackground}>
                 <Card.Img
                     variant="top"
                     src={imgSrc}

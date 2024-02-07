@@ -11,9 +11,19 @@ import ProductCard from "./ProductCard.jsx"
 
 export default function Products() {
     const [products, setProducts] = useState([]);
+    let productsPerPageNumber;
+
+    console.log(window.innerHeight);
+
+    if (window.innerWidth > 768) {
+        productsPerPageNumber = 6;
+    } else {
+        productsPerPageNumber = 4;
+    }
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(6);
+
+    const [productsPerPage] = useState(productsPerPageNumber);
     const [sortText, setSortText] = useState("");
     const [isLoading, setLoading] = useState(true)
 
