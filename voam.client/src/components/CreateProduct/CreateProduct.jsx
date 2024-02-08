@@ -84,8 +84,8 @@ export default function CreateProduct() {
     }
 
     return (
-        <div className={styles.containerForm}>
-            <Form className={styles.form} onSubmit={handleSubmit} encType="multipart/form-data">
+        <div className={styles.containerFormCreate}>
+            <Form className={styles.formCreate} onSubmit={handleSubmit} encType="multipart/form-data">
                 <h1 className={styles.title}>Create Product</h1>
 
                 <Form.Group className="mb-3">
@@ -167,6 +167,7 @@ export default function CreateProduct() {
                         type="switch"
                         id="custom-switch"
                         name={CreateFormKeys.IsAvailable}
+                        className={styles.switch}
                         label={`Is this product available?`}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -254,6 +255,7 @@ export default function CreateProduct() {
                         type="file"
                         name={CreateFormKeys.Images}
                         id={CreateFormKeys.Images}
+                        className={styles.fileInput}
                         onChange={(e) =>
                             setFieldValue(
                                 CreateFormKeys.Images,

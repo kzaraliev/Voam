@@ -13,8 +13,6 @@ export default function Products() {
     const [products, setProducts] = useState([]);
     let productsPerPageNumber;
 
-    console.log(window.innerHeight);
-
     if (window.innerWidth > 768) {
         productsPerPageNumber = 6;
     } else {

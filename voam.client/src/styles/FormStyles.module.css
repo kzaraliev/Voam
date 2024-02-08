@@ -1,16 +1,18 @@
-.containerForm {
+.containerForm,.containerFormCreate {
   height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 24px 0;
 }
 
-.form {
+
+.form, .formCreate {
   padding: 32px 38px;
   padding-top: 0;
   width: 33%;
-  max-height: 95%;
+  max-height: 100%;
   background-color: #2b30358f;
   border: 5px dashed #212529;
   border-radius: 12px;
@@ -43,7 +45,7 @@
 .invalid {
   animation: alternate;
   transition-duration: 0.4s;
-  font-size: large;
+  font-size: medium;
   color: red;
   margin-bottom: 6px;
 }
@@ -76,10 +78,25 @@
 
 /* ------------------ */
 
+/* Create product */
+
+
+
+.fileInput, .switch{
+  color:#bcbebc;
+}
+
+/* ------------------ */
+
 @media screen and (max-width: 768px) {
-  .form {
+  .form, .formCreate {
     width: 90%;
     padding: 32px 20px;
+  }
+
+  .formCreate{
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .submitButton {
@@ -98,7 +115,7 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  .form {
+  .form,.formCreate {
     width: 60%;
   }
 
