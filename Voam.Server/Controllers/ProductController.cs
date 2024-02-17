@@ -58,6 +58,12 @@ namespace Voam.Server.Controllers
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductModel data)
         {
             var product = await productService.CreateProductAsync(data);
+
+            if (product == null)
+            {
+                return BadRequest();
+            }
+
             await sizeService.CreateSizeAsync(data.sizeS, data.sizeM, data.sizeL, product.Id);
             await imageService.CreateImageAsync(data.images, product.Id);
         

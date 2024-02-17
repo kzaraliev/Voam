@@ -20,7 +20,7 @@ namespace Voam.Core.Services
 
         public async Task<bool> CreateSizeAsync(int sizeSAmount, int sizeMAmount, int sizeLAmount, int productId)
         {
-            if (sizeSAmount != 0)
+            if (sizeSAmount > 0)
             {
                 Size sizeS = new Size()
                 {
@@ -31,7 +31,7 @@ namespace Voam.Core.Services
                 await context.Sizes.AddAsync(sizeS);
             }
 
-            if (sizeMAmount != 0)
+            if (sizeMAmount > 0)
             {
                 Size sizeM = new Size()
                 {
@@ -42,7 +42,7 @@ namespace Voam.Core.Services
                 await context.Sizes.AddAsync(sizeM);
             }
 
-            if (sizeLAmount != 0)
+            if (sizeLAmount > 0)
             {
                 Size sizeL = new Size()
                 {
