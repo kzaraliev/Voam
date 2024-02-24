@@ -32,4 +32,4 @@ export const edit = async (bookId, bookData) => {
     return result;
 };
 
-export const remove = async (bookId) => request.remove(`${baseUrl}/${bookId}`);
+export const remove = async (productId) => request.remove(`${baseUrl}/DeleteProduct?id=${productId}`);

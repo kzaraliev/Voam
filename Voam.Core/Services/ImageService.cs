@@ -22,7 +22,7 @@ namespace Voam.Core.Services
             {
                 if (!imageData.StartsWith(Base64ImagePrefix))
                 {
-                    throw new ArgumentException("Invalid image format. Only PNG images are accepted.");
+                    throw new ArgumentException("Invalid image format. Only base64 encoded PNG images are accepted.");
                 }
 
                 byte[] imageBytes;
@@ -30,9 +30,9 @@ namespace Voam.Core.Services
                 {
                     imageBytes = Convert.FromBase64String(imageData.Substring(Base64ImagePrefix.Length));
                 }
-                catch (FormatException)
+                catch (FormatException ex)
                 {
-                    throw new ArgumentException("Invalid Base64 string.");
+                    throw new ArgumentException("Invalid Base64 string.", ex);
                 }
 
                 ProductImage image = new ProductImage()
@@ -44,10 +44,14 @@ namespace Voam.Core.Services
                 imagesList.Add(image);
             }
 
-            await context.ProductImages.AddRangeAsync(imagesList);
-            await context.SaveChangesAsync();
+            if (imagesList.Any())
+            {
+                await context.ProductImages.AddRangeAsync(imagesList);
+                await context.SaveChangesAsync();
+                return true;
+            }
 
-            return true;
+            return false;
         }
     }
 }

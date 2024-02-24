@@ -20,42 +20,21 @@ namespace Voam.Core.Services
 
         public async Task<bool> CreateSizeAsync(int sizeSAmount, int sizeMAmount, int sizeLAmount, int productId)
         {
-            if (sizeSAmount > 0)
+            var sizes = new List<Size>
             {
-                Size sizeS = new Size()
-                {
-                    SizeChar = 'S',
-                    Quantity = sizeSAmount,
-                    ProductId = productId
-                };
-                await context.Sizes.AddAsync(sizeS);
+                new Size { SizeChar = 'S', Quantity = sizeSAmount, ProductId = productId },
+                new Size { SizeChar = 'M', Quantity = sizeMAmount, ProductId = productId },
+                new Size { SizeChar = 'L', Quantity = sizeLAmount, ProductId = productId }
+            }.Where(size => size.Quantity > 0).ToList();
+
+            if (sizes.Any())
+            {
+                await context.Sizes.AddRangeAsync(sizes);
+                await context.SaveChangesAsync();
+                return true;
             }
 
-            if (sizeMAmount > 0)
-            {
-                Size sizeM = new Size()
-                {
-                    SizeChar = 'M',
-                    Quantity = sizeMAmount,
-                    ProductId = productId
-                };
-                await context.Sizes.AddAsync(sizeM);
-            }
-
-            if (sizeLAmount > 0)
-            {
-                Size sizeL = new Size()
-                {
-                    SizeChar = 'L',
-                    Quantity = sizeLAmount,
-                    ProductId = productId
-                };
-                await context.Sizes.AddAsync(sizeL);
-            }
-
-            await context.SaveChangesAsync();
-
-            return true;
+            return false;
         }
     }
 }

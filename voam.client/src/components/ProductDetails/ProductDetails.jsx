@@ -6,7 +6,7 @@ import Figure from "react-bootstrap/Figure";
 import Carousel from "react-bootstrap/Carousel";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 import { FaStar } from "react-icons/fa6";
 
 import * as productService from "../../services/productService";
@@ -63,20 +63,19 @@ export default function ProductDetails() {
       setErrors(errorMessages.zeroOrEmptyInput);
       return;
     }
-
     setErrors("");
   };
 
   const deleteButtonClickHandler = async () => {
-    //const hasConfirmed = confirm(
-    //  `Are you sure you want to delete ${book.title}`
-    //);
-//
-    //if (hasConfirmed) {
-    //  await bookService.remove(id);
-//
-    //  navigate(Path.Books);
-    //}
+    const hasConfirmed = confirm(
+      `Are you sure you want to delete ${product.name}`
+    );
+
+    if (hasConfirmed) {
+      await productService.remove(id);
+
+        navigate(Path.Items);
+    }
   };
 
   const initialValues = useMemo(
@@ -120,32 +119,32 @@ export default function ProductDetails() {
               <b>Description</b>: {product.description}
             </p>
             <Form className={styles.formAddToCart} onSubmit={onSubmit}>
-                <div className={styles.sizeAndQuantityContainer}>
-              {errors == errorMessages.invalidSize && (
-                <p className={styles.invalid}>{errors}</p>
-              )}
-              <Form.Select
-                name={OrderFormKeys.Size}
-                onChange={onChange}
-                value={values.size}
-                className={styles.sizeSelector}
-              >
-                <option value="">Select size</option>
-                {Object.keys(product).length !== 0 &&
-                  product.sizes
-                    .filter((s) => s.quantity > 0)
-                    .map((size) => {
-                      return (
-                        <option
-                          value={size.id}
-                          key={size.id}
-                          name={size.sizeChar}
-                        >
-                          {size.sizeChar}
-                        </option>
-                      );
-                    })}
-              </Form.Select>
+              <div className={styles.sizeAndQuantityContainer}>
+                {errors == errorMessages.invalidSize && (
+                  <p className={styles.invalid}>{errors}</p>
+                )}
+                <Form.Select
+                  name={OrderFormKeys.Size}
+                  onChange={onChange}
+                  value={values.size}
+                  className={styles.sizeSelector}
+                >
+                  <option value="">Select size</option>
+                  {Object.keys(product).length !== 0 &&
+                    product.sizes
+                      .filter((s) => s.quantity > 0)
+                      .map((size) => {
+                        return (
+                          <option
+                            value={size.id}
+                            key={size.id}
+                            name={size.sizeChar}
+                          >
+                            {size.sizeChar}
+                          </option>
+                        );
+                      })}
+                </Form.Select>
                 {(errors === errorMessages.notEnoughQuantity ||
                   errors === errorMessages.zeroOrEmptyInput) && (
                   <p className={styles.invalid}>{errors}</p>
@@ -168,46 +167,53 @@ export default function ProductDetails() {
               </Button>
             </Form>
             <div className={styles.ratingContainer}>
-                <div className={styles.stars}>
-            {[...Array(5)].map((star, index) => {
-              const currentRating = index + 1;
-              return (
-                <label key={index}>
-                  <input
-                    type="radio"
-                    name="rating"
-                    className={styles.ratingInput}
-                    value={currentRating}
-                    onClick={() => setRating(currentRating)}
-                  />
-                  <FaStar
-                    className={styles.star}
-                    size={30}
-                    color={
-                      currentRating <= (hover || rating) ? "#ffc107" : "#e4e5e9"
-                    }
-                    onMouseEnter={() => setHover(currentRating)}
-                    onMouseLeave={() => setHover(null)}
-                  />
-                </label>
-              );
-            })}
-            </div>
-            <p className={styles.ratingNumber}>({rating})</p>
+              <div className={styles.stars}>
+                {[...Array(5)].map((star, index) => {
+                  const currentRating = index + 1;
+                  return (
+                    <label key={index}>
+                      <input
+                        type="radio"
+                        name="rating"
+                        className={styles.ratingInput}
+                        value={currentRating}
+                        onClick={() => setRating(currentRating)}
+                      />
+                      <FaStar
+                        className={styles.star}
+                        size={30}
+                        color={
+                          currentRating <= (hover || rating)
+                            ? "#ffc107"
+                            : "#e4e5e9"
+                        }
+                        onMouseEnter={() => setHover(currentRating)}
+                        onMouseLeave={() => setHover(null)}
+                      />
+                    </label>
+                  );
+                })}
+              </div>
+              <p className={styles.ratingNumber}>({rating})</p>
             </div>
           </div>
           <div className={styles.editAndDeleteContainer}>
-              <Button as={Link} to={`${Path.Items}/${id}/edit`} variant="warning" className={styles.editButton}>
-                  Edit
-              </Button>
-              <Button
-                variant="danger"
-                className={styles.deleteButton}
-                onClick={deleteButtonClickHandler}
-              >
-                Delete
-              </Button>
-            </div>
+            <Button
+              as={Link}
+              to={`${Path.Items}/${id}/edit`}
+              variant="warning"
+              className={styles.editButton}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="danger"
+              className={styles.deleteButton}
+              onClick={deleteButtonClickHandler}
+            >
+              Delete
+            </Button>
+          </div>
         </div>
       </div>
     </div>

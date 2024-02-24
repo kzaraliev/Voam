@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Voam.Core.Contracts;
 using Voam.Core.Models;
-using Voam.Core.Services;
-using Voam.Infrastructure.Data.Models;
+using static Voam.Core.Utils.Constants;
 
 namespace Voam.Server.Controllers
 {
@@ -13,14 +11,10 @@ namespace Voam.Server.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService productService;
-        private readonly ISizeService sizeService;
-        private readonly IImageService imageService;
 
-        public ProductController(IProductService _productService, ISizeService _sizeService, IImageService _imageService)
+        public ProductController(IProductService _productService)
         {
             productService = _productService;
-            sizeService = _sizeService;
-            imageService = _imageService;
         }
 
         [HttpGet]
@@ -30,7 +24,7 @@ namespace Voam.Server.Controllers
             IEnumerable<DisplayProductModel> products = await productService.GetAllProductsAsync();
             return StatusCode(StatusCodes.Status200OK, products);
         }
-        
+
         [HttpGet]
         [Route("GetRecentlyAddedProducts")]
         public async Task<IActionResult> GetRecentlyAddedProducts()
@@ -38,36 +32,48 @@ namespace Voam.Server.Controllers
             IEnumerable<DisplayProductModel> products = await productService.GetRecentlyAddedProductsAsync();
             return StatusCode(StatusCodes.Status200OK, products);
         }
-        
+
         [HttpGet]
         [Route("GetProductById")]
         public async Task<IActionResult> GetProductById(int id)
         {
             var product = await productService.GetProductByIdAsync(id);
 
-            if(product == null)
+            if (product == null)
             {
-                return StatusCode(StatusCodes.Status404NotFound);
+                return NotFound();
             }
-        
-            return StatusCode(StatusCodes.Status200OK, product);
+
+            return Ok(product);
         }
-        
+
         [HttpPost]
         [Route("CreateProduct")]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductModel data)
         {
-            var product = await productService.CreateProductAsync(data);
-
-            if (product == null)
+            try
             {
-                return BadRequest();
+                var product = await productService.CreateFullProductAsync(data, data.images, data.sizeS, data.sizeM, data.sizeL);
+                return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
             }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the product.");
+            }
+        }
 
-            await sizeService.CreateSizeAsync(data.sizeS, data.sizeM, data.sizeL, product.Id);
-            await imageService.CreateImageAsync(data.images, product.Id);
-        
-            return StatusCode(StatusCodes.Status200OK, product);
+        [HttpDelete]
+        [Route("DeleteProduct")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var deleteResult = await productService.DeleteProductByIdAsync(id);
+
+            return deleteResult switch
+            {
+                DeleteResult.NotFound => NotFound($"Product with Id {id} not found."),
+                DeleteResult.Success => NoContent(),
+                _ => StatusCode(StatusCodes.Status500InternalServerError, "Error deleting product")
+            };
         }
     }
 }
