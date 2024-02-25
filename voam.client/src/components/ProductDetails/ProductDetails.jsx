@@ -200,7 +200,7 @@ export default function ProductDetails() {
           <div className={styles.editAndDeleteContainer}>
             <Button
               as={Link}
-              to={`${Path.Items}/${id}/edit`}
+              to={`/items/${id}/edit`}
               variant="warning"
               className={styles.editButton}
             >

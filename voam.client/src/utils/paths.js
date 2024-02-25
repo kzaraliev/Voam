@@ -9,6 +9,7 @@ const Path = {
     Profile: "/profile",
     ShoppingCart: "/shopping-cart",
     CreateProduct: "/create",
+    EditProduct: "/items/:productId/edit",
     NotFound: "*",
 };
 

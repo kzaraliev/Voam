@@ -62,6 +62,18 @@ namespace Voam.Server.Controllers
             }
         }
 
+        [HttpPut]
+        [Route("UpdateProduct")]
+        public async Task<IActionResult> UpdateProduct(int id, EditProductModel data)
+        {
+            //Handle update product in the back-end
+            //If user add new images - string[]
+            //if old images - obj[]
+
+            //think about solution in the front-end
+            throw new NotImplementedException();
+        }
+
         [HttpDelete]
         [Route("DeleteProduct")]
         public async Task<IActionResult> DeleteProduct(int id)

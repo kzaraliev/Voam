@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 
-import { CreateFormKeys } from "../../utils/constants";
+import { EditFormKeys } from "../../utils/constants";
 import registerValidation from "./createProductValidation";
 import styles from "../../styles/FormStyles.module.css";
 import Path from "../../utils/paths"
@@ -12,14 +12,14 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 const initialValues = {
-    [CreateFormKeys.Name]: "",
-    [CreateFormKeys.Description]: "",
-    [CreateFormKeys.Price]: "",
-    [CreateFormKeys.IsAvailable]: false,
-    [CreateFormKeys.SizeS]: 0,
-    [CreateFormKeys.SizeM]: 0,
-    [CreateFormKeys.SizeL]: 0,
-    [CreateFormKeys.Images]: [],
+    [EditFormKeys.Name]: "",
+    [EditFormKeys.Description]: "",
+    [EditFormKeys.Price]: "",
+    [EditFormKeys.IsAvailable]: false,
+    [EditFormKeys.SizeS]: 0,
+    [EditFormKeys.SizeM]: 0,
+    [EditFormKeys.SizeL]: 0,
+    [EditFormKeys.Images]: [],
 };
 
 export default function CreateProduct() {
@@ -76,7 +76,7 @@ export default function CreateProduct() {
     function checkImagesLength() {
         // If no image is found, return false
         if (values.images.length === 0) {
-            setFieldError(CreateFormKeys.Images, 'Upload at least one image');
+            setFieldError(EditFormKeys.Images, 'Upload at least one image');
             return true;
         }
 
@@ -89,154 +89,154 @@ export default function CreateProduct() {
                 <h1 className={styles.title}>Create Product</h1>
 
                 <Form.Group className="mb-3">
-                    {errors[CreateFormKeys.Name] &&
-                        touched[CreateFormKeys.Name] && (
+                    {errors[EditFormKeys.Name] &&
+                        touched[EditFormKeys.Name] && (
                             <p className={styles.invalid}>
-                                {errors[CreateFormKeys.Name]}
+                                {errors[EditFormKeys.Name]}
                             </p>
                         )}
                     <FloatingLabel
-                        htmlFor={CreateFormKeys.Name}
+                        htmlFor={EditFormKeys.Name}
                         label="Product name"
                         className="mb-3"
                     >
                         <Form.Control
                             type="text"
                             id="name"
-                            name={CreateFormKeys.Name}
+                            name={EditFormKeys.Name}
                             placeholder="Enter product name"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values[CreateFormKeys.Name]}
+                            value={values[EditFormKeys.Name]}
                         />
                     </FloatingLabel>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    {errors[CreateFormKeys.Description] &&
-                        touched[CreateFormKeys.Description] && (
-                            <p className={styles.invalid}>{errors[CreateFormKeys.Description]}</p>
+                    {errors[EditFormKeys.Description] &&
+                        touched[EditFormKeys.Description] && (
+                            <p className={styles.invalid}>{errors[EditFormKeys.Description]}</p>
                         )}
                     <FloatingLabel
-                        htmlFor={CreateFormKeys.Description}
+                        htmlFor={EditFormKeys.Description}
                         label="Product description"
                         className="mb-3"
                     >
                         <Form.Control
                             type="text"
                             id="decsription"
-                            name={CreateFormKeys.Description}
+                            name={EditFormKeys.Description}
                             placeholder="Enter product description"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values[CreateFormKeys.Description]}
+                            value={values[EditFormKeys.Description]}
                         />
                     </FloatingLabel>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    {errors[CreateFormKeys.Price] &&
-                        touched[CreateFormKeys.Price] && (
-                            <p className={styles.invalid}>{errors[CreateFormKeys.Price]}</p>
+                    {errors[EditFormKeys.Price] &&
+                        touched[EditFormKeys.Price] && (
+                            <p className={styles.invalid}>{errors[EditFormKeys.Price]}</p>
                         )}
                     <FloatingLabel
-                        htmlFor={CreateFormKeys.Price}
+                        htmlFor={EditFormKeys.Price}
                         label="Price"
                         className="mb-3"
                     >
                         <Form.Control
                             type="number"
                             id="price"
-                            name={CreateFormKeys.Price}
+                            name={EditFormKeys.Price}
                             placeholder="Enter product price"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values[CreateFormKeys.Price]}
+                            value={values[EditFormKeys.Price]}
                         />
                     </FloatingLabel>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    {errors[CreateFormKeys.IsAvailable] &&
-                        touched[CreateFormKeys.IsAvailable] && (
-                            <p className={styles.invalid}>{errors[CreateFormKeys.IsAvailable]}</p>
+                    {errors[EditFormKeys.IsAvailable] &&
+                        touched[EditFormKeys.IsAvailable] && (
+                            <p className={styles.invalid}>{errors[EditFormKeys.IsAvailable]}</p>
                         )}
                     
 
                     <Form.Check // prettier-ignore
                         type="switch"
                         id="custom-switch"
-                        name={CreateFormKeys.IsAvailable}
+                        name={EditFormKeys.IsAvailable}
                         className={styles.switch}
                         label={`Is this product available?`}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values[CreateFormKeys.IsAvailable]}
+                        value={values[EditFormKeys.IsAvailable]}
                     />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    {errors[CreateFormKeys.SizeS] &&
-                        touched[CreateFormKeys.SizeS] && (
-                            <p className={styles.invalid}>{errors[CreateFormKeys.SizeS]}</p>
+                    {errors[EditFormKeys.SizeS] &&
+                        touched[EditFormKeys.SizeS] && (
+                            <p className={styles.invalid}>{errors[EditFormKeys.SizeS]}</p>
                         )}
                     <FloatingLabel
-                        htmlFor={CreateFormKeys.SizeS}
+                        htmlFor={EditFormKeys.SizeS}
                         label="S size amount"
                         className="mb-3"
                     >
                         <Form.Control
                             type="number"
                             id="sizeS"
-                            name={CreateFormKeys.SizeS}
+                            name={EditFormKeys.SizeS}
                             placeholder="Enter S size amount"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values[CreateFormKeys.SizeS]}
+                            value={values[EditFormKeys.SizeS]}
                         />
                     </FloatingLabel>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    {errors[CreateFormKeys.SizeM] &&
-                        touched[CreateFormKeys.SizeM] && (
-                            <p className={styles.invalid}>{errors[CreateFormKeys.SizeM]}</p>
+                    {errors[EditFormKeys.SizeM] &&
+                        touched[EditFormKeys.SizeM] && (
+                            <p className={styles.invalid}>{errors[EditFormKeys.SizeM]}</p>
                         )}
                     <FloatingLabel
-                        htmlFor={CreateFormKeys.SizeM}
+                        htmlFor={EditFormKeys.SizeM}
                         label="M size amount"
                         className="mb-3"
                     >
                         <Form.Control
                             type="number"
                             id="sizeM"
-                            name={CreateFormKeys.SizeM}
+                            name={EditFormKeys.SizeM}
                             placeholder="Enter S size amount"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values[CreateFormKeys.SizeM]}
+                            value={values[EditFormKeys.SizeM]}
                         />
                     </FloatingLabel>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    {errors[CreateFormKeys.SizeL] &&
-                        touched[CreateFormKeys.SizeL] && (
-                            <p className={styles.invalid}>{errors[CreateFormKeys.SizeL]}</p>
+                    {errors[EditFormKeys.SizeL] &&
+                        touched[EditFormKeys.SizeL] && (
+                            <p className={styles.invalid}>{errors[EditFormKeys.SizeL]}</p>
                         )}
                     <FloatingLabel
-                        htmlFor={CreateFormKeys.SizeL}
+                        htmlFor={EditFormKeys.SizeL}
                         label="L size amount"
                         className="mb-3"
                     >
                         <Form.Control
                             type="number"
                             id="sizeL"
-                            name={CreateFormKeys.SizeL}
+                            name={EditFormKeys.SizeL}
                             placeholder="Enter S size amount"
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            value={values[CreateFormKeys.SizeL]}
+                            value={values[EditFormKeys.SizeL]}
                         />
                     </FloatingLabel>
                 </Form.Group>
@@ -244,21 +244,21 @@ export default function CreateProduct() {
 
 
                 <Form.Group controlId="formFileMultiple" className="mb-3">
-                    {errors[CreateFormKeys.Images] &&
-                        touched[CreateFormKeys.Images] && (
-                        <p className={styles.invalid}>{errors[CreateFormKeys.Images]}</p>
+                    {errors[EditFormKeys.Images] &&
+                        touched[EditFormKeys.Images] && (
+                        <p className={styles.invalid}>{errors[EditFormKeys.Images]}</p>
                         )}
-                    <label htmlFor={CreateFormKeys.Images}></label>
+                    <label htmlFor={EditFormKeys.Images}></label>
 
                     <input
                         multiple
                         type="file"
-                        name={CreateFormKeys.Images}
-                        id={CreateFormKeys.Images}
+                        name={EditFormKeys.Images}
+                        id={EditFormKeys.Images}
                         className={styles.fileInput}
                         onChange={(e) =>
                             setFieldValue(
-                                CreateFormKeys.Images,
+                                EditFormKeys.Images,
                                 e.target.files
                             )
                         }

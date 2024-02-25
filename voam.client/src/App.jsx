@@ -13,6 +13,7 @@ import NotFound from "./components/NotFound/NotFound.jsx";
 import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx"
 import Products from "./components/Products/Products.jsx";
+import EditProduct from "./components/EditProduct/EditProduct.jsx";
 
 function App() {
     return (
@@ -27,7 +28,8 @@ function App() {
                 <Route path={Path.Login} element={<Login />} />
                 <Route path={Path.Register} element={<Register />} />
                 <Route path={Path.NotFound} element={<NotFound />} />
-                <Route path={Path.CreateProduct} element={<CreateProduct/> } />
+                <Route path={Path.CreateProduct} element={<CreateProduct />} />
+                <Route path={Path.EditProduct} element={<EditProduct />} />
             </Routes>
             <Footer />
         </div>
