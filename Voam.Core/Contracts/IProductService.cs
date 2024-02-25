@@ -12,5 +12,6 @@ namespace Voam.Core.Contracts
         Task<IEnumerable<DisplayProductModel>> GetAllProductsAsync();
         Task<DetailsProductModel?> GetProductByIdAsync(int id);
         Task<IEnumerable<DisplayProductModel>> GetRecentlyAddedProductsAsync();
+        Task<DetailsProductModel> UpdateFullProductAsync(int id, EditProductModel data, ICollection<string> images, int sizeS, int sizeM, int sizeL);
     }
 }

@@ -56,7 +56,7 @@ namespace Voam.Server.Controllers
                 var product = await productService.CreateFullProductAsync(data, data.images, data.sizeS, data.sizeM, data.sizeL);
                 return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while creating the product.");
             }
@@ -69,9 +69,15 @@ namespace Voam.Server.Controllers
             //Handle update product in the back-end
             //If user add new images - string[]
             //if old images - obj[]
-
-            //think about solution in the front-end
-            throw new NotImplementedException();
+            try
+            {
+                var product = await productService.UpdateFullProductAsync(id, data, data.images, data.sizeS, data.sizeM, data.sizeL);
+                return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while updating the product.");
+            }
         }
 
         [HttpDelete]

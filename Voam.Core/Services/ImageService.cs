@@ -1,4 +1,5 @@
-﻿using Voam.Core.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Voam.Core.Contracts;
 using Voam.Infrastructure.Data;
 using Voam.Infrastructure.Data.Models;
 
@@ -52,6 +53,16 @@ namespace Voam.Core.Services
             }
 
             return false;
+        }
+
+        public async Task UpdateImageAsync(ICollection<string> images, int productId)
+        {
+            var imagesToRemove = await context.ProductImages.Where(s => s.ProductId == productId).ToListAsync();
+            context.ProductImages.RemoveRange(imagesToRemove);
+
+            await context.SaveChangesAsync();
+
+            await CreateImageAsync(images, productId);
         }
     }
 }

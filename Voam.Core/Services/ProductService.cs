@@ -186,5 +186,83 @@ namespace Voam.Core.Services
 
             return saveResult > 0 ? DeleteResult.Success : DeleteResult.Error;
         }
+
+        public async Task<DetailsProductModel> UpdateFullProductAsync(int id, EditProductModel data, ICollection<string> images, int sizeSAmount, int sizeMAmount, int sizeLAmount)
+        {
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    // Update product
+                    var product = await UpdateProductAsync(id, data);
+                    if (product == null)
+                    {
+                        throw new InvalidOperationException("Failed to update the product.");
+                    }
+
+                    // Update sizes
+                    await sizeService.UpdateSizesAsync(sizeSAmount, sizeMAmount, sizeLAmount, product.Id);
+
+                    if (images.Any())
+                    {
+                        // Update images
+                        await imageService.UpdateImageAsync(images, product.Id);
+                    }
+                                   
+                    await transaction.CommitAsync();
+                    return product;
+                }
+                catch
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
+            }
+        }
+
+        public async Task<DetailsProductModel> UpdateProductAsync(int id, EditProductModel data)
+        {
+            try
+            {
+                var product = await context.Products.FindAsync(id);
+                if (product == null)
+                {
+                    throw new InvalidOperationException("Failed to find the product.");
+                }
+
+                product.Name = data.name ?? product.Name;
+                product.Description = data.description ?? product.Description;
+
+                if (data.price != 0)
+                {
+                    product.Price = data.price;
+                }
+                else
+                {
+                    product.Price = product.Price;
+
+                }
+
+                product.IsAvailable = data.isAvailable;
+
+                await context.SaveChangesAsync();
+
+                var updatedProduct = new DetailsProductModel
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    IsAvailable = product.IsAvailable,
+                };
+
+                return updatedProduct;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,16 @@ namespace Voam.Core.Services
             }
 
             return false;
+        }
+
+        public async Task UpdateSizesAsync(int sizeSAmount, int sizeMAmount, int sizeLAmount, int productId)
+        {
+            var sizesToRemove = await context.Sizes.Where(s => s.ProductId == productId).ToListAsync();
+            context.Sizes.RemoveRange(sizesToRemove);
+
+            await context.SaveChangesAsync();
+
+            await CreateSizeAsync(sizeSAmount, sizeMAmount, sizeLAmount, productId);
         }
     }
 }

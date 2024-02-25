@@ -80,6 +80,8 @@ export default function EditProduct() {
                 }
 
                 values.images = imagesArray;
+            } else {
+                values.images = [];
             }
 
 

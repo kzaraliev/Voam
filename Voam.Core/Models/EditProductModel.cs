@@ -8,9 +8,9 @@ namespace Voam.Core.Models
 {
     public class EditProductModel
     {
-        public string name { get; set; }
+        public string name { get; set; } = string.Empty;
 
-        public string description { get; set; }
+        public string description { get; set; } = string.Empty;
 
         public decimal price { get; set; }
 
@@ -22,6 +22,6 @@ namespace Voam.Core.Models
 
         public int sizeL { get; set; }
 
-        public ICollection<ProductImageModel> images { get; set; }
+        public ICollection<string> images { get; set; } = new List<string>();
     }
 }
