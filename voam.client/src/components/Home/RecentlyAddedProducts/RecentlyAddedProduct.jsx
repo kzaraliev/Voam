@@ -11,7 +11,7 @@ export default function RecentlyAddedProduct({ id, name, price, image }) {
     const imgSrc = `data:image/jpeg;base64,${image}`;
 
     return (
-        <Card className={styles.card} style={{ width: "24rem" }}>
+        <Card className={styles.card}>
             <Card.Img variant="top" src={imgSrc} className={styles.img} />
             <Card.Body className={styles.cardBody}>
                 <Card.Title className={styles.cardTitle}>{name}</Card.Title>

@@ -21,7 +21,6 @@
 }
 
 .img {
-    height: 40%;
     width: 24rem;
     height: 24rem;
     object-fit: cover;
@@ -31,7 +30,7 @@
 .card {
     background-color: #2b3035bf !important;
     border: 2px solid #2b3035 !important;
-
+    width: 24rem;
 }
 
 .cardBody {
@@ -44,4 +43,44 @@
 
 .cardPrice {
     color: #aaabaa !important;
+}
+
+@media screen and (max-width: 768px) {
+    .title{
+        font-size: 2.2rem;
+    }
+
+    .card{
+        width: 90%;
+    }
+
+    .containerProducts{
+        max-width: 90%;
+    }
+
+    .cardTitle {
+        font-size: x-large !important;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+    .title{
+        font-size: 2.8rem;
+    }
+
+    .recentProducts{
+        width: 90%;
+    }
+
+    .card{
+        width: 80%;
+    }
+
+    .containerProducts{
+        max-width: 100%;
+    }
+
+    .cardTitle {
+        font-size: larger !important;
+    }
 }
