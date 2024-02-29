@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Voam.Core.Contracts;
 using Voam.Core.Models;
 using static Voam.Core.Utils.Constants;
@@ -53,7 +52,7 @@ namespace Voam.Server.Controllers
         {
             try
             {
-                var product = await productService.CreateFullProductAsync(data, data.images, data.sizeS, data.sizeM, data.sizeL);
+                var product = await productService.CreateFullProductAsync(data, data.Images, data.SizeS, data.SizeM, data.SizeL);
                 return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
             }
             catch (Exception)
@@ -66,12 +65,9 @@ namespace Voam.Server.Controllers
         [Route("UpdateProduct")]
         public async Task<IActionResult> UpdateProduct(int id, EditProductModel data)
         {
-            //Handle update product in the back-end
-            //If user add new images - string[]
-            //if old images - obj[]
             try
             {
-                var product = await productService.UpdateFullProductAsync(id, data, data.images, data.sizeS, data.sizeM, data.sizeL);
+                var product = await productService.UpdateFullProductAsync(id, data, data.Images, data.SizeS, data.SizeM, data.SizeL);
                 return CreatedAtAction(nameof(GetProductById), new { id = product.Id }, product);
             }
             catch (Exception)

@@ -8,20 +8,20 @@ namespace Voam.Core.Models
 {
     public class EditProductModel
     {
-        public string name { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
-        public string description { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
 
-        public decimal price { get; set; }
+        public decimal Price { get; set; }
 
-        public bool isAvailable { get; set; }
+        public bool IsAvailable { get; set; }
 
-        public int sizeS { get; set; }
+        public int SizeS { get; set; }
 
-        public int sizeM { get; set; }
+        public int SizeM { get; set; }
 
-        public int sizeL { get; set; }
+        public int SizeL { get; set; }
 
-        public ICollection<string> images { get; set; } = new List<string>();
+        public ICollection<string> Images { get; set; } = new List<string>();
     }
 }

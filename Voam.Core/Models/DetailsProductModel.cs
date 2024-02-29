@@ -14,10 +14,10 @@ namespace Voam.Core.Models
 
         public bool IsAvailable { get; set; }
 
-        public virtual ICollection<ProductImageModel> Images { get; set; } = new List<ProductImageModel>();
+        public ICollection<ProductImageModel> Images { get; set; } = new List<ProductImageModel>();
 
-        public virtual ICollection<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
+        public ICollection<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();
 
-        public virtual ICollection<SizeModel> Sizes { get; set; } = new List<SizeModel>();
+        public ICollection<SizeModel> Sizes { get; set; } = new List<SizeModel>();
     }
 }

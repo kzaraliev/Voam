@@ -155,10 +155,10 @@ namespace Voam.Core.Services
             {
                 Product product = new Product()
                 {
-                    Name = data.name,
-                    Description = data.description,
-                    Price = data.price,
-                    IsAvailable = data.isAvailable,
+                    Name = data.Name,
+                    Description = data.Description,
+                    Price = data.Price,
+                    IsAvailable = data.IsAvailable,
                 };
 
                 context.Products.Add(product);
@@ -230,12 +230,12 @@ namespace Voam.Core.Services
                     throw new InvalidOperationException("Failed to find the product.");
                 }
 
-                product.Name = data.name ?? product.Name;
-                product.Description = data.description ?? product.Description;
+                product.Name = data.Name ?? product.Name;
+                product.Description = data.Description ?? product.Description;
 
-                if (data.price != 0)
+                if (data.Price != 0)
                 {
-                    product.Price = data.price;
+                    product.Price = data.Price;
                 }
                 else
                 {
@@ -243,7 +243,7 @@ namespace Voam.Core.Services
 
                 }
 
-                product.IsAvailable = data.isAvailable;
+                product.IsAvailable = data.IsAvailable;
 
                 await context.SaveChangesAsync();
 
