@@ -1,123 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Voam.Infrastructure.Data.Models;
 
 namespace Voam.Infrastructure.Data
 {
-    public class VoamDbContext : DbContext
+    public class VoamDbContext : IdentityDbContext
     {
         public VoamDbContext(DbContextOptions<VoamDbContext> options) : base(options)
         { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Size>().HasData(
-                new Size()
-                {
-                    Id = 1,
-                    ProductId = 1,
-                    Quantity = 10,
-                    SizeChar = 'S',
-                },
-                new Size()
-                {
-                    Id = 2,
-                    ProductId = 1,
-                    Quantity = 10,
-                    SizeChar = 'M',
-                },
-                new Size()
-                {
-                    Id = 3,
-                    ProductId = 1,
-                    Quantity = 10,
-                    SizeChar = 'L',
-                },
-                new Size()
-                {
-                    Id = 4,
-                    ProductId = 2,
-                    Quantity = 10,
-                    SizeChar = 'S',
-                },
-                new Size()
-                {
-                    Id = 5,
-                    ProductId = 2,
-                    Quantity = 10,
-                    SizeChar = 'M',
-                },
-                new Size()
-                {
-                    Id = 6,
-                    ProductId = 2,
-                    Quantity = 10,
-                    SizeChar = 'L',
-                },
-                new Size()
-                {
-                    Id = 7,
-                    ProductId = 3,
-                    Quantity = 10,
-                    SizeChar = 'S',
-                },
-                new Size()
-                {
-                    Id = 8,
-                    ProductId = 3,
-                    Quantity = 10,
-                    SizeChar = 'M',
-                },
-                new Size()
-                {
-                    Id = 9,
-                    ProductId = 3,
-                    Quantity = 10,
-                    SizeChar = 'L',
-                },
-                new Size()
-                {
-                    Id = 10,
-                    ProductId = 4,
-                    Quantity = 10,
-                    SizeChar = 'S',
-                },
-                new Size()
-                {
-                    Id = 11,
-                    ProductId = 4,
-                    Quantity = 10,
-                    SizeChar = 'M',
-                },
-                new Size()
-                {
-                    Id = 12,
-                    ProductId = 4,
-                    Quantity = 10,
-                    SizeChar = 'L',
-                },
-                new Size()
-                {
-                    Id = 13,
-                    ProductId = 5,
-                    Quantity = 10,
-                    SizeChar = 'S',
-                },
-                new Size()
-                {
-                    Id = 14,
-                    ProductId = 5,
-                    Quantity = 10,
-                    SizeChar = 'M',
-                },
-                new Size()
-                {
-                    Id = 15,
-                    ProductId = 5,
-                    Quantity = 10,
-                    SizeChar = 'L',
-                }
-                );
-        }
+       
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }

@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Voam.Infrastructure.Data;
 
-
 #nullable disable
 
 namespace Voam.Server.Migrations
@@ -23,7 +22,205 @@ namespace Voam.Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Voam.Server.Data.Models.CartItem", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.CartItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +246,7 @@ namespace Voam.Server.Migrations
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Customer", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,7 +289,7 @@ namespace Voam.Server.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Order", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,7 +313,7 @@ namespace Voam.Server.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.OrderItem", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -145,7 +342,7 @@ namespace Voam.Server.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Product", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -173,7 +370,7 @@ namespace Voam.Server.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.ProductImage", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.ProductImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -195,7 +392,7 @@ namespace Voam.Server.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Review", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Review", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -224,7 +421,7 @@ namespace Voam.Server.Migrations
                     b.ToTable("ProductReviews");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Size", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Size", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,122 +444,66 @@ namespace Voam.Server.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Sizes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ProductId = 1,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ProductId = 1,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ProductId = 1,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ProductId = 2,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ProductId = 2,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ProductId = 2,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ProductId = 3,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ProductId = 3,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ProductId = 3,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ProductId = 4,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ProductId = 4,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ProductId = 4,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            ProductId = 5,
-                            Quantity = 10,
-                            SizeChar = "S"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            ProductId = 5,
-                            Quantity = 10,
-                            SizeChar = "M"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            ProductId = 5,
-                            Quantity = 10,
-                            SizeChar = "L"
-                        });
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.CartItem", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Voam.Server.Data.Models.Customer", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.CartItem", b =>
+                {
+                    b.HasOne("Voam.Infrastructure.Data.Models.Customer", null)
                         .WithMany("ShoppingCart")
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("Voam.Server.Data.Models.Product", "Product")
+                    b.HasOne("Voam.Infrastructure.Data.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -371,9 +512,9 @@ namespace Voam.Server.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Order", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Order", b =>
                 {
-                    b.HasOne("Voam.Server.Data.Models.Customer", "Customer")
+                    b.HasOne("Voam.Infrastructure.Data.Models.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -382,15 +523,15 @@ namespace Voam.Server.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.OrderItem", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.OrderItem", b =>
                 {
-                    b.HasOne("Voam.Server.Data.Models.Order", "Order")
+                    b.HasOne("Voam.Infrastructure.Data.Models.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Voam.Server.Data.Models.Product", "Product")
+                    b.HasOne("Voam.Infrastructure.Data.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -401,9 +542,9 @@ namespace Voam.Server.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.ProductImage", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.ProductImage", b =>
                 {
-                    b.HasOne("Voam.Server.Data.Models.Product", "Product")
+                    b.HasOne("Voam.Infrastructure.Data.Models.Product", "Product")
                         .WithMany("Images")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -412,15 +553,15 @@ namespace Voam.Server.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Review", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Review", b =>
                 {
-                    b.HasOne("Voam.Server.Data.Models.Customer", "Customer")
+                    b.HasOne("Voam.Infrastructure.Data.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Voam.Server.Data.Models.Product", "Product")
+                    b.HasOne("Voam.Infrastructure.Data.Models.Product", "Product")
                         .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -431,9 +572,9 @@ namespace Voam.Server.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Size", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Size", b =>
                 {
-                    b.HasOne("Voam.Server.Data.Models.Product", "Product")
+                    b.HasOne("Voam.Infrastructure.Data.Models.Product", "Product")
                         .WithMany("Sizes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -442,19 +583,19 @@ namespace Voam.Server.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Customer", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
 
                     b.Navigation("ShoppingCart");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Order", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Order", b =>
                 {
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("Voam.Server.Data.Models.Product", b =>
+            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Product", b =>
                 {
                     b.Navigation("Images");
 

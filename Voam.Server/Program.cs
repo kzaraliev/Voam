@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Voam.Core.Contracts;
 using Voam.Core.Services;
 using Voam.Infrastructure.Data;
@@ -30,6 +34,36 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISizeService, SizeService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+{
+   //options.Password - add reqs
+}).AddEntityFrameworkStores<VoamDbContext>()
+.AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateActor = true,
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        RequireExpirationTime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = builder.Configuration.GetSection("Jwt:Issuer").Value,
+        ValidAudience = builder.Configuration.GetSection("Jwt:Audience").Value,
+
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("Jwt:Key").Value))
+    };
+});
+
+builder.Services.AddTransient<IAuthService, AuthService>();
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -46,6 +80,7 @@ app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
