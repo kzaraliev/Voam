@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
@@ -6,9 +6,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 import Path from "../../utils/paths.js";
+import AuthContext from "../../context/authContext.jsx";
 
 function Navigation() {
     const [expanded, setExpanded] = useState(false);
+    const { isAuthenticated, email } = useContext(AuthContext);
 
     const handleNavItemClick = () => {
         setExpanded(false);
@@ -50,9 +52,12 @@ function Navigation() {
                         </Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link as={Link} to={Path.Profile} onClick={handleNavItemClick}>
-                            Profile
-                        </Nav.Link>
+                        {isAuthenticated && (
+                            <Nav.Link as={Link} to={Path.Profile} onClick={handleNavItemClick}>
+                                Profile
+                            </Nav.Link>
+                        )}
+
                         <Nav.Link
                             as={Link}
                             to={Path.ShoppingCart}
@@ -60,12 +65,17 @@ function Navigation() {
                         >
                             Shopping Cart
                         </Nav.Link>
+
+                        {!isAuthenticated && (
+                            <>
                         <Nav.Link as={Link} to={Path.Login} onClick={handleNavItemClick}>
                             Login
                         </Nav.Link>
                         <Nav.Link as={Link} to={Path.Register} onClick={handleNavItemClick}>
                             Register
-                        </Nav.Link>
+                                </Nav.Link>
+                            </>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -7,7 +7,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import styles from "../../styles/FormStyles.module.css";
 import Path from "../../utils/paths";
-/*import AuthContext from "../../context/authContext";*/
+import AuthContext from "../../context/authContext";
 import { LoginFormKeys } from "../../utils/constants";
 
 const initialValues = {
@@ -25,15 +25,14 @@ export default function Login() {
             onSubmit,
         });
 
-    /*const { loginSubmitHandler } = useContext(AuthContext);*/
+    const { loginSubmitHandler } = useContext(AuthContext);
 
     async function onSubmit(values) {
-        return;
-        /*try {
+        try {
             await loginSubmitHandler(values);
         } catch (error) {
             setServerError(error.message);
-        }*/
+        }
     }
 
     const passwordVisibilityToggle = () => {

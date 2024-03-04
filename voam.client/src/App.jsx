@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Path from "./utils/paths.js";
+import { AuthProvider } from "./context/authContext.jsx";
 
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
@@ -14,9 +15,12 @@ import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
 import CreateProduct from "./components/CreateProduct/CreateProduct.jsx"
 import Products from "./components/Products/Products.jsx";
 import EditProduct from "./components/EditProduct/EditProduct.jsx";
+//import AuthGuard from "./guards/AuthGuard.jsx";
+import LoggedInGuard from "./guards/LoggedInGuard";
 
 function App() {
     return (
+        <AuthProvider>
         <div style={{ backgroundColor: "#3b444b"}}>
             <Navigation />
             <Routes>
@@ -25,14 +29,17 @@ function App() {
                 <Route path={`${Path.Items}/:id`} element={<ProductDetails />} />
                 <Route path={Path.About} element={<About />} />
                 <Route path={Path.Contacts} element={<Contact />} />
-                <Route path={Path.Login} element={<Login />} />
-                <Route path={Path.Register} element={<Register />} />
+                    <Route element={<LoggedInGuard />}>
+                        <Route path={Path.Register} element={<Register />} />
+                        <Route path={Path.Login} element={<Login />} />
+                    </Route>
                 <Route path={Path.NotFound} element={<NotFound />} />
                 <Route path={Path.CreateProduct} element={<CreateProduct />} />
                 <Route path={Path.EditProduct} element={<EditProduct />} />
             </Routes>
             <Footer />
-        </div>
+            </div>
+        </AuthProvider>
     );
 }
 

@@ -24,7 +24,7 @@ namespace Voam.Core.Services
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email,user.UserName),
+                new Claim(ClaimTypes.Email,user.Email),
                 new Claim(ClaimTypes.Role,"Admin"),
             };
 
@@ -45,7 +45,7 @@ namespace Voam.Core.Services
 
         public async Task<bool> Login(LoginUser user)
         {
-            var identityUser = await userManager.FindByEmailAsync(user.UserName);
+            var identityUser = await userManager.FindByEmailAsync(user.Email);
             if (identityUser is null)
             {
                 return false;
@@ -56,7 +56,7 @@ namespace Voam.Core.Services
 
         public async Task<bool> RegisterUser(LoginUser user)
         {
-            var identityUser = new IdentityUser { UserName = user.UserName, Email = user.UserName };
+            var identityUser = new IdentityUser { UserName = user.Email, Email = user.Email };
 
             var result = await userManager.CreateAsync(identityUser, user.Password);
             return result.Succeeded;

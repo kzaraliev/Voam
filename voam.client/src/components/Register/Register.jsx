@@ -64,7 +64,7 @@ export default function Register() {
             )}
           <FloatingLabel
             htmlFor={RegisterFormKeys.Username}
-            label="Username"
+            label="Full name"
             className="mb-3"
           >
             <Form.Control
@@ -138,7 +138,6 @@ export default function Register() {
         </Link>
         <button
           className={styles.submitButton}
-          variant="primary"
           type="submit"
           disabled={isSubmitting}
         >
