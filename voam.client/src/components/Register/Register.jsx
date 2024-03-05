@@ -7,20 +7,20 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import styles from "../../styles/FormStyles.module.css";
 import Path from "../../utils/paths";
-// import AuthContext from "../../context/authContext";
+import AuthContext from "../../context/authContext";
 import { RegisterFormKeys } from "../../utils/constants";
 import registerValidation from "./registerValidation";
 
 const initialValues = {
-  [RegisterFormKeys.Email]: "",
-  [RegisterFormKeys.Username]: "",
-  [RegisterFormKeys.Password]: "",
-  [RegisterFormKeys.ConfirmPassword]: "",
+    [RegisterFormKeys.Email]: "",
+    [RegisterFormKeys.FirstName]: "",
+    [RegisterFormKeys.LastName]: "",
+    [RegisterFormKeys.Password]: "",
+    [RegisterFormKeys.PhoneNumber]: "",
 };
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     values,
@@ -36,18 +36,14 @@ export default function Register() {
     onSubmit,
   });
 
-  //const { registerSubmitHandler } = useContext(AuthContext);
+  const { registerSubmitHandler } = useContext(AuthContext);
 
   async function onSubmit(values) {
-    //await registerSubmitHandler(values);
+    await registerSubmitHandler(values);
   }
 
   const passwordVisibilityToggle = () => {
     setShowPassword(!showPassword);
-  };
-
-  const confirmPasswordVisibilityToggle = () => {
-    setShowConfirmPassword(!showConfirmPassword);
   };
 
   return (
@@ -55,29 +51,77 @@ export default function Register() {
       <Form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={styles.title}>Register</h1>
 
-        <Form.Group className="mb-3">
-          {errors[RegisterFormKeys.Username] &&
-            touched[RegisterFormKeys.Username] && (
+              <Form.Group className="mb-3">
+                  {errors[RegisterFormKeys.FirstName] &&
+                      touched[RegisterFormKeys.FirstName] && (
               <p className={styles.invalid}>
-                {errors[RegisterFormKeys.Username]}
+                          {errors[RegisterFormKeys.FirstName]}
               </p>
             )}
           <FloatingLabel
-            htmlFor={RegisterFormKeys.Username}
-            label="Full name"
+                      htmlFor={RegisterFormKeys.FirstName}
+                      label="First name"
             className="mb-3"
           >
             <Form.Control
               type="text"
-              id="username"
-              name={RegisterFormKeys.Username}
-              placeholder="Enter username"
+              id="firstName"
+                          name={RegisterFormKeys.FirstName}
+                          placeholder="Enter First name"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values[RegisterFormKeys.Username]}
+                          value={values[RegisterFormKeys.FirstName]}
             />
           </FloatingLabel>
-        </Form.Group>
+         </Form.Group>
+
+              <Form.Group className="mb-3">
+                  {errors[RegisterFormKeys.LastName] &&
+                      touched[RegisterFormKeys.LastName] && (
+                          <p className={styles.invalid}>
+                          {errors[RegisterFormKeys.LastName]}
+                          </p>
+                      )}
+                  <FloatingLabel
+                      htmlFor={RegisterFormKeys.LastName}
+                      label="Last name"
+                      className="mb-3"
+                  >
+                      <Form.Control
+                          type="text"
+                          id="lastName"
+                          name={RegisterFormKeys.LastName}
+                          placeholder="Enter last name"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values[RegisterFormKeys.LastName]}
+                      />
+                  </FloatingLabel>
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                  {errors[RegisterFormKeys.PhoneNumber] &&
+                      touched[RegisterFormKeys.PhoneNumber] && (
+                          <p className={styles.invalid}>
+                          {errors[RegisterFormKeys.PhoneNumber]}
+                          </p>
+                      )}
+                  <FloatingLabel
+                      htmlFor={RegisterFormKeys.PhoneNumber}
+                      label="Phone number"
+                      className="mb-3"
+                  >
+                      <Form.Control
+                          type="text"
+                          id="phoneNumber"
+                          name={RegisterFormKeys.PhoneNumber}
+                          placeholder="Enter phone number"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values[RegisterFormKeys.PhoneNumber]}
+                      />
+                  </FloatingLabel>
+              </Form.Group>
 
         <Form.Group className="mb-3">
           {errors[RegisterFormKeys.Email] &&

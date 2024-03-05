@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 using Voam.Core.Contracts;
 using Voam.Core.Models;
 
@@ -20,9 +18,10 @@ namespace Voam.Server.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterUser(LoginUser user)
         {
-            if (await authService.RegisterUser(user))
+            var result = await authService.RegisterUser(user);
+            if (result)
             {
-                return Ok("Successfuly done");
+                return await Login(user);
             }
 
             return BadRequest("Something went wrong");
@@ -42,9 +41,15 @@ namespace Voam.Server.Controllers
             if (result == true)
             {
                 var tokenString = authService.GenerateTokenString(user);
+
+                var userDetails = await authService.GetUserPublicData(user.Email);
+
                 AuthenticationDetails response = new AuthenticationDetails()
                 {
                     accessToken = tokenString,
+                    email = userDetails.Email,
+                    username = userDetails.Usernam,
+                    userId = userDetails.Id
                 };
                 return Ok(response);
             }
@@ -58,6 +63,9 @@ namespace Voam.Server.Controllers
     public class AuthenticationDetails
     {
         public string accessToken { get; set; } = string.Empty;
+        public string email { get; set; } = string.Empty;
+        public string username { get; set; } = string.Empty;
+        public string userId { get; set; } = string.Empty;
     }
 
     public class ErrorResponse

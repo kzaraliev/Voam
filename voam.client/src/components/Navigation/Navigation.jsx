@@ -10,7 +10,7 @@ import AuthContext from "../../context/authContext.jsx";
 
 function Navigation() {
     const [expanded, setExpanded] = useState(false);
-    const { isAuthenticated, email } = useContext(AuthContext);
+    const { isAuthenticated, username } = useContext(AuthContext);
 
     const handleNavItemClick = () => {
         setExpanded(false);
@@ -53,9 +53,14 @@ function Navigation() {
                     </Nav>
                     <Nav>
                         {isAuthenticated && (
+                            <>
                             <Nav.Link as={Link} to={Path.Profile} onClick={handleNavItemClick}>
-                                Profile
+                                Profile - {username}
                             </Nav.Link>
+                            <Nav.Link as={Link} to={Path.Logout} onClick={handleNavItemClick}>
+                                Logout
+                                </Nav.Link>
+                            </>
                         )}
 
                         <Nav.Link

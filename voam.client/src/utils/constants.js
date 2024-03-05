@@ -5,9 +5,10 @@ export const LoginFormKeys = {
 
 export const RegisterFormKeys = {
     Email: "email",
-    Username: "username",
+    FirstName: "firstName",
+    LastName: "lastName",
+    PhoneNumber: "phoneNumber",
     Password: "password",
-    ConfirmPassword: "confirmPassword",
 };
 
 export const CreateFormKeys = {

@@ -25,14 +25,16 @@ export const AuthProvider = ({ children }) => {
     const result = await authService.register(
       values.email,
       values.password,
-      values.username
+        values.firstName,
+        values.lastName,
+        values.phoneNumber
     );
 
     setAuth(result);
 
     localStorage.setItem("accessToken", result.accessToken);
 
-    navigate(Path.Profile);
+      navigate(Path.Home);
   };
 
   const logoutHandler = () => {
@@ -43,10 +45,10 @@ export const AuthProvider = ({ children }) => {
   const values = {
     loginSubmitHandler,
     registerSubmitHandler,
-    logoutHandler,
-    username: auth.username || auth.email,
+      logoutHandler,
+      username: auth.username,
     email: auth.email,
-    userId: auth.id,
+      userId: auth.userId,
     isAuthenticated: !!auth.accessToken,
   };
 
