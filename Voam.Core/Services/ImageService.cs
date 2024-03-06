@@ -2,17 +2,18 @@
 using Voam.Core.Contracts;
 using Voam.Infrastructure.Data;
 using Voam.Infrastructure.Data.Models;
+using Voam.Infrastucture.Data.Common;
 
 namespace Voam.Core.Services
 {
     public class ImageService : IImageService
     {
-        private readonly VoamDbContext context;
+        private readonly IRepository repository;
         private const string Base64ImagePrefix = "data:image/png;base64,";
 
-        public ImageService(VoamDbContext _context)
+        public ImageService(IRepository _repository)
         {
-            context = _context;
+            repository = _repository;
         }
 
         public async Task<bool> CreateImageAsync(ICollection<string> images, int productId)
@@ -47,8 +48,8 @@ namespace Voam.Core.Services
 
             if (imagesList.Any())
             {
-                await context.ProductImages.AddRangeAsync(imagesList);
-                await context.SaveChangesAsync();
+                await repository.AddRangeAsync(imagesList);
+                await repository.SaveChangesAsync();
                 return true;
             }
 
@@ -57,10 +58,10 @@ namespace Voam.Core.Services
 
         public async Task UpdateImageAsync(ICollection<string> images, int productId)
         {
-            var imagesToRemove = await context.ProductImages.Where(s => s.ProductId == productId).ToListAsync();
-            context.ProductImages.RemoveRange(imagesToRemove);
+            var imagesToRemove = await repository.All<ProductImage>().Where(s => s.ProductId == productId).ToListAsync();
+            repository.RemoveRange(imagesToRemove);
 
-            await context.SaveChangesAsync();
+            await repository.SaveChangesAsync();
 
             await CreateImageAsync(images, productId);
         }

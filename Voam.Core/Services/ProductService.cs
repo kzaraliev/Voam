@@ -3,26 +3,31 @@ using Voam.Core.Contracts;
 using Voam.Core.Models;
 using Voam.Infrastructure.Data;
 using Voam.Infrastructure.Data.Models;
+using Voam.Infrastucture.Data.Common;
 using static Voam.Core.Utils.Constants;
 
 namespace Voam.Core.Services
 {
     public class ProductService : IProductService
     {
-        private readonly VoamDbContext context;
+        private readonly IRepository repository;
         private readonly ISizeService sizeService;
         private readonly IImageService imageService;
 
-        public ProductService(VoamDbContext _context, ISizeService _sizeService, IImageService _imageService)
+        private readonly VoamDbContext context;
+
+        public ProductService(IRepository _repository, ISizeService _sizeService, IImageService _imageService, VoamDbContext _context)
         {
-            context = _context;
+            repository = _repository;
             sizeService = _sizeService;
             imageService = _imageService;
+            context = _context;
+
         }
 
         public async Task<IEnumerable<DisplayProductModel>> GetAllProductsAsync()
         {
-            return await context.Products
+            return await repository.AllReadOnly<Product>()
                 .Where(p => p.IsAvailable == true)
                 .Select(p => new DisplayProductModel()
                 {
@@ -39,13 +44,12 @@ namespace Voam.Core.Services
                         .FirstOrDefault(),
                 })
                 .OrderByDescending(p => p.Id)
-                .AsNoTracking()
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<DisplayProductModel>> GetRecentlyAddedProductsAsync()
         {
-            return await context.Products
+            return await repository.AllReadOnly<Product>()
                 .Where(p => p.IsAvailable == true)
                 .Select(p => new DisplayProductModel()
                 {
@@ -61,7 +65,6 @@ namespace Voam.Core.Services
                         })
                         .FirstOrDefault(),
                 })
-                .AsNoTracking()
                 .OrderByDescending(p => p.Id)
                 .Take(3)
                 .ToListAsync();
@@ -71,7 +74,7 @@ namespace Voam.Core.Services
         {
             try
             {
-                return await context.Products
+                return await repository.AllReadOnly<Product>()
                .Where(p => p.Id == id)
                .Select(p => new DetailsProductModel()
                {
@@ -101,7 +104,6 @@ namespace Voam.Core.Services
                            SizeChar = s.SizeChar,
                        }).ToArray()
                })
-               .AsNoTracking()
                .FirstOrDefaultAsync();
             }
             catch (Exception ex)
@@ -161,8 +163,8 @@ namespace Voam.Core.Services
                     IsAvailable = data.IsAvailable,
                 };
 
-                context.Products.Add(product);
-                context.SaveChanges();
+                await repository.AddAsync(product);
+                await repository.SaveChangesAsync();
 
                 return await GetProductByIdAsync(product.Id);
             }
@@ -174,15 +176,15 @@ namespace Voam.Core.Services
 
         public async Task<DeleteResult> DeleteProductByIdAsync(int id)
         {
-            var product = await context.Products.FindAsync(id);
+            var product = await repository.FindAsync<Product>(id);
 
             if (product == null)
             {
                 return DeleteResult.NotFound;
             }
 
-            context.Products.Remove(product);
-            int saveResult = await context.SaveChangesAsync();
+            repository.Remove(product);
+            int saveResult = await repository.SaveChangesAsync();
 
             return saveResult > 0 ? DeleteResult.Success : DeleteResult.Error;
         }
@@ -224,7 +226,7 @@ namespace Voam.Core.Services
         {
             try
             {
-                var product = await context.Products.FindAsync(id);
+                var product = await repository.FindAsync<Product>(id);
                 if (product == null)
                 {
                     throw new InvalidOperationException("Failed to find the product.");
@@ -245,7 +247,7 @@ namespace Voam.Core.Services
 
                 product.IsAvailable = data.IsAvailable;
 
-                await context.SaveChangesAsync();
+                await repository.SaveChangesAsync();
 
                 var updatedProduct = new DetailsProductModel
                 {

@@ -6,6 +6,7 @@ using System.Text;
 using Voam.Core.Contracts;
 using Voam.Core.Services;
 using Voam.Infrastructure.Data;
+using Voam.Infrastucture.Data.Common;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -36,7 +37,7 @@ namespace Microsoft.Extensions.DependencyInjection
             string connectionString = config.GetConnectionString("DefaultConnection");
             services.AddDbContext<VoamDbContext>(opt => opt.UseSqlServer(connectionString));
 
-            //services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IRepository, Repository>();
 
             return services;
         }

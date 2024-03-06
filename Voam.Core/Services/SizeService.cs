@@ -1,22 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Voam.Core.Contracts;
-using Voam.Infrastructure.Data;
 using Voam.Infrastructure.Data.Models;
+using Voam.Infrastucture.Data.Common;
 
 namespace Voam.Core.Services
 {
     public class SizeService : ISizeService
     {
-        private readonly VoamDbContext context;
+        private readonly IRepository repository;
 
-        public SizeService(VoamDbContext _context)
+        public SizeService(IRepository _repository)
         {
-            context = _context;
+            repository = _repository;
         }
 
         public async Task<bool> CreateSizeAsync(int sizeSAmount, int sizeMAmount, int sizeLAmount, int productId)
@@ -30,8 +25,8 @@ namespace Voam.Core.Services
 
             if (sizes.Any())
             {
-                await context.Sizes.AddRangeAsync(sizes);
-                await context.SaveChangesAsync();
+                await repository.AddRangeAsync(sizes);
+                await repository.SaveChangesAsync();
                 return true;
             }
 
@@ -40,10 +35,10 @@ namespace Voam.Core.Services
 
         public async Task UpdateSizesAsync(int sizeSAmount, int sizeMAmount, int sizeLAmount, int productId)
         {
-            var sizesToRemove = await context.Sizes.Where(s => s.ProductId == productId).ToListAsync();
-            context.Sizes.RemoveRange(sizesToRemove);
+            var sizesToRemove = await repository.All<Size>().Where(s => s.ProductId == productId).ToListAsync();
+            repository.RemoveRange(sizesToRemove);
 
-            await context.SaveChangesAsync();
+            await repository.SaveChangesAsync();
 
             await CreateSizeAsync(sizeSAmount, sizeMAmount, sizeLAmount, productId);
         }

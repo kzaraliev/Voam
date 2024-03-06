@@ -1,12 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Voam.Core.Contracts;
-using Voam.Core.Services;
-using Voam.Infrastructure.Data;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
