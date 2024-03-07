@@ -16,24 +16,21 @@ namespace Voam.Server.Controllers
             productService = _productService;
         }
 
-        [HttpGet]
-        [Route("GetAllProducts")]
+        [HttpGet("GetAllProducts")]
         public async Task<IActionResult> GetAllProducts()
         {
             IEnumerable<DisplayProductModel> products = await productService.GetAllProductsAsync();
-            return StatusCode(StatusCodes.Status200OK, products);
+            return Ok(products);
         }
 
-        [HttpGet]
-        [Route("GetRecentlyAddedProducts")]
+        [HttpGet("GetRecentlyAddedProducts")]
         public async Task<IActionResult> GetRecentlyAddedProducts()
         {
             IEnumerable<DisplayProductModel> products = await productService.GetRecentlyAddedProductsAsync();
-            return StatusCode(StatusCodes.Status200OK, products);
+            return Ok(products);
         }
 
-        [HttpGet]
-        [Route("GetProductById")]
+        [HttpGet("GetProductById")]
         public async Task<IActionResult> GetProductById(int id)
         {
             var product = await productService.GetProductByIdAsync(id);
@@ -46,8 +43,7 @@ namespace Voam.Server.Controllers
             return Ok(product);
         }
 
-        [HttpPost]
-        [Route("CreateProduct")]
+        [HttpPost("CreateProduct")]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductModel data)
         {
             try
@@ -61,8 +57,7 @@ namespace Voam.Server.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("UpdateProduct")]
+        [HttpPut("UpdateProduct")]
         public async Task<IActionResult> UpdateProduct(int id, EditProductModel data)
         {
             try
@@ -76,8 +71,7 @@ namespace Voam.Server.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("DeleteProduct")]
+        [HttpDelete("DeleteProduct")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var deleteResult = await productService.DeleteProductByIdAsync(id);

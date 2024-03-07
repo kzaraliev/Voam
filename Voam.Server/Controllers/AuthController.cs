@@ -46,39 +46,16 @@ namespace Voam.Server.Controllers
 
                 AuthenticationDetails response = new AuthenticationDetails()
                 {
-                    accessToken = tokenString,
-                    email = userDetails.Email,
-                    username = userDetails.Usernam,
-                    userId = userDetails.Id
+                    AccessToken = tokenString,
+                    Email = userDetails.Email,
+                    Username = userDetails.Usernam,
+                    UserId = userDetails.Id
                 };
                 return Ok(response);
             }
 
-            var errorResponse = new ErrorResponse(401, "Unauthorized", "Incorrect email or password.");
-
-            return StatusCode(errorResponse.Status, errorResponse);
+            return Unauthorized(new {message = "Incorrect email or password" });
         }
 
-    }
-    public class AuthenticationDetails
-    {
-        public string accessToken { get; set; } = string.Empty;
-        public string email { get; set; } = string.Empty;
-        public string username { get; set; } = string.Empty;
-        public string userId { get; set; } = string.Empty;
-    }
-
-    public class ErrorResponse
-    {
-        public int Status { get; set; }
-        public string Error { get; set; }
-        public string Message { get; set; }
-
-        public ErrorResponse(int status, string error, string message)
-        {
-            Status = status;
-            Error = error;
-            Message = message;
-        }
     }
 }
