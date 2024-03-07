@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Voam.Infrastructure.Data.Models
@@ -16,9 +17,9 @@ namespace Voam.Infrastructure.Data.Models
         public decimal TotalAmount { get; set; }
 
         [ForeignKey(nameof(Customer))]
-        public int CustomerId { get; set; }
+        public string CustomerId { get; set; } = string.Empty;
 
-        public required virtual Customer Customer { get; set; }
+        public required virtual IdentityUser Customer { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }

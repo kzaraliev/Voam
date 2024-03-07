@@ -1,4 +1,4 @@
-﻿using Voam.Core.Models;
+﻿using Voam.Core.Models.Identity;
 
 namespace Voam.Core.Contracts
 {

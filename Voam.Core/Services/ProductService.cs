@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Voam.Core.Contracts;
 using Voam.Core.Models;
+using Voam.Core.Models.Product;
+using Voam.Core.Models.ProductImage;
+using Voam.Core.Models.Review;
+using Voam.Core.Models.Size;
 using Voam.Infrastructure.Data;
 using Voam.Infrastructure.Data.Models;
 using Voam.Infrastucture.Data.Common;

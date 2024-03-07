@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Voam.Core.Contracts;
-using Voam.Core.Models;
+using Voam.Core.Models.Identity;
 
 namespace Voam.Server.Controllers
 {

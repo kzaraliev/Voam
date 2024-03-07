@@ -228,9 +228,6 @@ namespace Voam.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -239,54 +236,9 @@ namespace Voam.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
                     b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
-                });
-
-            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.Order", b =>
@@ -297,8 +249,9 @@ namespace Voam.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -400,8 +353,9 @@ namespace Voam.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -499,10 +453,6 @@ namespace Voam.Server.Migrations
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.CartItem", b =>
                 {
-                    b.HasOne("Voam.Infrastructure.Data.Models.Customer", null)
-                        .WithMany("ShoppingCart")
-                        .HasForeignKey("CustomerId");
-
                     b.HasOne("Voam.Infrastructure.Data.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -514,8 +464,8 @@ namespace Voam.Server.Migrations
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.Order", b =>
                 {
-                    b.HasOne("Voam.Infrastructure.Data.Models.Customer", "Customer")
-                        .WithMany("Orders")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Customer")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -555,7 +505,7 @@ namespace Voam.Server.Migrations
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.Review", b =>
                 {
-                    b.HasOne("Voam.Infrastructure.Data.Models.Customer", "Customer")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -581,13 +531,6 @@ namespace Voam.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Voam.Infrastructure.Data.Models.Customer", b =>
-                {
-                    b.Navigation("Orders");
-
-                    b.Navigation("ShoppingCart");
                 });
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.Order", b =>

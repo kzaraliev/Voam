@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Voam.Core.Contracts;
-using Voam.Core.Models;
+using Voam.Core.Models.Product;
 using static Voam.Core.Utils.Constants;
 
 namespace Voam.Server.Controllers

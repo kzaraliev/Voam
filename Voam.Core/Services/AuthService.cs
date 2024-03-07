@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Voam.Core.Contracts;
-using Voam.Core.Models;
+using Voam.Core.Models.Identity;
 
 namespace Voam.Core.Services
 {
@@ -33,7 +33,7 @@ namespace Voam.Core.Services
             {
                 Id = identityUser.Id,
                 Email = identityUser.Email ?? "Error",
-                Usernam = Split(identityUser.UserName ?? "Error"),
+                Usernam = SplitUsername(identityUser.UserName ?? "Error"),
             };
 
             return user;
@@ -75,13 +75,13 @@ namespace Voam.Core.Services
 
         public async Task<bool> RegisterUser(LoginUser user)
         {
-            var identityUser = new IdentityUser { UserName = $"{user.FirstName}{user.LastName}", Email = user.Email, PhoneNumber = user.PhoneNumber };
+            var identityUser = new IdentityUser { UserName = CombineFirstAndLastName(user.FirstName, user.LastName), Email = user.Email, PhoneNumber = user.PhoneNumber };
 
             var result = await userManager.CreateAsync(identityUser, user.Password);
             return result.Succeeded;
         }
 
-        private string Split(string input)
+        private string SplitUsername(string input)
         {
             int uppercaseCount = 0;
 
@@ -104,6 +104,22 @@ namespace Voam.Core.Services
 
             // Return the original input if no split is performed
             return input;
+        }
+
+        private string CombineFirstAndLastName(string firstName, string lastName)
+        {
+            string result = "";
+
+            string firstNameToLower = firstName.ToLower(); // Convert the entire string to lowercase first
+            string lastNameToLower = lastName.ToLower(); // Convert the entire string to lowercase first
+
+            if (!string.IsNullOrEmpty(firstNameToLower) && !string.IsNullOrEmpty(lastNameToLower))
+            {
+                // Make the first character uppercase
+                result = (char.ToUpper(firstNameToLower[0]) + firstNameToLower.Substring(1)) + (char.ToUpper(lastNameToLower[0]) + lastNameToLower.Substring(1));
+            }
+
+            return result;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Voam.Core.Models;
+﻿using Voam.Core.Models.Product;
 using Voam.Infrastructure.Data.Models;
 using static Voam.Core.Utils.Constants;
 
