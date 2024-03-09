@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Voam.Infrastructure.Data.Models
 {
-    public class Order
+    public class ShoppingCart
     {
         [Key]
         public int Id { get; set; }
@@ -16,11 +16,12 @@ namespace Voam.Infrastructure.Data.Models
         [Column(TypeName = "decimal(10, 2)")]
         public decimal TotalAmount { get; set; }
 
+        [Required]
         [ForeignKey(nameof(Customer))]
-        public string CustomerId { get; set; } = string.Empty;
+        public required string CustomerId { get; set; }
 
-        public required virtual IdentityUser Customer { get; set; }
+        public virtual IdentityUser Customer { get; set; } = null!;
 
-        public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
     }
 }

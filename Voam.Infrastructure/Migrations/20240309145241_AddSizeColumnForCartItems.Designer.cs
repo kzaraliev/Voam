@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Voam.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Voam.Infrastructure.Data;
 namespace Voam.Server.Migrations
 {
     [DbContext(typeof(VoamDbContext))]
-    partial class VoamDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240309145241_AddSizeColumnForCartItems")]
+    partial class AddSizeColumnForCartItems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,7 +237,7 @@ namespace Voam.Server.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShoppingCartId")
+                    b.Property<int?>("ShoppingCartId")
                         .HasColumnType("int");
 
                     b.Property<int>("SizeId")
@@ -440,11 +443,9 @@ namespace Voam.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Voam.Infrastructure.Data.Models.ShoppingCart", "ShoppingCart")
+                    b.HasOne("Voam.Infrastructure.Data.Models.ShoppingCart", null)
                         .WithMany("CartItems")
-                        .HasForeignKey("ShoppingCartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ShoppingCartId");
 
                     b.HasOne("Voam.Infrastructure.Data.Models.Size", "Size")
                         .WithMany()
@@ -453,8 +454,6 @@ namespace Voam.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-
-                    b.Navigation("ShoppingCart");
 
                     b.Navigation("Size");
                 });

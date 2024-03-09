@@ -13,11 +13,13 @@ namespace Voam.Core.Services
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly IConfiguration config;
+        private readonly IShoppingCartService shoppingCartService;
 
-        public AuthService(UserManager<IdentityUser> _userManager, IConfiguration _config)
+        public AuthService(UserManager<IdentityUser> _userManager, IConfiguration _config, IShoppingCartService _shoppingCartService)
         {
             userManager = _userManager;
             config = _config;
+            shoppingCartService = _shoppingCartService;
         }
 
         public async Task<UserPublicModel> GetUserPublicData(string email)
@@ -78,6 +80,12 @@ namespace Voam.Core.Services
             var identityUser = new IdentityUser { UserName = CombineFirstAndLastName(user.FirstName, user.LastName), Email = user.Email, PhoneNumber = user.PhoneNumber };
 
             var result = await userManager.CreateAsync(identityUser, user.Password);
+
+            if (result.Succeeded)
+            {
+                await shoppingCartService.CreateShoppingCartAsync(identityUser.Id);
+            }
+
             return result.Succeeded;
         }
 

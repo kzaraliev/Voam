@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Voam.Core.Contracts;
+using Voam.Core.Models.Size;
 using Voam.Infrastructure.Data.Models;
 using Voam.Infrastucture.Data.Common;
 
@@ -31,6 +32,11 @@ namespace Voam.Core.Services
             }
 
             return false;
+        }
+
+        public async Task<Size?> GetSizeById(int id)
+        {
+            return await repository.FindAsync<Size>(id);
         }
 
         public async Task UpdateSizesAsync(int sizeSAmount, int sizeMAmount, int sizeLAmount, int productId)

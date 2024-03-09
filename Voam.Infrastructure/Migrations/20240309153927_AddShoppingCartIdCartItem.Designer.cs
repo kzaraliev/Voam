@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Voam.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using Voam.Infrastructure.Data;
 namespace Voam.Server.Migrations
 {
     [DbContext(typeof(VoamDbContext))]
-    partial class VoamDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240309153927_AddShoppingCartIdCartItem")]
+    partial class AddShoppingCartIdCartItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
