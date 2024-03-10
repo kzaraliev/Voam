@@ -18,11 +18,11 @@ namespace Voam.Infrastructure.Data.Models
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
 
-        public required virtual Product Product { get; set; }
+        public virtual Product Product { get; set; }
 
         [ForeignKey(nameof(Customer))]
         public string CustomerId { get; set; } = string.Empty;
 
-        public required virtual IdentityUser Customer { get; set; }
+        public virtual IdentityUser Customer { get; set; }
     }
 }

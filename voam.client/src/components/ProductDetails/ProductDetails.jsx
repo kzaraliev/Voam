@@ -10,6 +10,7 @@ import { FaStar } from "react-icons/fa6";
 
 import * as productService from "../../services/productService";
 import * as shoppingCartService from "../../services/shoppingCartService";
+import * as reviewService from "../../services/reviewService";
 import AuthContext from "../../context/authContext.jsx";
 import Path from "../../utils/paths";
 import styles from "./ProductDetails.module.css";
@@ -23,11 +24,10 @@ export default function ProductDetails() {
   const [errors, setErrors] = useState("");
   const navigate = useNavigate();
   const [rating, setRating] = useState(null);
+  const [avgRating, setAvgRating] = useState(null);
   const [hover, setHover] = useState(null);
 
   //const [isSubmitting, setIsSubmitting] = useState(false);
-
-  console.log(isAuthenticated)
 
   const errorMessages = {
     invalidSize: "Select product size",
@@ -43,7 +43,31 @@ export default function ProductDetails() {
         console.log(err);
         navigate(Path.Items);
       });
+
+    reviewService
+      .get(userId, id)
+      .then((res) => {
+        setAvgRating(parseFloat(res.averageRating.toFixed(2)));
+        setRating(parseFloat(res.userRating.toFixed(2)));
+      })
+      .catch((err) => console.log(err));
   }, [id]);
+
+  function handleRate(currentRating) {
+    const data = {
+      userId: userId,
+      productId: parseInt(id),
+      rating: currentRating,
+    };
+
+    reviewService
+      .post(data)
+      .then((res) => {
+        setAvgRating(parseFloat(res.averageRating.toFixed(2)));
+        setRating(parseFloat(res.userRating.toFixed(2)));
+      })
+      .catch((err) => console.log(err));
+  }
 
   const submitHandler = () => {
     const selectedSizeId = values.size;
@@ -73,11 +97,11 @@ export default function ProductDetails() {
       userId: userId,
       productId: id,
       sizeId: values.size,
-      quantity: values.amount
-    }
+      quantity: values.amount,
+    };
 
     shoppingCartService.addToShoppingCart(data).catch((err) => {
-      console.log(err)
+      console.log(err);
     });
   };
 
@@ -89,7 +113,7 @@ export default function ProductDetails() {
     if (hasConfirmed) {
       await productService.remove(id);
 
-        navigate(Path.Items);
+      navigate(Path.Items);
     }
   };
 
@@ -194,7 +218,12 @@ export default function ProductDetails() {
                         name="rating"
                         className={styles.ratingInput}
                         value={currentRating}
-                        onClick={() => setRating(currentRating)}
+                        onClick={() => {
+                          if (isAuthenticated) {
+                            setRating(currentRating);
+                            handleRate(currentRating);
+                          }
+                        }}
                       />
                       <FaStar
                         className={styles.star}
@@ -211,7 +240,7 @@ export default function ProductDetails() {
                   );
                 })}
               </div>
-              <p className={styles.ratingNumber}>({rating})</p>
+              <p className={styles.ratingNumber}>({avgRating})</p>
             </div>
           </div>
           <div className={styles.editAndDeleteContainer}>

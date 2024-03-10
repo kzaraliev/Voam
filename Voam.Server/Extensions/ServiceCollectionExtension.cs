@@ -20,6 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ISizeService, SizeService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
             services.AddScoped<ICartItemService, CartItemService>();
+            services.AddScoped<IReviewService, ReviewService>();
 
             services.AddCors(options =>
             {
