@@ -53,7 +53,7 @@ namespace Voam.Core.Services
             }
 
             shoppingCart.CartItems.Add(cartItem);
-            shoppingCart.TotalAmount += product.Price;
+            shoppingCart.TotalAmount += product.Price * quantity;
             await repository.SaveChangesAsync();            
 
             return true;

@@ -54,23 +54,17 @@ function Navigation() {
                     <Nav>
                         {isAuthenticated && (
                             <>
-                            <Nav.Link as={Link} to={Path.Profile} onClick={handleNavItemClick}>
-                                Profile - {username}
-                            </Nav.Link>
-                            <Nav.Link as={Link} to={Path.Logout} onClick={handleNavItemClick}>
-                                Logout
+                                <Nav.Link as={Link} to={Path.Profile} onClick={handleNavItemClick}>
+                                    Profile - {username}
+                                </Nav.Link>
+                                <Nav.Link as={Link} to={Path.ShoppingCart} onClick={handleNavItemClick}>
+                                    ShoppingCart
+                                </Nav.Link>
+                                <Nav.Link as={Link} to={Path.Logout} onClick={handleNavItemClick}>
+                                    Logout
                                 </Nav.Link>
                             </>
                         )}
-
-                        <Nav.Link
-                            as={Link}
-                            to={Path.ShoppingCart}
-                            onClick={handleNavItemClick}
-                        >
-                            Shopping Cart
-                        </Nav.Link>
-
                         {!isAuthenticated && (
                             <>
                         <Nav.Link as={Link} to={Path.Login} onClick={handleNavItemClick}>

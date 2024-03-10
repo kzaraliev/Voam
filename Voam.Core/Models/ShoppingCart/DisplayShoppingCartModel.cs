@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Voam.Infrastructure.Data.Models;
-
-namespace Voam.Core.Models.ShoppingCart
+﻿namespace Voam.Core.Models.ShoppingCart
 {
     public class DisplayShoppingCartModel
     {
