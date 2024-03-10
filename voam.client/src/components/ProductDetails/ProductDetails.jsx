@@ -1,15 +1,16 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useContext } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 
 import Figure from "react-bootstrap/Figure";
 import Carousel from "react-bootstrap/Carousel";
 import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { FaStar } from "react-icons/fa6";
 
 import * as productService from "../../services/productService";
+import * as shoppingCartService from "../../services/shoppingCartService";
+import AuthContext from "../../context/authContext.jsx";
 import Path from "../../utils/paths";
 import styles from "./ProductDetails.module.css";
 import { OrderFormKeys } from "../../utils/constants";
@@ -17,6 +18,7 @@ import { OrderFormKeys } from "../../utils/constants";
 export default function ProductDetails() {
   //Separate form in new component
   const { id } = useParams();
+  const { isAuthenticated, userId } = useContext(AuthContext);
   const [product, setProduct] = useState({});
   const [errors, setErrors] = useState("");
   const navigate = useNavigate();
@@ -24,6 +26,8 @@ export default function ProductDetails() {
   const [hover, setHover] = useState(null);
 
   //const [isSubmitting, setIsSubmitting] = useState(false);
+
+  console.log(isAuthenticated)
 
   const errorMessages = {
     invalidSize: "Select product size",
@@ -64,6 +68,17 @@ export default function ProductDetails() {
       return;
     }
     setErrors("");
+
+    const data = {
+      userId: userId,
+      productId: id,
+      sizeId: values.size,
+      quantity: values.amount
+    }
+
+    shoppingCartService.addToShoppingCart(data).catch((err) => {
+      console.log(err)
+    });
   };
 
   const deleteButtonClickHandler = async () => {
@@ -85,6 +100,7 @@ export default function ProductDetails() {
     }),
     []
   );
+
   const { values, onChange, onSubmit } = useForm(
     submitHandler,
     initialValues,
@@ -162,8 +178,9 @@ export default function ProductDetails() {
                 className={styles.submitButton}
                 type="submit"
                 variant="success"
+                disabled={!isAuthenticated}
               >
-                Add to cart
+                {isAuthenticated ? "Add to cart" : "Log in to add to cart"}
               </Button>
             </Form>
             <div className={styles.ratingContainer}>

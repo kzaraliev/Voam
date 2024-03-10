@@ -7,3 +7,9 @@ export const get = async (userId) => {
 
     return result;
 };
+
+export const addToShoppingCart = async (data) => {
+    const result = await request.put(`${baseUrl}/AddCartItem`, data);
+
+    return result;
+};
