@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
-                    builder.AllowAnyOrigin()
+                    builder.WithOrigins("https://localhost:5173")
                     .AllowAnyMethod()
                     .AllowAnyHeader();
                 });
