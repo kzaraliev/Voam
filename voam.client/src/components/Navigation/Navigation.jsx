@@ -47,9 +47,14 @@ function Navigation() {
                         <Nav.Link as={Link} to={Path.Contacts} onClick={handleNavItemClick}>
                             Contact
                         </Nav.Link>
-                        <Nav.Link as={Link} to={Path.CreateProduct} onClick={handleNavItemClick}>
-                            Create
-                        </Nav.Link>
+                        {isAuthenticated && (
+                            <>
+                                <Nav.Link as={Link} to={Path.CreateProduct} onClick={handleNavItemClick}>
+                                    Create
+                                </Nav.Link>
+                            </>
+                        )}
+                        
                     </Nav>
                     <Nav>
                         {isAuthenticated && (
@@ -67,11 +72,11 @@ function Navigation() {
                         )}
                         {!isAuthenticated && (
                             <>
-                        <Nav.Link as={Link} to={Path.Login} onClick={handleNavItemClick}>
-                            Login
-                        </Nav.Link>
-                        <Nav.Link as={Link} to={Path.Register} onClick={handleNavItemClick}>
-                            Register
+                                <Nav.Link as={Link} to={Path.Login} onClick={handleNavItemClick}>
+                                    Login
+                                </Nav.Link>
+                                <Nav.Link as={Link} to={Path.Register} onClick={handleNavItemClick}>
+                                    Register
                                 </Nav.Link>
                             </>
                         )}
