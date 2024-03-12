@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Voam.Core.Contracts;
 using Voam.Core.Models.ShoppingCart;
+using static Voam.Core.Utils.Constants;
 
 namespace Voam.Server.Controllers
 {
@@ -33,6 +34,19 @@ namespace Voam.Server.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpDelete("DeleteCartItem")]
+        public async Task<IActionResult> DeleteCartItem(int id)
+        {
+            var deleteResult = await shoppingCartService.DeleteCartItemAsyncById(id);
+
+            return deleteResult switch
+            {
+                DeleteResult.NotFound => NotFound($"CartItem with Id {id} not found."),
+                DeleteResult.Success => NoContent(),
+                _ => StatusCode(StatusCodes.Status500InternalServerError, "Error deleting product")
+            };
         }
     }
 }

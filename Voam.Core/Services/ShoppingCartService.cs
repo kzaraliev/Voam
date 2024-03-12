@@ -3,6 +3,7 @@ using Voam.Core.Contracts;
 using Voam.Core.Models.ShoppingCart;
 using Voam.Infrastructure.Data.Models;
 using Voam.Infrastucture.Data.Common;
+using static Voam.Core.Utils.Constants;
 
 namespace Voam.Core.Services
 {
@@ -71,6 +72,37 @@ namespace Voam.Core.Services
 
             await repository.AddAsync(shoppingCart);
             await repository.SaveChangesAsync();
+        }
+
+        public async Task<DeleteResult> DeleteCartItemAsyncById(int cartItemId)
+        {
+            var cartItem = await repository.FindAsync<CartItem>(cartItemId);
+
+            if (cartItem == null)
+            {
+                return DeleteResult.NotFound;
+            }
+
+            var shoppingCart = await repository.FindAsync<ShoppingCart>(cartItem.ShoppingCartId);
+            
+            if (shoppingCart == null)
+            {
+                return DeleteResult.NotFound;
+            }
+
+            var product = await repository.FindAsync<Product>(cartItem.ProductId);
+
+            if (product == null)
+            {
+                return DeleteResult.NotFound;
+            }
+
+            shoppingCart.TotalAmount -= cartItem.Quantity * product.Price;
+
+            repository.Remove(cartItem);
+            int saveResult = await repository.SaveChangesAsync();
+
+            return saveResult > 0 ? DeleteResult.Success : DeleteResult.Error;
         }
 
         public async Task<DisplayShoppingCartModel?> GetShoppingCartAsync(string userId)

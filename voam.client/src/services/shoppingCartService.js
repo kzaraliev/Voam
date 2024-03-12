@@ -13,3 +13,5 @@ export const addToShoppingCart = async (data) => {
 
     return result;
 };
+
+export const remove = async (cartItemId) => request.remove(`${baseUrl}/DeleteCartItem?id=${cartItemId}`);

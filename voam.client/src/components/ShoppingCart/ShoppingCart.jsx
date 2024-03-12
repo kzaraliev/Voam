@@ -11,6 +11,18 @@ export default function ShoppingCart() {
 
   console.log(cartItems);
 
+  function handleItemDelete(itemId, amountToDeduct) {
+    setCartItems(currentItems => {
+      const updatedTotalAmount = currentItems.totalAmount - amountToDeduct;
+  
+      return {
+        ...currentItems,
+        cartItems: currentItems.cartItems.filter(item => item.id !== itemId),
+        totalAmount: updatedTotalAmount
+      };
+    });
+  }
+
   useEffect(() => {
     shoppingCartService.get(userId).then((res) => setCartItems(res));
   }, []);
@@ -30,6 +42,7 @@ export default function ShoppingCart() {
                 productId={cartItem.productId}
                 quantity={cartItem.quantity}
                 sizeId={cartItem.sizeId}
+                onDelete={handleItemDelete}
               />
             ))
           )}
