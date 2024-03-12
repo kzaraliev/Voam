@@ -12,8 +12,6 @@ namespace Voam.Core.Models.Product
 
         public decimal Price { get; set; }
 
-        public bool IsAvailable { get; set; }
-
         public ProductImageModel? Image { get; set; } = null!;
     }
 }

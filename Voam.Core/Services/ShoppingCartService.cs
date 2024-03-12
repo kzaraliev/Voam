@@ -54,7 +54,6 @@ namespace Voam.Core.Services
             }
 
             shoppingCart.CartItems.Add(cartItem);
-            shoppingCart.TotalAmount += product.Price * quantity;
             await repository.SaveChangesAsync();            
 
             return true;
@@ -66,8 +65,6 @@ namespace Voam.Core.Services
             {
                 CartItems = new List<CartItem>(),
                 CustomerId = userId,
-                OrderDate = DateTime.MinValue,
-                TotalAmount = 0,
             };
 
             await repository.AddAsync(shoppingCart);
@@ -97,8 +94,6 @@ namespace Voam.Core.Services
                 return DeleteResult.NotFound;
             }
 
-            shoppingCart.TotalAmount -= cartItem.Quantity * product.Price;
-
             repository.Remove(cartItem);
             int saveResult = await repository.SaveChangesAsync();
 
@@ -122,9 +117,7 @@ namespace Voam.Core.Services
                         Quantity = ci.Quantity,
                         SizeId = ci.SizeId,
                     }).ToList(),
-                    TotalAmount = sc.TotalAmount,
-                    OrderDate = DateTime.MinValue,
-
+                    TotalPrice = sc.CartItems.Sum(sc => sc.Product.Price * sc.Quantity)
                 })
                 .FirstOrDefaultAsync();
             }

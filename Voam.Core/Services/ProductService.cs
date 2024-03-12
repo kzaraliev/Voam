@@ -32,14 +32,12 @@ namespace Voam.Core.Services
         public async Task<IEnumerable<DisplayProductModel>> GetAllProductsAsync()
         {
             return await repository.AllReadOnly<Product>()
-                .Where(p => p.IsAvailable == true)
                 .Select(p => new DisplayProductModel()
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
                     Price = p.Price,
-                    IsAvailable = p.IsAvailable,
                     Image = p.Images
                         .Select(i => new ProductImageModel()
                         {
@@ -54,14 +52,12 @@ namespace Voam.Core.Services
         public async Task<IEnumerable<DisplayProductModel>> GetRecentlyAddedProductsAsync()
         {
             return await repository.AllReadOnly<Product>()
-                .Where(p => p.IsAvailable == true)
                 .Select(p => new DisplayProductModel()
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
                     Price = p.Price,
-                    IsAvailable = p.IsAvailable,
                     Image = p.Images
                         .Select(i => new ProductImageModel()
                         {
@@ -86,7 +82,6 @@ namespace Voam.Core.Services
                    Name = p.Name,
                    Description = p.Description,
                    Price = p.Price,
-                   IsAvailable = p.IsAvailable,
                    Images = p.Images
                        .Select(i => new ProductImageModel()
                        {
@@ -164,7 +159,6 @@ namespace Voam.Core.Services
                     Name = data.Name,
                     Description = data.Description,
                     Price = data.Price,
-                    IsAvailable = data.IsAvailable,
                 };
 
                 await repository.AddAsync(product);
@@ -249,7 +243,6 @@ namespace Voam.Core.Services
 
                 }
 
-                product.IsAvailable = data.IsAvailable;
 
                 await repository.SaveChangesAsync();
 
@@ -259,7 +252,6 @@ namespace Voam.Core.Services
                     Name = product.Name,
                     Description = product.Description,
                     Price = product.Price,
-                    IsAvailable = product.IsAvailable,
                 };
 
                 return updatedProduct;

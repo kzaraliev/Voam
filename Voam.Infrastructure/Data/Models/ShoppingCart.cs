@@ -10,13 +10,6 @@ namespace Voam.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
-        public DateTime OrderDate { get; set; }
-
-        [Required]
-        [Column(TypeName = "decimal(10, 2)")]
-        public decimal TotalAmount { get; set; }
-
-        [Required]
         [ForeignKey(nameof(Customer))]
         public required string CustomerId { get; set; }
 

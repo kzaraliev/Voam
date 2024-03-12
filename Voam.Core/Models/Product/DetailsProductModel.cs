@@ -15,8 +15,6 @@ namespace Voam.Core.Models.Product
 
         public decimal Price { get; set; }
 
-        public bool IsAvailable { get; set; }
-
         public ICollection<ProductImageModel> Images { get; set; } = new List<ProductImageModel>();
 
         public ICollection<ReviewModel> Reviews { get; set; } = new List<ReviewModel>();

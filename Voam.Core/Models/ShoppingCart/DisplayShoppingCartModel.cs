@@ -4,9 +4,7 @@
     {
         public int Id { get; set; }
 
-        public DateTime OrderDate { get; set; }
-
-        public decimal TotalAmount { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public required string CustomerId { get; set; }
 

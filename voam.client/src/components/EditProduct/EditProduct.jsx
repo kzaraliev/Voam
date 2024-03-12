@@ -21,7 +21,6 @@ export default function EditProduct() {
         [EditFormKeys.Name]: "",
         [EditFormKeys.Description]: "",
         [EditFormKeys.Price]: "",
-        [EditFormKeys.IsAvailable]: false,
         [EditFormKeys.SizeS]: 0,
         [EditFormKeys.SizeM]: 0,
         [EditFormKeys.SizeL]: 0,
@@ -51,7 +50,6 @@ export default function EditProduct() {
             [EditFormKeys.Name]: product[EditFormKeys.Name] || "",
             [EditFormKeys.Description]: product[EditFormKeys.Description] || "",
             [EditFormKeys.Price]: product[EditFormKeys.Price] || "",
-            [EditFormKeys.IsAvailable]: product[EditFormKeys.IsAvailable] || false,
             [EditFormKeys.SizeS]: (product.sizes && Array.isArray(product.sizes) && product.sizes.find(s => s.sizeChar === "S"))?.quantity || 0,
             [EditFormKeys.SizeM]: (product.sizes && Array.isArray(product.sizes) && product.sizes.find(s => s.sizeChar === "M"))?.quantity || 0,
             [EditFormKeys.SizeL]: (product.sizes && Array.isArray(product.sizes) && product.sizes.find(s => s.sizeChar === "L"))?.quantity || 0,
@@ -175,26 +173,6 @@ export default function EditProduct() {
                             value={values[EditFormKeys.Price]}
                         />
                     </FloatingLabel>
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    {errors[EditFormKeys.IsAvailable] &&
-                        touched[EditFormKeys.IsAvailable] && (
-                            <p className={styles.invalid}>{errors[EditFormKeys.IsAvailable]}</p>
-                        )}
-
-
-                    <Form.Check
-                        type="switch"
-                        id={EditFormKeys.IsAvailable}
-                        name={EditFormKeys.IsAvailable}
-                        className={styles.switch}
-                        label={`Is this product available?`}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        checked={Boolean(values[EditFormKeys.IsAvailable])}
-                        value={values[EditFormKeys.IsAvailable]}
-                    />
                 </Form.Group>
 
                 <Form.Group className="mb-3">

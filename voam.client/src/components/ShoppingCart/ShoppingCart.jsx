@@ -14,12 +14,12 @@ export default function ShoppingCart() {
 
   function handleItemDelete(itemId, amountToDeduct) {
     setCartData((currentItems) => {
-      const updatedTotalAmount = currentItems.totalAmount - amountToDeduct;
+      const updatedTotalAmount = currentItems.totalPrice - amountToDeduct;
 
       return {
         ...currentItems,
         cartItems: currentItems.cartItems.filter((item) => item.id !== itemId),
-        totalAmount: updatedTotalAmount,
+        totalPrice: updatedTotalAmount,
       };
     });
   }
@@ -61,7 +61,7 @@ export default function ShoppingCart() {
         </ul>
         <button className={styles.submitButton} type="submit">
           Proceed to checkout (
-          {cartData === undefined ? "" : cartData.totalAmount} lv.)
+          {cartData === undefined ? "" : cartData.totalPrice.toFixed(2)} lv.)
         </button>
       </div>
     </div>

@@ -15,7 +15,6 @@ const initialValues = {
     [EditFormKeys.Name]: "",
     [EditFormKeys.Description]: "",
     [EditFormKeys.Price]: "",
-    [EditFormKeys.IsAvailable]: false,
     [EditFormKeys.SizeS]: 0,
     [EditFormKeys.SizeM]: 0,
     [EditFormKeys.SizeL]: 0,
@@ -154,25 +153,6 @@ export default function CreateProduct() {
                             value={values[EditFormKeys.Price]}
                         />
                     </FloatingLabel>
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                    {errors[EditFormKeys.IsAvailable] &&
-                        touched[EditFormKeys.IsAvailable] && (
-                            <p className={styles.invalid}>{errors[EditFormKeys.IsAvailable]}</p>
-                        )}
-                    
-
-                    <Form.Check // prettier-ignore
-                        type="switch"
-                        id="custom-switch"
-                        name={EditFormKeys.IsAvailable}
-                        className={styles.switch}
-                        label={`Is this product available?`}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values[EditFormKeys.IsAvailable]}
-                    />
                 </Form.Group>
 
                 <Form.Group className="mb-3">

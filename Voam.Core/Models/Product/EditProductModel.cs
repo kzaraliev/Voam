@@ -19,9 +19,6 @@ namespace Voam.Core.Models.Product
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]
-        public bool IsAvailable { get; set; }
-
-        [Required(ErrorMessage = RequiredMessage)]
         public int SizeS { get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]

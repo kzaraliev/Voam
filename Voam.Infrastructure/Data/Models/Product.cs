@@ -19,9 +19,6 @@ namespace Voam.Infrastructure.Data.Models
         [Column(TypeName = "decimal(10, 2)")]
         public decimal Price { get; set; }
 
-        [Required]
-        public bool IsAvailable { get; set; }
-
         public virtual ICollection<ProductImage> Images { get; set; } = new List<ProductImage>();
 
         public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
