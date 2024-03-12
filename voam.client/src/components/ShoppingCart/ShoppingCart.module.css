@@ -36,6 +36,15 @@
   color: #ffffec;
 }
 
+.emptyCartIcon{
+  color: #1a1919;
+  font-size: 200px;
+}
+.emptyCartTitle, .emptyCartText{
+  margin-bottom: 0;
+  color: #aaabaa;
+}
+
 /* Cart item */
 
 .cartItem {
