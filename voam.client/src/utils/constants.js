@@ -35,3 +35,10 @@ export const OrderFormKeys = {
     Size: "size",
     Amount: "amount"
 }
+
+export const OrderKeys = {
+    Email: "email",
+    FirstName: "firstName",
+    LastName: "lastName",
+    PhoneNumber: "phoneNumber",
+}

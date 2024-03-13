@@ -129,5 +129,27 @@ namespace Voam.Core.Services
 
             return result;
         }
+
+        public async Task<OrderInformationModel> GetUserInformation(string id)
+        {
+            var identityUser = await userManager.FindByIdAsync(id);
+
+            if (identityUser == null)
+            {
+                throw new Exception("No such user");
+            }
+
+            string fullName = SplitUsername(identityUser.UserName ?? "ErrorPetrov");
+
+            OrderInformationModel user = new OrderInformationModel()
+            {
+                Email = identityUser.Email ?? "Error",
+                FirstName = fullName.Split(" ")[0],
+                LastName = fullName.Split(" ")[1],
+                PhoneNumber = identityUser.PhoneNumber ?? "Error"
+            };
+
+            return user;
+        }
     }
 }

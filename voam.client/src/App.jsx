@@ -18,32 +18,34 @@ import AuthGuard from "./guards/AuthGuard.jsx";
 import LoggedInGuard from "./guards/LoggedInGuard";
 import Logout from "./components/Logout/Logout.jsx";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart.jsx";
+import Checkout from "./components/Checkout/Checkout.jsx";
 
 function App() {
   return (
     <AuthProvider>
-        <div style={{ backgroundColor: "#3b444b" }}>
-          <Navigation />
-          <Routes>
-            <Route path={Path.Home} element={<Home />} />
-            <Route path={Path.Items} element={<Products />} />
-            <Route path={`${Path.Items}/:id`} element={<ProductDetails />} />
-            <Route path={Path.About} element={<About />} />
-            <Route path={Path.Contacts} element={<Contact />} />
-            <Route element={<LoggedInGuard />}>
-              <Route path={Path.Register} element={<Register />} />
-              <Route path={Path.Login} element={<Login />} />
-            </Route>
-            <Route element={<AuthGuard />}>
-              <Route path={Path.ShoppingCart} element={<ShoppingCart />} />
-              <Route path={Path.Logout} element={<Logout />}></Route>
-              <Route path={Path.CreateProduct} element={<CreateProduct />} />
-              <Route path={Path.EditProduct} element={<EditProduct />} />
-            </Route>
-            <Route path={Path.NotFound} element={<NotFound />} />
-          </Routes>
-          <Footer />
-        </div>
+      <div style={{ backgroundColor: "#3b444b" }}>
+        <Navigation />
+        <Routes>
+          <Route path={Path.Home} element={<Home />} />
+          <Route path={Path.Items} element={<Products />} />
+          <Route path={`${Path.Items}/:id`} element={<ProductDetails />} />
+          <Route path={Path.About} element={<About />} />
+          <Route path={Path.Contacts} element={<Contact />} />
+          <Route element={<LoggedInGuard />}>
+            <Route path={Path.Register} element={<Register />} />
+            <Route path={Path.Login} element={<Login />} />
+          </Route>
+          <Route element={<AuthGuard />}>
+            <Route path={Path.ShoppingCart} element={<ShoppingCart />} />
+            <Route path={Path.Checkout} element={<Checkout />} />
+            <Route path={Path.Logout} element={<Logout />}></Route>
+            <Route path={Path.CreateProduct} element={<CreateProduct />} />
+            <Route path={Path.EditProduct} element={<EditProduct />} />
+          </Route>
+          <Route path={Path.NotFound} element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </div>
     </AuthProvider>
   );
 }

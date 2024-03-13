@@ -8,6 +8,7 @@ const Path = {
     Register: "/register",
     Profile: "/profile",
     ShoppingCart: "/shopping-cart",
+    Checkout: "/checkout",
     CreateProduct: "/create",
     EditProduct: "/items/:productId/edit",
     NotFound: "*",

@@ -20,3 +20,8 @@ export const register = (email, password, firstName, lastName, phoneNumber) => r
 });
 
 export const logout = () => request.get(`${baseUrl}/Logout`); //add logout to back-end
+
+export const getInformation = async (userId) => {
+    const result = await request.get(`${baseUrl}/GetUserInformation?id=${userId}`);
+    return result;
+};

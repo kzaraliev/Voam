@@ -8,5 +8,6 @@ namespace Voam.Core.Contracts
         string GenerateTokenString(LoginUser user);
         Task<bool> Login(LoginUser user);
         Task<bool> RegisterUser(LoginUser user);
+        Task<OrderInformationModel> GetUserInformation(string id);
     }
 }

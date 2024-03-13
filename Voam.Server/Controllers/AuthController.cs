@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Identity;
 
@@ -55,6 +56,15 @@ namespace Voam.Server.Controllers
             }
 
             return Unauthorized(new {message = "Incorrect email or password" });
+        }
+
+        [Authorize]
+        [HttpGet("GetUserInformation")]
+        public async Task<IActionResult> GetUserInformation(string id)
+        {
+            var result = await authService.GetUserInformation(id);
+
+            return Ok(result);
         }
 
     }
