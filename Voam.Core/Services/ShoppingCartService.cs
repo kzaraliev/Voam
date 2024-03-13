@@ -26,6 +26,12 @@ namespace Voam.Core.Services
         {
             var shoppingCart = repository.All<ShoppingCart>()
                 .Where(sc => sc.CustomerId == userId)
+                .Select(sc => new ShoppingCart()
+                {
+                    CartItems = sc.CartItems,
+                    CustomerId = sc.CustomerId,
+                    Id = sc.Id
+                })
                 .FirstOrDefault();
 
             if (shoppingCart == null)
@@ -33,7 +39,6 @@ namespace Voam.Core.Services
                 return false;
             }
 
-            var cartItem = await cartItemService.CreateCartItem(productId, shoppingCart.Id, sizeId, quantity);
             var product = await productService.GetProductByIdAsync(productId);
 
             if (product == null)
@@ -52,6 +57,28 @@ namespace Voam.Core.Services
             {
                 return false;
             }
+
+            if (shoppingCart.CartItems.Any(ci => ci.ProductId == productId) && shoppingCart.CartItems.Any(ci => ci.SizeId == sizeId))
+            {
+                var existingCartItem = shoppingCart.CartItems.Where(ci => ci.ProductId == productId).FirstOrDefault();
+
+                if (existingCartItem == null)
+                {
+                    return false;
+                }
+
+                if (size.Quantity < quantity + existingCartItem.Quantity)
+                {
+                    return false;
+                }
+
+                existingCartItem.Quantity += quantity;
+
+                await repository.SaveChangesAsync();
+                return true;
+            }
+
+            var cartItem = await cartItemService.CreateCartItem(productId, shoppingCart.Id, sizeId, quantity);
 
             shoppingCart.CartItems.Add(cartItem);
             await repository.SaveChangesAsync();            
