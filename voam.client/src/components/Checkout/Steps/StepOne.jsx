@@ -10,7 +10,7 @@ import { OrderKeys } from "../../../utils/constants";
 import orderValidation from "./orderValidation";
 import Path from "../../../utils/paths";
 
-export default function StepOne({ changeActiveStep }) {
+export default function StepOne({ changeActiveStep, onFormDataChange }) {
   const { userId, logoutHandler } = useContext(AuthContext);
 
   const [user, setUser] = useState({
@@ -57,8 +57,7 @@ export default function StepOne({ changeActiveStep }) {
   });
 
   async function onSubmit(values) {
-    //Save somewhere the data from Step one in checkout (useState in parent element)
-    console.log(values);
+    onFormDataChange(values)
     changeActiveStep(2);
   }
 

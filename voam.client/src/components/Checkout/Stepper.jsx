@@ -26,9 +26,9 @@ export default function Stepper({ activeStep, steps }) {
                     {value === 1 ? (
                       isStepComplete(value) ? <HiOutlineCheck /> : <FaClipboardList/>
                     ) : value === 2 ? (
-                      <FaShoppingCart />
+                      isStepComplete(value) ? <HiOutlineCheck /> : <FaShoppingCart />
                     ) : value === 3 ? (
-                      <RiShoppingBag3Fill />
+                      isStepComplete(value) ? <HiOutlineCheck /> : <RiShoppingBag3Fill />
                     ) : null}
                   </span>
                 </div>
