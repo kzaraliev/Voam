@@ -27,14 +27,17 @@ export default function ShoppingCart() {
   }
 
   useEffect(() => {
-    shoppingCartService.get(userId).then((res) => setCartData(res)).catch(err => {
-      console.log("401 Unauthorized")
-      if (err === 401) {
-        logoutHandler()
-        navigate(Path.Login)
-        alert("Something went wrong. Try login again")
-      }
-    });
+    shoppingCartService
+      .get(userId)
+      .then((res) => setCartData(res))
+      .catch((err) => {
+        console.log("401 Unauthorized");
+        if (err === 401) {
+          logoutHandler();
+          navigate(Path.Login);
+          alert("Something went wrong. Try login again");
+        }
+      });
   }, []);
 
   console.log(cartData);
@@ -48,7 +51,7 @@ export default function ShoppingCart() {
             <p>Loading...</p>
           ) : cartData.cartItems.length == 0 ? (
             <>
-              <TiShoppingCart className={styles.emptyCartIcon}/>
+              <TiShoppingCart className={styles.emptyCartIcon} />
               <h2 className={styles.emptyCartTitle}>Your cart is empty</h2>
               <p className={styles.emptyCartText}>
                 Looks like you haven't added anything to your cart.{" "}
@@ -68,12 +71,19 @@ export default function ShoppingCart() {
             ))
           )}
         </ul>
-        <Link to={Path.Checkout}>
-        <button className={styles.submitButton} type="submit">
-          Proceed to checkout (
-          {cartData === undefined ? "" : cartData.totalPrice.toFixed(2)} lv.)
-        </button>
-        </Link>
+        {cartData === undefined ? (
+          <p>Loading</p>
+        ) : (
+          cartData.cartItems.length != 0 && (
+            <Link to={Path.Checkout}>
+              <button className={styles.submitButton} type="submit">
+                Proceed to checkout (
+                {cartData === undefined ? "" : cartData.totalPrice.toFixed(2)}{" "}
+                lv.)
+              </button>
+            </Link>
+          )
+        )}
       </div>
     </div>
   );

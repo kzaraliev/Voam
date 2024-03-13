@@ -1,3 +1,7 @@
 export default function StepThree() {
-    return(<></>)
+  return (
+    <div>
+      <h1>Thank you for your purchasing</h1>
+    </div>
+  );
 }
