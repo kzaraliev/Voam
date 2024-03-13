@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./ShoppingCart.module.css";
 import { TiShoppingCart } from "react-icons/ti";
@@ -11,6 +12,7 @@ import Path from "../../utils/paths.js";
 export default function ShoppingCart() {
   const [cartData, setCartData] = useState();
   const { userId } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   function handleItemDelete(itemId, amountToDeduct) {
     setCartData((currentItems) => {
@@ -25,7 +27,13 @@ export default function ShoppingCart() {
   }
 
   useEffect(() => {
-    shoppingCartService.get(userId).then((res) => setCartData(res));
+    shoppingCartService.get(userId).then((res) => setCartData(res)).catch(err => {
+      console.log("401 Unauthorized")
+      if (err === 401) {
+        navigate(Path.Logout);
+        alert("Something went wrong. Try login again")
+      }
+    });
   }, []);
 
   console.log(cartData);

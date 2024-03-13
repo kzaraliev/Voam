@@ -30,6 +30,10 @@ const request = async (method, url, data) => {
         return {};
     }
 
+    if (response.status === 401) {
+        throw 401;
+    }
+
     const result = await response.json();
 
     if (!response.ok) {
