@@ -11,7 +11,7 @@ import Path from "../../utils/paths.js";
 
 export default function ShoppingCart() {
   const [cartData, setCartData] = useState();
-  const { userId } = useContext(AuthContext);
+  const { userId, logoutHandler } = useContext(AuthContext);
   const navigate = useNavigate();
 
   function handleItemDelete(itemId, amountToDeduct) {
@@ -30,7 +30,8 @@ export default function ShoppingCart() {
     shoppingCartService.get(userId).then((res) => setCartData(res)).catch(err => {
       console.log("401 Unauthorized")
       if (err === 401) {
-        navigate(Path.Logout);
+        logoutHandler()
+        navigate(Path.Login)
         alert("Something went wrong. Try login again")
       }
     });
@@ -67,10 +68,12 @@ export default function ShoppingCart() {
             ))
           )}
         </ul>
+        <Link to={Path.Checkout}>
         <button className={styles.submitButton} type="submit">
           Proceed to checkout (
           {cartData === undefined ? "" : cartData.totalPrice.toFixed(2)} lv.)
         </button>
+        </Link>
       </div>
     </div>
   );
