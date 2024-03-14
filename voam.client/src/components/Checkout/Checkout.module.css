@@ -1,5 +1,5 @@
 .checkoutContainer{
-    height: 95dvh;
+    height: fit-content;
 }
 
 .stepperContainer {

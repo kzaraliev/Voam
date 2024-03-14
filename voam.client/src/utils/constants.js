@@ -41,4 +41,6 @@ export const OrderKeys = {
     FirstName: "firstName",
     LastName: "lastName",
     PhoneNumber: "phoneNumber",
+    EcontOffice: "econtOffice",
+    City: "city"
 }

@@ -9,9 +9,6 @@ import styles from "./Checkout.module.css";
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = useState(1);
-  const [billingDetails, setBillingDetails] = useState({});
-
-  console.log(billingDetails);
 
   const changeActiveStep = (stepValue) => {
     if (stepValue <= steps.length || stepValue >= 1) {
@@ -20,7 +17,15 @@ export default function Checkout() {
   };
 
   const handleFormData = (newFormData) => {
-    setBillingDetails(newFormData);
+    console.log(newFormData)
+    const data = {
+      fullName: newFormData.firstName + " " + newFormData.lastName,
+      email: newFormData.email,
+      phone: newFormData.phoneNumber,
+      econt: newFormData.econtOffice,
+      city: newFormData.city
+    }
+    localStorage.setItem("checkout-data", JSON.stringify(data));
   };
 
   const steps = useMemo(
@@ -38,7 +43,11 @@ export default function Checkout() {
       {
         label: "Order preview",
         value: 2,
-        component: <StepTwo changeActiveStep={changeActiveStep} />,
+        component: (
+          <StepTwo
+            changeActiveStep={changeActiveStep}
+          />
+        ),
       },
       {
         label: "Place order",

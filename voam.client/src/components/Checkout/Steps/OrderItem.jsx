@@ -4,7 +4,7 @@ import * as productService from "../../../services/productService";
 import defaultImg from "../../../assets/hoodie_icon.png";
 import styles from "./StepTwo.module.css";
 
-export default function OrderItem({ id, productId, quantity, sizeId, onDelete }) {
+export default function OrderItem({ productId, quantity, sizeId }) {
   const [product, setProduct] = useState();
   const size = product
     ? product.sizes.find((size) => size.id === sizeId).sizeChar

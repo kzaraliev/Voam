@@ -46,13 +46,9 @@
   padding: 32px 38px;
   padding-top: 0;
   width: 45%;
-  max-height: 70dvh;
   background-color: #2b30358f;
   border: 5px dashed #212529;
   border-radius: 12px;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 .productsList {
@@ -68,5 +64,39 @@
   text-align: center;
   margin-bottom: 32px;
   margin-top: 24px;
+  color: #ffffec;
+}
+
+.shippingInfoContainer {
+  color: #ffffec;
+  margin-bottom: 42px;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+}
+
+.shippingInfo {
+  width: fit-content;
+  list-style: circle;
+  font-size: large;
+  padding-top: 12px;
+}
+
+.shippingLabel {
+  font-weight: bold;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 200px;
+}
+
+.productListTitle{
+  align-self: flex-start;
   color: #ffffec;
 }

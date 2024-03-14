@@ -18,6 +18,8 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
     [OrderKeys.FirstName]: "",
     [OrderKeys.LastName]: "",
     [OrderKeys.PhoneNumber]: "",
+    [OrderKeys.EcontOffice]: "",
+    [OrderKeys.City]: "",
   });
 
   useEffect(() => {
@@ -47,6 +49,8 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
       [OrderKeys.FirstName]: user[OrderKeys.FirstName] || "",
       [OrderKeys.LastName]: user[OrderKeys.LastName] || "",
       [OrderKeys.PhoneNumber]: user[OrderKeys.PhoneNumber] || "",
+      [OrderKeys.EcontOffice]: "",
+      [OrderKeys.City]: "",
     },
     validationSchema: orderValidation,
     onSubmit,
@@ -147,6 +151,48 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values[OrderKeys.Email]}
+              />
+            </FloatingLabel>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            {errors[OrderKeys.EcontOffice] && touched[OrderKeys.EcontOffice] && (
+              <p className={styles.invalid}>{errors[OrderKeys.EcontOffice]}</p>
+            )}
+            <FloatingLabel
+              htmlFor={OrderKeys.EcontOffice}
+              label="Econt street name and number"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                id={OrderKeys.EcontOffice}
+                name={OrderKeys.EcontOffice}
+                placeholder="Enter EcontOffice"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values[OrderKeys.EcontOffice]}
+              />
+            </FloatingLabel>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            {errors[OrderKeys.City] && touched[OrderKeys.City] && (
+              <p className={styles.invalid}>{errors[OrderKeys.City]}</p>
+            )}
+            <FloatingLabel
+              htmlFor={OrderKeys.City}
+              label="Enter city"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                id={OrderKeys.City}
+                name={OrderKeys.City}
+                placeholder="Enter your City"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values[OrderKeys.City]}
               />
             </FloatingLabel>
           </Form.Group>
