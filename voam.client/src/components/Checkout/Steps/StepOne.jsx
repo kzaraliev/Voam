@@ -27,12 +27,9 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
         setUser(result);
       })
       .catch((err) => {
-        if (err === 401) {
-          console.log("401 Unauthorized");
-          logoutHandler();
-          navigate(Path.Login);
-          alert("Something went wrong. Try login again");
-        }
+        logoutHandler();
+        navigate(Path.Login);
+        alert("Ooops... Something went wrong. Try login again");
       });
   }, []);
 
@@ -57,7 +54,7 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
   });
 
   async function onSubmit(values) {
-    onFormDataChange(values)
+    onFormDataChange(values);
     changeActiveStep(2);
   }
 

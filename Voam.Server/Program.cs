@@ -1,3 +1,5 @@
+using Voam.Server.Common;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,6 +23,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<AuthorizationResponseMiddleware>();
 
 app.UseCors("AllowAll");
 

@@ -1,46 +1,42 @@
 const buildOptions = (data) => {
-    const options = {};
+  const options = {};
 
-    if (data) {
-        options.body = JSON.stringify(data);
-        options.headers = {
-            "content-type": "application/json",
-        };
-    }
+  if (data) {
+    options.body = JSON.stringify(data);
+    options.headers = {
+      "content-type": "application/json",
+    };
+  }
 
-    const token = localStorage.getItem("accessToken");
+  const token = localStorage.getItem("accessToken");
 
-    if (token) {
-        options.headers = {
-            ...options.headers,
-            "Authorization": `Bearer ${token}`,
-        };
-    }
+  if (token) {
+    options.headers = {
+      ...options.headers,
+      Authorization: `Bearer ${token}`,
+    };
+  }
 
-    return options;
+  return options;
 };
 
 const request = async (method, url, data) => {
-    const response = await fetch(url, {
-        ...buildOptions(data),
-        method,
-    });
+  const response = await fetch(url, {
+    ...buildOptions(data),
+    method,
+  });
 
-    if (response.status === 204) {
-        return {};
-    }
+  if (response.status === 204) {
+    return {};
+  }
 
-    if (response.status === 401) {
-        throw 401;
-    }
+  const result = await response.json();
 
-    const result = await response.json();
+  if (!response.ok) {
+    throw result;
+  }
 
-    if (!response.ok) {
-        throw result;
-    }
-
-    return result;
+  return result;
 };
 
 export const get = request.bind(null, "GET");

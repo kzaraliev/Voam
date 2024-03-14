@@ -31,12 +31,9 @@ export default function StepTwo({ changeActiveStep }) {
       .get(userId)
       .then((res) => setCartData(res))
       .catch((err) => {
-        console.log("401 Unauthorized");
-        if (err === 401) {
-          logoutHandler();
-          navigate(Path.Login);
-          alert("Something went wrong. Try login again");
-        }
+        logoutHandler();
+        navigate(Path.Login);
+        alert("Ooops... Something went wrong. Try login again");
       });
   }, []);
 
@@ -67,7 +64,7 @@ export default function StepTwo({ changeActiveStep }) {
             type="submit"
             onClick={() => changeActiveStep(3)}
           >
-            Place order (
+            Next Step (
             {cartData === undefined ? "" : cartData.totalPrice.toFixed(2)} lv.)
           </button>
         </div>

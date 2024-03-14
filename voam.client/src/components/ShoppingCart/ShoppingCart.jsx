@@ -31,12 +31,9 @@ export default function ShoppingCart() {
       .get(userId)
       .then((res) => setCartData(res))
       .catch((err) => {
-        console.log("401 Unauthorized");
-        if (err === 401) {
-          logoutHandler();
-          navigate(Path.Login);
-          alert("Something went wrong. Try login again");
-        }
+        logoutHandler();
+        navigate(Path.Login);
+        alert("Ooops... Something went wrong. Try login again");
       });
   }, []);
 
