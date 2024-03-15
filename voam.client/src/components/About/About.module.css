@@ -32,6 +32,10 @@
   font-size: 1.5rem;
 }
 
+.paragraph{
+  color: #b3b8b3;
+}
+
 .image {
   height: auto;
   max-width: 40%;
