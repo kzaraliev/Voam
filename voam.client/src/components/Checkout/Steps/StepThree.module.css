@@ -1,0 +1,30 @@
+.messageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 32px auto;
+    text-align: center;
+    max-width: 60%;
+    justify-content: space-evenly;
+}
+
+.icon{
+    font-size: 5rem;
+    color: green;
+    margin-bottom: 18px;
+    margin-top: 24px;
+}
+
+.title{
+    font-size: 3.5rem;
+    color: #ffffec;
+    margin-bottom: 32px;
+}
+
+.paragraph{
+    font-size: larger;
+    max-width: 80%;
+    color: #aaabaa;
+    margin-bottom: 48px;
+}

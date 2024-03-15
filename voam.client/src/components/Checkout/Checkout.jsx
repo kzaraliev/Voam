@@ -42,7 +42,7 @@ export default function Checkout() {
         ),
       },
       {
-        label: "Order preview",
+        label: "Review & Confirm",
         value: 2,
         component: (
           <StepTwo
@@ -51,7 +51,7 @@ export default function Checkout() {
         ),
       },
       {
-        label: "Place order",
+        label: "Confirmation",
         value: 3,
         component: <StepThree changeActiveStep={changeActiveStep} />,
       },
