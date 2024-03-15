@@ -20,6 +20,7 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
     [OrderKeys.PhoneNumber]: "",
     [OrderKeys.EcontOffice]: "",
     [OrderKeys.City]: "",
+    [OrderKeys.PaymentMethod]: "",
   });
 
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
       [OrderKeys.PhoneNumber]: user[OrderKeys.PhoneNumber] || "",
       [OrderKeys.EcontOffice]: "",
       [OrderKeys.City]: "",
+      [OrderKeys.PaymentMethod]: "Upon delivery",
     },
     validationSchema: orderValidation,
     onSubmit,
@@ -156,9 +158,12 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            {errors[OrderKeys.EcontOffice] && touched[OrderKeys.EcontOffice] && (
-              <p className={styles.invalid}>{errors[OrderKeys.EcontOffice]}</p>
-            )}
+            {errors[OrderKeys.EcontOffice] &&
+              touched[OrderKeys.EcontOffice] && (
+                <p className={styles.invalid}>
+                  {errors[OrderKeys.EcontOffice]}
+                </p>
+              )}
             <FloatingLabel
               htmlFor={OrderKeys.EcontOffice}
               label="Econt street name and number"
@@ -195,6 +200,19 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
                 value={values[OrderKeys.City]}
               />
             </FloatingLabel>
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Check
+              className={styles.radioPayment}
+              inline
+              label="Pay upon delivery"
+              name={[OrderKeys.PaymentMethod]}
+              type="radio"
+              id={[OrderKeys.PaymentMethod]}
+              value={values[OrderKeys.PaymentMethod]}
+              defaultChecked={true}
+            />
           </Form.Group>
 
           <button

@@ -68,6 +68,10 @@ export default function StepTwo({ changeActiveStep }) {
                   <span className={styles.shippingLabel}>Town/City</span>:{" "}
                   {billingDetails.city}
                 </li>
+                <li>
+                  <span className={styles.shippingLabel}>Payment Method</span>:{" "}
+                  {billingDetails.payment}
+                </li>
               </ul>
             </div>
             <div className={styles.logoContainer}>

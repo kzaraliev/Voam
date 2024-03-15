@@ -42,5 +42,6 @@ export const OrderKeys = {
     LastName: "lastName",
     PhoneNumber: "phoneNumber",
     EcontOffice: "econtOffice",
-    City: "city"
+    City: "city",
+    PaymentMethod: "paymentMethod",
 }

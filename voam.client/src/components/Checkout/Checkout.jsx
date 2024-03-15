@@ -19,11 +19,12 @@ export default function Checkout() {
   const handleFormData = (newFormData) => {
     console.log(newFormData)
     const data = {
-      fullName: newFormData.firstName + " " + newFormData.lastName,
+      fullName: `${newFormData.firstName} ${newFormData.lastName}`,
       email: newFormData.email,
       phone: newFormData.phoneNumber,
       econt: newFormData.econtOffice,
-      city: newFormData.city
+      city: newFormData.city,
+      payment: newFormData.paymentMethod,
     }
     localStorage.setItem("checkout-data", JSON.stringify(data));
   };
