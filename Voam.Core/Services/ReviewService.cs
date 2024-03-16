@@ -9,12 +9,10 @@ namespace Voam.Core.Services
     public class ReviewService : IReviewService
     {
         private readonly IRepository repository;
-        private readonly IProductService productService;
 
-        public ReviewService(IRepository _repository,  IProductService _productService)
+        public ReviewService(IRepository _repository)
         {
             repository = _repository;
-            productService = _productService;
         }
 
         public async Task<bool> AddRating(int productId, string userId, double rating)
