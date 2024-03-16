@@ -8,7 +8,7 @@ namespace Voam.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrator")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService productService;

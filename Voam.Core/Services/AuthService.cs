@@ -46,13 +46,22 @@ namespace Voam.Core.Services
             return user;
         }
 
-        public string GenerateTokenString(LoginUser user)
+        public async Task<string> GenerateTokenString(LoginUser user)
         {
+            var identityUser = await userManager.FindByEmailAsync(user.Email);
+            if (identityUser == null) throw new Exception("User not found");
+
+            var userRoles = await userManager.GetRolesAsync(identityUser);
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Email,user.Email),
-                new Claim(ClaimTypes.Role,"Admin"),
             };
+
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key").Value));
 

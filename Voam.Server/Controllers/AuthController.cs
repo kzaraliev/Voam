@@ -7,6 +7,7 @@ namespace Voam.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Administrator")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService authService;
@@ -16,6 +17,7 @@ namespace Voam.Server.Controllers
             authService = _authService;
         }
 
+        [AllowAnonymous]
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterUser(LoginUser user)
         {
@@ -29,6 +31,7 @@ namespace Voam.Server.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginUser user)
         {
@@ -41,7 +44,7 @@ namespace Voam.Server.Controllers
 
             if (result == true)
             {
-                var tokenString = authService.GenerateTokenString(user);
+                var tokenString = await authService.GenerateTokenString(user);
 
                 var userDetails = await authService.GetUserPublicData(user.Email);
 
@@ -68,7 +71,6 @@ namespace Voam.Server.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost("AddRole")]
         public async Task<IActionResult> AddRole(string roleName)
         {
@@ -77,7 +79,6 @@ namespace Voam.Server.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost("AddUserToRole")]
         public async Task<IActionResult> AddUserToRole(string userId, string roleName)
         {
