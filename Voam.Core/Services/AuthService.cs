@@ -33,11 +33,14 @@ namespace Voam.Core.Services
                 throw new Exception("No such user");
             }
 
+            var userRoles =  await userManager.GetRolesAsync(identityUser);
+
             var user = new UserPublicModel()
             {
                 Id = identityUser.Id,
                 Email = identityUser.Email ?? "Error",
                 Usernam = SplitUsername(identityUser.UserName ?? "Error"),
+                Roles = userRoles
             };
 
             return user;
@@ -177,6 +180,24 @@ namespace Voam.Core.Services
                     {
                         await userManager.AddToRoleAsync(user, roleName);
 
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        public async Task<bool> CheckIsUserWithRole(string userEmail, string roleName)
+        {
+            if (await roleManager.RoleExistsAsync(roleName))
+            {
+                var user = await userManager.FindByEmailAsync(userEmail);
+
+                if (user != null)
+                {
+                    if (await userManager.IsInRoleAsync(user, roleName))
+                    {
                         return true;
                     }
                 }

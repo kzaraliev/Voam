@@ -11,5 +11,6 @@ namespace Voam.Core.Contracts
         Task<OrderInformationModel> GetUserInformation(string id);
         Task<bool> AddRole(string roleName);
         Task<bool> AddUserToRole(string userId, string roleName);
+        Task<bool> CheckIsUserWithRole(string userEmail, string roleName);
     }
 }

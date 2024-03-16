@@ -19,7 +19,7 @@ import { OrderFormKeys } from "../../utils/constants";
 export default function ProductDetails() {
   //Separate form in new component
   const { id } = useParams();
-  const { isAuthenticated, userId } = useContext(AuthContext);
+  const { isAuthenticated, userId, isAdmin } = useContext(AuthContext);
   const [product, setProduct] = useState({});
   const [errors, setErrors] = useState("");
   const navigate = useNavigate();
@@ -246,23 +246,25 @@ export default function ProductDetails() {
               <p className={styles.ratingNumber}>({avgRating})</p>
             </div>
           </div>
-          <div className={styles.editAndDeleteContainer}>
-            <Button
-              as={Link}
-              to={`/items/${id}/edit`}
-              variant="warning"
-              className={styles.editButton}
-            >
-              Edit
-            </Button>
-            <Button
-              variant="danger"
-              className={styles.deleteButton}
-              onClick={deleteButtonClickHandler}
-            >
-              Delete
-            </Button>
-          </div>
+          {isAdmin && (
+            <div className={styles.editAndDeleteContainer}>
+              <Button
+                as={Link}
+                to={`/items/${id}/edit`}
+                variant="warning"
+                className={styles.editButton}
+              >
+                Edit
+              </Button>
+              <Button
+                variant="danger"
+                className={styles.deleteButton}
+                onClick={deleteButtonClickHandler}
+              >
+                Delete
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -50,6 +50,7 @@ export const AuthProvider = ({ children }) => {
     email: auth.email,
     userId: auth.userId,
     isAuthenticated: !!auth.accessToken,
+    isAdmin: auth.roles?.includes("Administrator")
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

@@ -50,7 +50,8 @@ namespace Voam.Server.Controllers
                     AccessToken = tokenString,
                     Email = userDetails.Email,
                     Username = userDetails.Usernam,
-                    UserId = userDetails.Id
+                    UserId = userDetails.Id,
+                    Roles = userDetails.Roles,
                 };
                 return Ok(response);
             }
