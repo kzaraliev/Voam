@@ -63,7 +63,7 @@ namespace Voam.Core.Services
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key").Value));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key").Value ?? throw new ArgumentException("JWT Key is not configured properly.")));
 
             var signingCred = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
 

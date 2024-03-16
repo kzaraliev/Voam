@@ -39,7 +39,7 @@ namespace Voam.Server.Controllers
         [HttpDelete("DeleteCartItem")]
         public async Task<IActionResult> DeleteCartItem(int id)
         {
-            var deleteResult = await shoppingCartService.DeleteCartItemAsyncById(id);
+            var deleteResult = await shoppingCartService.DeleteCartItemAsyncByIdAsync(id);
 
             return deleteResult switch
             {

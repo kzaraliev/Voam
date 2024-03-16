@@ -13,7 +13,7 @@ namespace Voam.Core.Services
             repository = _repository;
         }
 
-        public async Task<CartItem> CreateCartItem(int productId, int shoppingCartId, int sizeId, int quantity)
+        public async Task<CartItem> CreateCartItemAsync(int productId, int shoppingCartId, int sizeId, int quantity)
         {
             CartItem cartItem = new CartItem()
             {

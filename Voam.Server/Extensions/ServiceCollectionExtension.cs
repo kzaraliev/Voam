@@ -21,6 +21,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
             services.AddScoped<ICartItemService, CartItemService>();
             services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderItemService, OrderItemService>();
 
             services.AddCors(options =>
             {
@@ -37,7 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
         {
-            string connectionString = config.GetConnectionString("DefaultConnection");
+            string connectionString = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("No connection string named 'DefaultConnection' found in application configuration."); ;
             services.AddDbContext<VoamDbContext>(opt => opt.UseSqlServer(connectionString));
 
             services.AddScoped<IRepository, Repository>();
@@ -73,7 +75,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     ValidIssuer = config.GetSection("Jwt:Issuer").Value,
                     ValidAudience = config.GetSection("Jwt:Audience").Value,
 
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key").Value))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key").Value ?? throw new InvalidOperationException("JWT Key is not configured in the application settings.")))
                 };
             });
 

@@ -6,6 +6,6 @@ namespace Voam.Core.Contracts
     {
         Task<bool> CreateSizeAsync(int sizeSAmount, int sizeMAmount, int sizeLAmount, int productId);
         Task UpdateSizesAsync(int sizeSAmount, int sizeMAmount, int sizeLAmount, int id);
-        Task<Size?> GetSizeById(int id);
+        Task<Size?> GetSizeByIdAsync(int id);
     }
 }

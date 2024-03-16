@@ -34,7 +34,7 @@ namespace Voam.Core.Services
             return false;
         }
 
-        public async Task<Size?> GetSizeById(int id)
+        public async Task<Size?> GetSizeByIdAsync(int id)
         {
             return await repository.FindAsync<Size>(id);
         }

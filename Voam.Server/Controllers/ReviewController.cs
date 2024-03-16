@@ -22,7 +22,7 @@ namespace Voam.Server.Controllers
         [HttpGet("GetProductAverageRating")]
         public async Task<IActionResult> GetAverageRatingForProduct(int productId, string userId)
         {
-            var avgRating = await reviewService.GetAvgRatingForProduct(productId, userId);
+            var avgRating = await reviewService.GetAvgRatingForProductAsync(productId, userId);
 
             if (avgRating == null)
             {
@@ -35,12 +35,12 @@ namespace Voam.Server.Controllers
         [HttpPost("AddRating")]
         public async Task<IActionResult> AddRating(RatingFormModel model)
         {
-            if (!await reviewService.AddRating(model.ProductId, model.UserId, model.Rating))
+            if (!await reviewService.AddRatingAsync(model.ProductId, model.UserId, model.Rating))
             {
                 return BadRequest();
             }
 
-            return Ok(await reviewService.GetAvgRatingForProduct(model.ProductId, model.UserId));
+            return Ok(await reviewService.GetAvgRatingForProductAsync(model.ProductId, model.UserId));
         }
     }
 }

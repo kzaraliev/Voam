@@ -258,7 +258,7 @@ namespace Voam.Core.Services
             }
             catch (Exception ex)
             {
-                return null;
+                throw new InvalidOperationException($"An error occurred while updating the product with ID {id}.", ex);
             }
 
         }

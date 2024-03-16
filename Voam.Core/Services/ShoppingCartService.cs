@@ -46,7 +46,7 @@ namespace Voam.Core.Services
                 return false;
             }
 
-            var size = await sizeService.GetSizeById(sizeId);
+            var size = await sizeService.GetSizeByIdAsync(sizeId);
 
             if (size == null)
             {
@@ -78,7 +78,7 @@ namespace Voam.Core.Services
                 return true;
             }
 
-            var cartItem = await cartItemService.CreateCartItem(productId, shoppingCart.Id, sizeId, quantity);
+            var cartItem = await cartItemService.CreateCartItemAsync(productId, shoppingCart.Id, sizeId, quantity);
 
             shoppingCart.CartItems.Add(cartItem);
             await repository.SaveChangesAsync();            
@@ -98,7 +98,7 @@ namespace Voam.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task<DeleteResult> DeleteCartItemAsyncById(int cartItemId)
+        public async Task<DeleteResult> DeleteCartItemAsyncByIdAsync(int cartItemId)
         {
             var cartItem = await repository.FindAsync<CartItem>(cartItemId);
 

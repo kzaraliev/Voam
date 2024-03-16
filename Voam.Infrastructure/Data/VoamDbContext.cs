@@ -18,6 +18,12 @@ namespace Voam.Infrastructure.Data
                 .WithMany()
                 .HasForeignKey(ci => ci.SizeId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasOne(ci => ci.Size)
+                .WithMany()
+                .HasForeignKey(ci => ci.SizeId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbSet<Product> Products { get; set; }
@@ -26,5 +32,7 @@ namespace Voam.Infrastructure.Data
         public DbSet<Review> ProductReviews { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }

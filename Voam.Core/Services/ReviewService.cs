@@ -15,7 +15,7 @@ namespace Voam.Core.Services
             repository = _repository;
         }
 
-        public async Task<bool> AddRating(int productId, string userId, double rating)
+        public async Task<bool> AddRatingAsync(int productId, string userId, double rating)
         {
             var review = await repository.All<Review>()
                             .Where(r => r.ProductId == productId && r.CustomerId == userId)
@@ -44,7 +44,7 @@ namespace Voam.Core.Services
             return true;
         }
 
-        public async Task<RatingModel> GetAvgRatingForProduct(int productId, string userId)
+        public async Task<RatingModel> GetAvgRatingForProductAsync(int productId, string userId)
         {
 
             var reviews = repository.AllReadOnly<Review>()
