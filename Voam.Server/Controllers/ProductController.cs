@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Product;
 using static Voam.Core.Utils.Constants;
@@ -7,6 +8,7 @@ namespace Voam.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService productService;
@@ -16,6 +18,7 @@ namespace Voam.Server.Controllers
             productService = _productService;
         }
 
+        [AllowAnonymous]
         [HttpGet("GetAllProducts")]
         public async Task<IActionResult> GetAllProducts()
         {
@@ -23,6 +26,7 @@ namespace Voam.Server.Controllers
             return Ok(products);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetRecentlyAddedProducts")]
         public async Task<IActionResult> GetRecentlyAddedProducts()
         {
@@ -30,6 +34,7 @@ namespace Voam.Server.Controllers
             return Ok(products);
         }
 
+        [AllowAnonymous]
         [HttpGet("GetProductById")]
         public async Task<IActionResult> GetProductById(int id)
         {

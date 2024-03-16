@@ -12,14 +12,16 @@ namespace Voam.Core.Services
     public class AuthService : IAuthService
     {
         private readonly UserManager<IdentityUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private readonly IConfiguration config;
         private readonly IShoppingCartService shoppingCartService;
 
-        public AuthService(UserManager<IdentityUser> _userManager, IConfiguration _config, IShoppingCartService _shoppingCartService)
+        public AuthService(UserManager<IdentityUser> _userManager, IConfiguration _config, IShoppingCartService _shoppingCartService, RoleManager<IdentityRole> _roleManager)
         {
             userManager = _userManager;
             config = _config;
             shoppingCartService = _shoppingCartService;
+            roleManager = _roleManager;
         }
 
         public async Task<UserPublicModel> GetUserPublicData(string email)
@@ -150,6 +152,37 @@ namespace Voam.Core.Services
             };
 
             return user;
+        }
+
+        public async Task<bool> AddRole(string roleName)
+        {
+            if (await roleManager.RoleExistsAsync(roleName) == false)
+            {
+                var result = await roleManager.CreateAsync(new IdentityRole { Name = roleName, ConcurrencyStamp = Guid.NewGuid().ToString() });
+                return result.Succeeded;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> AddUserToRole(string userId, string roleName)
+        {
+            if (await roleManager.RoleExistsAsync(roleName))
+            {
+                var user = await userManager.FindByIdAsync(userId);
+
+                if (user != null)
+                {
+                    if (await userManager.IsInRoleAsync(user, roleName) == false)
+                    {
+                        await userManager.AddToRoleAsync(user, roleName);
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

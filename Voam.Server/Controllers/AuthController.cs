@@ -55,7 +55,7 @@ namespace Voam.Server.Controllers
                 return Ok(response);
             }
 
-            return Unauthorized(new {message = "Incorrect email or password" });
+            return Unauthorized(new { message = "Incorrect email or password" });
         }
 
         [Authorize]
@@ -67,5 +67,22 @@ namespace Voam.Server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpPost("AddRole")]
+        public async Task<IActionResult> AddRole(string roleName)
+        {
+            var result = await authService.AddRole(roleName);
+
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("AddUserToRole")]
+        public async Task<IActionResult> AddUserToRole(string userId, string roleName)
+        {
+            var result = await authService.AddUserToRole(userId, roleName);
+
+            return Ok(result);
+        }
     }
 }

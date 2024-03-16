@@ -13,17 +13,11 @@ namespace Voam.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Assuming your entities are named CartItem and Size, and the foreign key property on CartItem is SizeId
             modelBuilder.Entity<CartItem>()
-                .HasOne(ci => ci.Size) // Specifies that CartItem has a single Size
-                .WithMany() // Specifies that Size can be associated with many CartItems. Adjust this according to your actual navigation property, if available.
-                .HasForeignKey(ci => ci.SizeId) // Specifies the foreign key property
-                .OnDelete(DeleteBehavior.NoAction); // Specifies that no action should be taken on delete.
-
-            // Optionally, you can also specify behavior for updates, though EF Core doesn't directly support 'NO ACTION' for updates in the same way as for deletes. 
-            // Update behaviors are usually controlled at the application level or through database triggers if needed.
-
-            // Add other Fluent API configurations as needed
+                .HasOne(ci => ci.Size)
+                .WithMany()
+                .HasForeignKey(ci => ci.SizeId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         public DbSet<Product> Products { get; set; }

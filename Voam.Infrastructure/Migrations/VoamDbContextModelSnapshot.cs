@@ -248,7 +248,7 @@ namespace Voam.Server.Migrations
 
                     b.HasIndex("SizeId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.Product", b =>
@@ -273,7 +273,7 @@ namespace Voam.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.ProductImage", b =>
@@ -295,7 +295,7 @@ namespace Voam.Server.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages");
+                    b.ToTable("ProductImages", (string)null);
                 });
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.Review", b =>
@@ -325,7 +325,7 @@ namespace Voam.Server.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductReviews");
+                    b.ToTable("ProductReviews", (string)null);
                 });
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.ShoppingCart", b =>
@@ -344,7 +344,7 @@ namespace Voam.Server.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("ShoppingCarts");
+                    b.ToTable("ShoppingCarts", (string)null);
                 });
 
             modelBuilder.Entity("Voam.Infrastructure.Data.Models.Size", b =>
@@ -369,7 +369,7 @@ namespace Voam.Server.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Sizes");
+                    b.ToTable("Sizes", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

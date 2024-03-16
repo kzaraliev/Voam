@@ -9,5 +9,7 @@ namespace Voam.Core.Contracts
         Task<bool> Login(LoginUser user);
         Task<bool> RegisterUser(LoginUser user);
         Task<OrderInformationModel> GetUserInformation(string id);
+        Task<bool> AddRole(string roleName);
+        Task<bool> AddUserToRole(string userId, string roleName);
     }
 }

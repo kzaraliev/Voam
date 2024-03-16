@@ -50,7 +50,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 //options.Password - add reqs
-            }).AddEntityFrameworkStores<VoamDbContext>()
+            })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<VoamDbContext>()
             .AddDefaultTokenProviders();
 
             services.AddAuthentication(options =>
@@ -60,19 +62,19 @@ namespace Microsoft.Extensions.DependencyInjection
             })
             .AddJwtBearer(options =>
             {
-                 options.TokenValidationParameters = new TokenValidationParameters()
-                 {
-                     ValidateActor = true,
-                     ValidateIssuer = true,
-                     ValidateAudience = true,
-                     RequireExpirationTime = true,
-                     ValidateIssuerSigningKey = true,
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateActor = true,
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    RequireExpirationTime = true,
+                    ValidateIssuerSigningKey = true,
 
-                     ValidIssuer = config.GetSection("Jwt:Issuer").Value,
-                     ValidAudience = config.GetSection("Jwt:Audience").Value,
+                    ValidIssuer = config.GetSection("Jwt:Issuer").Value,
+                    ValidAudience = config.GetSection("Jwt:Audience").Value,
 
-                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key").Value))
-                 };
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key").Value))
+                };
             });
 
             return services;
