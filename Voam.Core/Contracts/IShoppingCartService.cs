@@ -9,6 +9,7 @@ namespace Voam.Core.Contracts
         Task<DisplayShoppingCartModel?> GetShoppingCartAsync(string userId);
         Task CreateShoppingCartAsync(string userId);
         Task<bool> AddCartItemAsync(string userId, int productId, int sizeId, int quantity);
+        Task EmptyShoppingCartAsync(string userId);
         Task<DeleteResult> DeleteCartItemAsyncByIdAsync(int cartItemId);
     }
 }

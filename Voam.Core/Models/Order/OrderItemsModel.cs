@@ -1,4 +1,4 @@
-﻿namespace Voam.Core.Models.ShoppingCart
+﻿namespace Voam.Core.Models.Order
 {
     public class OrderItemsModel
     {

@@ -41,12 +41,33 @@ namespace Voam.Core.Services
 
         public async Task UpdateSizesAsync(int sizeSAmount, int sizeMAmount, int sizeLAmount, int productId)
         {
-            var sizesToRemove = await repository.All<Size>().Where(s => s.ProductId == productId).ToListAsync();
-            repository.RemoveRange(sizesToRemove);
+            var existingSizes = await repository.All<Size>().Where(s => s.ProductId == productId).ToListAsync();
+
+            // Update existing sizes or create new ones if they don't exist
+            UpdateOrCreateSize('S', sizeSAmount, productId, existingSizes);
+            UpdateOrCreateSize('M', sizeMAmount, productId, existingSizes);
+            UpdateOrCreateSize('L', sizeLAmount, productId, existingSizes);
 
             await repository.SaveChangesAsync();
+        }
 
-            await CreateSizeAsync(sizeSAmount, sizeMAmount, sizeLAmount, productId);
+        private async void UpdateOrCreateSize(char sizeChar, int quantity, int productId, List<Size> existingSizes)
+        {
+            var size = existingSizes.FirstOrDefault(s => s.SizeChar == sizeChar);
+
+            if (size != null)
+            {
+                // Update quantity if size already exists
+                size.Quantity = quantity;
+            }
+            else if (quantity > 0)
+            {
+                // Create new size if it doesn't exist and quantity is positive
+                var newSize = new Size { SizeChar = sizeChar, Quantity = quantity, ProductId = productId };
+                await repository.AddAsync(newSize);
+            }
+            // Optionally, handle case where size exists but new quantity is 0
+            // This depends on whether you want to keep sizes with 0 quantity or not
         }
     }
 }

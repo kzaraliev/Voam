@@ -176,6 +176,10 @@ export default function ProductDetails() {
                   {Object.keys(product).length !== 0 &&
                     product.sizes
                       .filter((s) => s.quantity > 0)
+                      .sort((a, b) => {
+                        const order = { 'S': 1, 'M': 2, 'L': 3 };
+                        return order[a.sizeChar] - order[b.sizeChar];
+                      })
                       .map((size) => {
                         return (
                           <option

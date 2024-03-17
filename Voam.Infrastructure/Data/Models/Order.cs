@@ -41,6 +41,10 @@ namespace Voam.Infrastructure.Data.Models
         [MaxLength(50)]
         public required string City { get; set; }
 
+        [Required]
+        [Column(TypeName = "decimal(10, 2)")]
+        public decimal TotalPrice { get; set; }
+
         public virtual IEnumerable<OrderItem> Products { get; set; } = new List<OrderItem>();
     }
 }

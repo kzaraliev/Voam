@@ -15,7 +15,7 @@ namespace Voam.Core.Services
             repository = _repository;
         }
 
-        public async Task<IEnumerable<OrderItem>> CreateOrderItemsAsync(int orderId, IEnumerable<CartItem> products)
+        public async Task<IEnumerable<OrderItem>> CreateOrderItemsAsync(int orderId, List<OrderItemCreateModel> products)
         {
             List<OrderItem> items = new List<OrderItem>();
 
@@ -24,9 +24,10 @@ namespace Voam.Core.Services
                 OrderItem orderItem = new OrderItem()
                 {
                     Quantity = product.Quantity,
-                    ProductId = product.ProductId,
+                    Name = product.Name,
+                    Price = product.Price,
                     OrderId = orderId,
-                    SizeId = product.SizeId,
+                    SizeChar = product.SizeChar,
                 };
 
                 items.Add(orderItem);

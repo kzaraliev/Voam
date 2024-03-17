@@ -4,6 +4,6 @@ namespace Voam.Core.Contracts
 {
     public interface IOrderService
     {
-        Task<bool> PlaceOrderAsync(string userId, PlaceOrderModel model);
+        Task<string> PlaceOrderAsync(string userId, PlaceOrderModel model);
     }
 }

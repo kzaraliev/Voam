@@ -11,15 +11,15 @@ namespace Voam.Infrastructure.Data.Models
         [Required]
         public int Quantity { get; set; }
 
-        [ForeignKey(nameof(Size))]
-        public int SizeId { get; set; }
+        [Required]
+        public char SizeChar { get; set; }
 
-        public virtual Size Size { get; set; } = null!;
+        [Required]
+        public required string Name { get; set; }
 
-        [ForeignKey(nameof(Product))]
-        public int ProductId { get; set; }
-
-        public virtual Product Product { get; set; } = null!;
+        [Required]
+        [Column(TypeName = "decimal(10, 2)")]
+        public decimal Price { get; set; }
 
         [ForeignKey(nameof(Order))]
         public int OrderId { get; set; }

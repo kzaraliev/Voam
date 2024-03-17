@@ -127,6 +127,22 @@ namespace Voam.Core.Services
             return saveResult > 0 ? DeleteResult.Success : DeleteResult.Error;
         }
 
+        public async Task EmptyShoppingCartAsync(string userId)
+        {
+            var shoppingCart =  await repository.All<ShoppingCart>()
+                .Where(sc => sc.CustomerId == userId)
+                .FirstOrDefaultAsync();
+
+            if (shoppingCart == null)
+            {
+                throw new InvalidOperationException("There is no such shopping cart");
+            }
+
+            await cartItemService.RemoveAllCartItemsFromShoppingCartAsync(shoppingCart.Id);
+
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<DisplayShoppingCartModel?> GetShoppingCartAsync(string userId)
         {
             try

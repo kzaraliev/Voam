@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import styles from "./StepTwo.module.css";
 import CartItem from "./OrderItem.jsx";
 import * as shoppingCartService from "../../../services/shoppingCartService.js";
+import * as orderService from "../../../services/orderService.js";
 import AuthContext from "../../../context/authContext.jsx";
 import Path from "../../../utils/paths.js";
 import logoImg from "../../../assets/logo.png";
+
 
 
 export default function StepTwo({ changeActiveStep }) {
@@ -37,7 +39,22 @@ export default function StepTwo({ changeActiveStep }) {
     }
   }, []);
 
-  console.log(billingDetails);
+  console.log(billingDetails, cartData)
+
+  function submitOrder(){
+    const data = {
+      fullName: billingDetails.fullName,
+      email: billingDetails.email,
+      phoneNumber: billingDetails.phone,
+      EcontOffice: billingDetails.econt,
+      city: billingDetails.city,
+      paymentMethod: billingDetails.payment,
+      products: cartData.cartItems,
+      totalPrice: cartData.totalPrice
+    }
+
+    orderService.add(userId, data)
+  }
 
   return (
     <div className={styles.orderPreviewContainer}>
@@ -97,7 +114,7 @@ export default function StepTwo({ changeActiveStep }) {
           <button
             className={styles.submitButton}
             type="submit"
-            onClick={() => changeActiveStep(3)}
+            onClick={() => {changeActiveStep(3); submitOrder()}}
           >
             Place order (
             {cartData === undefined ? "" : cartData.totalPrice.toFixed(2)} lv.)

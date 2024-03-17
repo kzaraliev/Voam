@@ -1,6 +1,4 @@
-﻿using Voam.Infrastructure.Data.Models;
-
-namespace Voam.Core.Models.Order
+﻿namespace Voam.Core.Models.Order
 {
     public class PlaceOrderModel
     {
@@ -12,6 +10,7 @@ namespace Voam.Core.Models.Order
         public string EcontOffice { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public string PaymentMethod { get; set; } = string.Empty;
-        public IEnumerable<CartItem> Products { get; set; } = new List<CartItem>();
+        public IEnumerable<OrderItemsModel> Products { get; set; } = new List<OrderItemsModel>();
+        public decimal TotalPrice { get; set; }
     }
 }
