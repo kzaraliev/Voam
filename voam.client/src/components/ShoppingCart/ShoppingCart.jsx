@@ -56,7 +56,7 @@ export default function ShoppingCart() {
               </p>
             </>
           ) : (
-            cartData.cartItems.map((cartItem) => (
+            cartData.cartItems.map((cartItem, index) => (
               <CartItem
                 key={cartItem.id}
                 id={cartItem.id}
@@ -64,6 +64,7 @@ export default function ShoppingCart() {
                 quantity={cartItem.quantity}
                 sizeId={cartItem.sizeId}
                 onDelete={handleItemDelete}
+                hasBorder={index !== cartData.cartItems.length - 1 && cartData.cartItems.length > 1}
               />
             ))
           )}
