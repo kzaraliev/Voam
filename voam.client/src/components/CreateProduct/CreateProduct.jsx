@@ -56,7 +56,6 @@ export default function CreateProduct() {
 
         values.images = imagesArray;     
 
-        console.log(values)
         try {
             const { id } = await productService.create(values);
 

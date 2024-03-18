@@ -60,8 +60,6 @@ export default function EditProduct() {
         enableReinitialize: true,
     });
 
-    console.log(values)
-
     async function onSubmit() {
         try {
             if (checkImagesLength()) {

@@ -37,8 +37,6 @@ export default function ShoppingCart() {
       });
   }, []);
 
-  console.log(cartData);
-
   return (
     <div className={styles.shoppingCart}>
       <div className={styles.container}>

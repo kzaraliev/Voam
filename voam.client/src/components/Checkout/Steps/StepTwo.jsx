@@ -39,8 +39,6 @@ export default function StepTwo({ changeActiveStep }) {
     }
   }, []);
 
-  console.log(billingDetails, cartData)
-
   function submitOrder(){
     const data = {
       fullName: billingDetails.fullName,

@@ -17,7 +17,6 @@ export default function Checkout() {
   };
 
   const handleFormData = (newFormData) => {
-    console.log(newFormData)
     const data = {
       fullName: `${newFormData.firstName} ${newFormData.lastName}`,
       email: newFormData.email,
