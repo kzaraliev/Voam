@@ -7,7 +7,7 @@ namespace Voam.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
     public class AuthController : ControllerBase
     {
         private readonly IAuthService authService;
@@ -62,7 +62,6 @@ namespace Voam.Server.Controllers
             return Unauthorized(new { message = "Incorrect email or password" });
         }
 
-        [Authorize]
         [HttpGet("GetUserInformation")]
         public async Task<IActionResult> GetUserInformation(string id)
         {
@@ -71,6 +70,7 @@ namespace Voam.Server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost("AddRole")]
         public async Task<IActionResult> AddRole(string roleName)
         {
@@ -79,6 +79,7 @@ namespace Voam.Server.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost("AddUserToRole")]
         public async Task<IActionResult> AddUserToRole(string userId, string roleName)
         {
