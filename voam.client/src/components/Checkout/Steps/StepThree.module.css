@@ -1,30 +1,51 @@
-.messageContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 32px auto;
-    text-align: center;
-    max-width: 60%;
-    justify-content: space-evenly;
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 32px auto;
+  text-align: center;
+  max-width: 60%;
+  justify-content: space-evenly;
 }
 
-.icon{
-    font-size: 5rem;
-    color: green;
-    margin-bottom: 18px;
-    margin-top: 24px;
+.icon {
+  font-size: 5rem;
+  color: green;
+  margin-bottom: 18px;
+  margin-top: 24px;
 }
 
-.title{
-    font-size: 3.5rem;
-    color: #ffffec;
-    margin-bottom: 32px;
+.title {
+  font-size: 3.5rem;
+  color: #ffffec;
+  margin-bottom: 32px;
 }
 
-.paragraph{
-    font-size: larger;
-    max-width: 80%;
-    color: #aaabaa;
-    margin-bottom: 48px;
+.paragraph {
+  font-size: larger;
+  max-width: 80%;
+  color: #aaabaa;
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 768px) {
+  .messageContainer {
+    max-width: 95%;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .icon {
+    margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+    .messageContainer {
+        max-width: 95%;
+    }
+
 }

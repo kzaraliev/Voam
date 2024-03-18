@@ -25,6 +25,9 @@ const orderValidation = Yup.object({
   [OrderKeys.EcontOffice]: Yup.string()
     .min(5, "Enter more than 5 characters")
     .required(),
+  [OrderKeys.City]: Yup.string()
+    .min(3, "Enter more than 5 characters")
+    .required(),
 });
 
 export default orderValidation;

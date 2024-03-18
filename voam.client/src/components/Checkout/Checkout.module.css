@@ -20,18 +20,20 @@
 .stepperList {
   border-top: 1px solid black;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   list-style-type: none;
   padding: 0;
   padding-top: 24px;
-  width: 600px;
+  max-width: 600px;
+  gap: 24px;
 }
 
 .step {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  text-align: center;
 }
 
 .isCompleted {

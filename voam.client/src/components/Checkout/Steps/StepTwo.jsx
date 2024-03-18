@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./StepTwo.module.css";
-import CartItem from "./OrderItem.jsx";
+import OrderItem from "./OrderItem.jsx";
 import * as shoppingCartService from "../../../services/shoppingCartService.js";
 import * as orderService from "../../../services/orderService.js";
 import AuthContext from "../../../context/authContext.jsx";
@@ -100,13 +100,14 @@ export default function StepTwo({ changeActiveStep }) {
             {cartData === undefined ? (
               <p>Loading...</p>
             ) : (
-              cartData.cartItems.map((cartItem) => (
-                <CartItem
+              cartData.cartItems.map((cartItem, index) => (
+                <OrderItem
                   key={cartItem.id}
                   id={cartItem.id}
                   productId={cartItem.productId}
                   quantity={cartItem.quantity}
                   sizeId={cartItem.sizeId}
+                  hasBorder={index !== cartData.cartItems.length - 1 && cartData.cartItems.length > 1}
                 />
               ))
             )}
