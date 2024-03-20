@@ -44,8 +44,8 @@
   color: #ffffffb9;
 }
 
-.price{
-    font-size: x-large;
+.price {
+  font-size: x-large;
 }
 
 .description {
@@ -66,76 +66,76 @@
   margin-top: 18px;
 }
 
-.editButton{
-    width: 20%;
-    height: 50px;
-    font-size: large !important;
-    margin-right: 24px;
-    padding-top: 11px !important;
+.editButton {
+  width: 20%;
+  height: 50px;
+  font-size: large !important;
+  margin-right: 24px;
+  padding-top: 11px !important;
 }
 
-.deleteButton{
-    width: 20%;
-    height: 50px;
-    font-size: large !important;
+.deleteButton {
+  width: 20%;
+  height: 50px;
+  font-size: large !important;
 }
 
-.invalid{
-    animation: alternate;
-    transition-duration: 0.4s;
-    font-size: medium;
-    color: red;
-    margin-bottom: 6px;
+.invalid {
+  animation: alternate;
+  transition-duration: 0.4s;
+  font-size: medium;
+  color: red;
+  margin-bottom: 6px;
 }
 
-.ratingInput{
-    display: none;
+.ratingInput {
+  display: none;
 }
 
-.star{
-    cursor: pointer;
+.star {
+  cursor: pointer;
 }
 
-.sizeSelector{
-    width: 50% !important;
+.sizeSelector {
+  width: 50% !important;
 }
 
-.amountSelector{
-    width: 40% !important;
+.amountSelector {
+  width: 40% !important;
 }
 
-.sizeAndQuantityContainer{
-    display: flex;
-    justify-content: space-between;
-    width: 60%;
-    height: 50px;
+.sizeAndQuantityContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+  height: 50px;
 }
 
-.submitButton{
-    margin-top: 32px;
-    width: 60%;
-    height: 60px;
+.submitButton {
+  margin-top: 32px;
+  width: 60%;
+  height: 60px;
 }
 
-.formAddToCart{
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: 24px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.formAddToCart {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.ratingContainer{
-    margin: 24px 0;
-    display: flex;
+.ratingContainer {
+  margin: 24px 0;
+  display: flex;
 }
 
-.ratingNumber{
-    margin: 0;
-    font-size: x-large;
-    margin-left: 24px;
+.ratingNumber {
+  margin: 0;
+  font-size: x-large;
+  margin-left: 24px;
 }
 
 @media screen and (max-width: 768px) {
@@ -143,7 +143,7 @@
     height: fit-content;
   }
 
-  .content{
+  .content {
     flex-direction: column;
     width: 95%;
     align-items: center;
@@ -154,7 +154,7 @@
     width: 100%;
   }
 
-  .productDetails{
+  .productDetails {
     padding: 0;
     width: 100%;
   }
@@ -162,22 +162,26 @@
   .productName {
     font-size: 2rem;
     text-align: center;
+    margin: 24px auto;
   }
 
-  .price, .description{
+  .price,
+  .description {
     font-size: 1rem;
   }
 
-  .sizeAndQuantityContainer{
+  .sizeAndQuantityContainer {
     width: 90%;
   }
 
-  .ratingContainer, .editAndDeleteContainer{
+  .ratingContainer,
+  .editAndDeleteContainer {
     align-items: center;
     justify-content: center;
   }
 
-  .editButton, .deleteButton{
+  .editButton,
+  .deleteButton {
     width: 30%;
   }
 }
@@ -188,7 +192,7 @@
     margin: 0 auto;
   }
 
-  .content{
+  .content {
     padding: 0;
     width: 90%;
   }
@@ -196,10 +200,10 @@
   .carousel {
     width: 60%;
     height: fit-content;
-    align-self: center;;
+    align-self: center;
   }
 
-    .productDetails{
+  .productDetails {
     padding: 12px 48px;
   }
 
@@ -208,20 +212,23 @@
     text-align: center;
   }
 
-  .price, .description{
+  .price,
+  .description {
     font-size: 1.3rem;
   }
 
-  .sizeAndQuantityContainer{
+  .sizeAndQuantityContainer {
     width: 90%;
   }
 
-  .ratingContainer, .editAndDeleteContainer{
+  .ratingContainer,
+  .editAndDeleteContainer {
     align-items: center;
     justify-content: center;
   }
 
-  .editButton, .deleteButton{
+  .editButton,
+  .deleteButton {
     width: 30%;
   }
 }
