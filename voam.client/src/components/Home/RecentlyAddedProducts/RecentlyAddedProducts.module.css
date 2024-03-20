@@ -49,7 +49,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; /* Adjust based on your carousel's height */
+  height: 100%;
+  text-decoration: none;
 }
 
 

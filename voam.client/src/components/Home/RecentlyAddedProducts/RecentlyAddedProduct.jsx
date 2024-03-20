@@ -11,7 +11,7 @@ export default function RecentlyAddedProduct({ id, name, price, image }) {
   const imgSrc = `data:image/jpeg;base64,${image}`;
 
   return (
-    <div className={styles.carouselItemContent}>
+    <Link to={`${Path.Items}/${id}`} className={styles.carouselItemContent}>
       <Card className={styles.card}>
         <Card.Img variant="top" src={imgSrc} className={styles.img} />
         <Card.Body className={styles.cardBody}>
@@ -24,6 +24,6 @@ export default function RecentlyAddedProduct({ id, name, price, image }) {
           </Button>
         </Card.Body>
       </Card>
-    </div>
+    </Link>
   );
 }
