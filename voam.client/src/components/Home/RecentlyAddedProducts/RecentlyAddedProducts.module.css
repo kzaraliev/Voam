@@ -1,86 +1,103 @@
-.recentProducts{
-    margin: 24px 0;
+.recentProducts {
+  margin: 12px auto;
 }
 
 .title {
-    font-size: 3.5rem;
-    color: #ffffec;
-    text-align: center;
-    margin: 24px 0;
+  font-size: 3.5rem;
+  color: #ffffec;
+  text-align: center;
+  margin: 24px auto;
 }
 
 .containerProducts {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    gap: 3rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    padding: 24px 0;
-    align-items: center;
-    justify-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding: 24px 0;
+  align-items: center;
+  justify-items: center;
 }
 
 .img {
-    width: 24rem;
-    height: 24rem;
-    object-fit: cover;
-    background: #ccc;
+  width: 24rem;
+  height: 24rem;
+  object-fit: cover;
+  background: #ccc;
 }
 
 .card {
-    background-color: #2b3035bf !important;
-    border: 2px solid #2b3035 !important;
-    width: 24rem;
+  background-color: #2b3035bf !important;
+  border: 2px solid #2b3035 !important;
+  width: 24rem;
 }
 
 .cardBody {
-    color: #ffff !important;
+  color: #ffff !important;
 }
 
-.cardTitle{
-    font-size: xx-large !important;
+.cardTitle {
+  font-size: xx-large !important;
 }
 
 .cardPrice {
-    color: #aaabaa !important;
+  color: #aaabaa !important;
 }
 
+.carouselItemContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Adjust based on your carousel's height */
+}
+
+
 @media screen and (max-width: 768px) {
-    .title{
-        font-size: 2.2rem;
-    }
+  .title {
+    font-size: 2.5rem;
+  }
 
-    .card{
-        width: 90%;
-    }
+  .card {
+    width: 90%;
+    max-height: fit-content;
+  }
 
-    .containerProducts{
-        max-width: 90%;
-    }
+  .img {
+    object-fit: contain;
+    height: fit-content;
+  }
+  .containerProducts {
+    max-width: 90%;
+  }
 
-    .cardTitle {
-        font-size: x-large !important;
-    }
+  .cardTitle {
+    font-size: x-large !important;
+  }
+
+  .cardPrice {
+    font-size: medium !important;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1440px) {
-    .title{
-        font-size: 2.8rem;
-    }
+  .title {
+    font-size: 2.8rem;
+  }
 
-    .recentProducts{
-        width: 90%;
-    }
+  .recentProducts {
+    width: 90%;
+  }
 
-    .card{
-        width: 80%;
-    }
+  .card {
+    width: 80%;
+  }
 
-    .containerProducts{
-        max-width: 100%;
-    }
+  .containerProducts {
+    max-width: 100%;
+  }
 
-    .cardTitle {
-        font-size: larger !important;
-    }
+  .cardTitle {
+    font-size: larger !important;
+  }
 }
