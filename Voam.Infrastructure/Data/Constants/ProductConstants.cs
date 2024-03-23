@@ -1,4 +1,4 @@
-﻿namespace Voam.Server.Constants
+﻿namespace Voam.Infrastructure.Data.Constants
 {
     public static class ProductConstants
     {

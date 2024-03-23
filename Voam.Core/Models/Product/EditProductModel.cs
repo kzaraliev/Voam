@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Voam.Core.Constants.MessageConstants;
-using static Voam.Server.Constants.ProductConstants;
+using static Voam.Infrastructure.Data.Constants.ProductConstants;
 
 namespace Voam.Core.Models.Product
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Voam.Server.Constants;
+using Voam.Infrastructure.Data.Constants;
 
 namespace Voam.Infrastructure.Data.Models
 {
