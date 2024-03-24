@@ -1,7 +1,6 @@
 JWT Refresh tokens (low)
 User profile page - all orders, personal information... (high)
 Admin page (profile page for admin user) - all orders, pending orders, create product, charts (high)
-Add change quantity in shopping cart (medium)
 Email notifications (medium)
 Add documentation for the whole project (medium)
 Unit Tests (high)

@@ -14,4 +14,10 @@ export const addToShoppingCart = async (data) => {
     return result;
 };
 
+export const updateQuantity = async (data) => {
+    const result = await request.put(`${baseUrl}/ChangeCartItemQuantity`, data);
+
+    return result;
+};
+
 export const remove = async (cartItemId) => request.remove(`${baseUrl}/DeleteCartItem?id=${cartItemId}`);

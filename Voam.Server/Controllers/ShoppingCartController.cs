@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Voam.Core.Contracts;
 using Voam.Core.Models.ShoppingCart;
+using Voam.Core.Services;
 using static Voam.Core.Utils.Constants;
 
 namespace Voam.Server.Controllers
@@ -34,6 +35,28 @@ namespace Voam.Server.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpPut("ChangeCartItemQuantity")]
+        public async Task<IActionResult> ChangeCartItemQuantity(CartItemQuantityUpdateModel model)
+        {
+            try
+            {
+                bool updateResult = await shoppingCartService.UpdateCartItemQuantity(model.CartItemId, model.Quantity);
+
+                if (updateResult)
+                {
+                    return Ok(new { success = true, message = "Quantity updated successfully." });
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while updating the cart item.");
+            }
         }
 
         [HttpDelete("DeleteCartItem")]

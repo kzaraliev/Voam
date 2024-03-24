@@ -81,7 +81,7 @@ namespace Voam.Core.Services
             var cartItem = await cartItemService.CreateCartItemAsync(productId, shoppingCart.Id, sizeId, quantity);
 
             shoppingCart.CartItems.Add(cartItem);
-            await repository.SaveChangesAsync();            
+            await repository.SaveChangesAsync();
 
             return true;
         }
@@ -108,7 +108,7 @@ namespace Voam.Core.Services
             }
 
             var shoppingCart = await repository.FindAsync<ShoppingCart>(cartItem.ShoppingCartId);
-            
+
             if (shoppingCart == null)
             {
                 return DeleteResult.NotFound;
@@ -129,7 +129,7 @@ namespace Voam.Core.Services
 
         public async Task EmptyShoppingCartAsync(string userId)
         {
-            var shoppingCart =  await repository.All<ShoppingCart>()
+            var shoppingCart = await repository.All<ShoppingCart>()
                 .Where(sc => sc.CustomerId == userId)
                 .FirstOrDefaultAsync();
 
@@ -168,6 +168,33 @@ namespace Voam.Core.Services
             {
                 throw new ApplicationException("A problem occurred while fetching details for shopping cart", ex);
             }
+        }
+
+        public async Task<bool> UpdateCartItemQuantity(int cartItemId, int quantity)
+        {
+            var cartItem = await repository.FindAsync<CartItem>(cartItemId);
+
+            if (cartItem == null)
+            {
+                return false;
+            }
+
+            var size = await sizeService.GetSizeByIdAsync(cartItem.SizeId);
+
+            if (size == null)
+            {
+                return false;
+            }
+
+            if (size.Quantity < quantity || quantity <= 0)
+            {
+                return false;
+            }
+
+            cartItem.Quantity = quantity;
+            await repository.SaveChangesAsync();
+
+            return true;
         }
     }
 }

@@ -26,6 +26,34 @@ export default function ShoppingCart() {
     });
   }
 
+  function handleQuantityUpdate(itemId, newQuantity, updatedTotalPriceForItem) {
+    setCartData((currentData) => {
+      const updatedCartItems = currentData.cartItems.map((item) => {
+        if (item.id === itemId) {
+          // Update the quantity and price for this specific item
+          return {
+            ...item,
+            quantity: newQuantity,
+            totalPrice: updatedTotalPriceForItem,
+          };
+        }
+        return item;
+      });
+
+      // Sum the total prices for all items to get the updated cart total
+      const updatedTotalPrice = updatedCartItems.reduce(
+        (total, item) => total + item.totalPrice,
+        0
+      );
+
+      return {
+        ...currentData,
+        cartItems: updatedCartItems,
+        totalPrice: updatedTotalPrice,
+      };
+    });
+  }
+
   useEffect(() => {
     shoppingCartService
       .get(userId)
@@ -62,7 +90,12 @@ export default function ShoppingCart() {
                 quantity={cartItem.quantity}
                 sizeId={cartItem.sizeId}
                 onDelete={handleItemDelete}
-                hasBorder={index !== cartData.cartItems.length - 1 && cartData.cartItems.length > 1}
+                pricePerItem={cartItem.price}
+                hasBorder={
+                  index !== cartData.cartItems.length - 1 &&
+                  cartData.cartItems.length > 1
+                }
+                onUpdate={handleQuantityUpdate}
               />
             ))
           )}
