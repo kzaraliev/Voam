@@ -88,6 +88,8 @@ namespace Voam.Core.Services
             order.Products = await orderItemService.CreateOrderItemsAsync(order.Id, products);
             await shoppingCartService.EmptyShoppingCartAsync(userId);
 
+
+
             return "Success";
         }
     }
