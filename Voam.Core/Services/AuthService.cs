@@ -6,17 +6,18 @@ using System.Security.Claims;
 using System.Text;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Identity;
+using Voam.Infrastructure.Data.Models;
 
 namespace Voam.Core.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IConfiguration config;
         private readonly IShoppingCartService shoppingCartService;
 
-        public AuthService(UserManager<IdentityUser> _userManager, IConfiguration _config, IShoppingCartService _shoppingCartService, RoleManager<IdentityRole> _roleManager)
+        public AuthService(UserManager<ApplicationUser> _userManager, IConfiguration _config, IShoppingCartService _shoppingCartService, RoleManager<IdentityRole> _roleManager)
         {
             userManager = _userManager;
             config = _config;
@@ -39,7 +40,7 @@ namespace Voam.Core.Services
             {
                 Id = identityUser.Id,
                 Email = identityUser.Email ?? "Error",
-                Usernam = SplitUsername(identityUser.UserName ?? "Error"),
+                Usernam = $"{identityUser.FirstName} {identityUser.LastName}",
                 Roles = userRoles
             };
 
@@ -91,7 +92,7 @@ namespace Voam.Core.Services
 
         public async Task<bool> RegisterUser(LoginUser user)
         {
-            var identityUser = new IdentityUser { UserName = CombineFirstAndLastName(user.FirstName, user.LastName), Email = user.Email, PhoneNumber = user.PhoneNumber };
+            var identityUser = new ApplicationUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.PhoneNumber, FirstName = user.FirstName.Trim(), LastName = user.LastName.Trim()};
 
             var result = await userManager.CreateAsync(identityUser, user.Password);
 
@@ -103,47 +104,6 @@ namespace Voam.Core.Services
             return result.Succeeded;
         }
 
-        private string SplitUsername(string input)
-        {
-            int uppercaseCount = 0;
-
-            // Iterate through each character in the input string
-            for (int i = 0; i < input.Length; i++)
-            {
-                // Check if the character is an uppercase letter
-                if (Char.IsUpper(input[i]))
-                {
-                    uppercaseCount++; // Increment the uppercase letter count
-
-                    // If this is the second uppercase letter, split the string here
-                    if (uppercaseCount == 2)
-                    {
-                        // Use string.Substring to split the string and insert a space
-                        return input.Substring(0, i) + " " + input.Substring(i);
-                    }
-                }
-            }
-
-            // Return the original input if no split is performed
-            return input;
-        }
-
-        private string CombineFirstAndLastName(string firstName, string lastName)
-        {
-            string result = "";
-
-            string firstNameToLower = firstName.ToLower(); // Convert the entire string to lowercase first
-            string lastNameToLower = lastName.ToLower(); // Convert the entire string to lowercase first
-
-            if (!string.IsNullOrEmpty(firstNameToLower) && !string.IsNullOrEmpty(lastNameToLower))
-            {
-                // Make the first character uppercase
-                result = (char.ToUpper(firstNameToLower[0]) + firstNameToLower.Substring(1)) + (char.ToUpper(lastNameToLower[0]) + lastNameToLower.Substring(1));
-            }
-
-            return result;
-        }
-
         public async Task<OrderInformationModel> GetUserInformation(string id)
         {
             var identityUser = await userManager.FindByIdAsync(id);
@@ -153,13 +113,11 @@ namespace Voam.Core.Services
                 throw new Exception("No such user");
             }
 
-            string fullName = SplitUsername(identityUser.UserName ?? "ErrorPetrov");
-
             OrderInformationModel user = new OrderInformationModel()
             {
                 Email = identityUser.Email ?? "Error",
-                FirstName = fullName.Split(" ")[0],
-                LastName = fullName.Split(" ")[1],
+                FirstName = identityUser.FirstName ?? "Error",
+                LastName = identityUser.LastName ?? "Error",
                 PhoneNumber = identityUser.PhoneNumber ?? "Error"
             };
 

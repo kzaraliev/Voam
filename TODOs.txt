@@ -6,3 +6,6 @@ Add documentation for the whole project (medium)
 Unit Tests (high)
 Search functionality (low)
 Seed data (medium)
+Login register: (high)
+	Add message when user is already registered in the system
+	Change the rules for the password

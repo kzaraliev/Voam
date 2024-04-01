@@ -6,6 +6,7 @@ using System.Text;
 using Voam.Core.Contracts;
 using Voam.Core.Services;
 using Voam.Infrastructure.Data;
+using Voam.Infrastructure.Data.Models;
 using Voam.Infrastucture.Data.Common;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -50,9 +51,13 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services, IConfiguration config)
         {
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
-                //options.Password - add reqs
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = true;
             })
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<VoamDbContext>()

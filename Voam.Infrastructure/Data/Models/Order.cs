@@ -13,7 +13,7 @@ namespace Voam.Infrastructure.Data.Models
         [Required]
         [ForeignKey(nameof(Customer))]
         public required string CustomerId { get; set; }
-        public virtual IdentityUser Customer { get; set; } = null!;
+        public virtual ApplicationUser Customer { get; set; } = null!;
 
         [Required]
         public DateTime OrderDate { get; set; }

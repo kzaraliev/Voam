@@ -11,8 +11,8 @@
         public const int EcontOfficeAddressMinLength = 10;
         public const int EcontOfficeAddressMaxLength = 500;
 
-        public const int PaymentMethodMinLength = 15;
-        public const int PaymentMethodMaxLength = 30;
+        public const int PaymentMethodMinLength = 5;
+        public const int PaymentMethodMaxLength = 100;
 
         public const int CityNameMinLength = 3;
         public const int CityNameMaxLength = 50;

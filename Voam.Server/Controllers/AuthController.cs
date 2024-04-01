@@ -28,7 +28,6 @@ namespace Voam.Server.Controllers
             }
 
             return BadRequest("Something went wrong");
-
         }
 
         [AllowAnonymous]

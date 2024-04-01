@@ -23,6 +23,6 @@ namespace Voam.Infrastructure.Data.Models
         [ForeignKey(nameof(Customer))]
         public string CustomerId { get; set; } = string.Empty;
 
-        public virtual IdentityUser Customer { get; set; } = null!;
+        public virtual ApplicationUser Customer { get; set; } = null!;
     }
 }

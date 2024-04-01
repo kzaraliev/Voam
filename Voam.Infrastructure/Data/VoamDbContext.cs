@@ -4,7 +4,7 @@ using Voam.Infrastructure.Data.Models;
 
 namespace Voam.Infrastructure.Data
 {
-    public class VoamDbContext : IdentityDbContext
+    public class VoamDbContext : IdentityDbContext<ApplicationUser>
     {
         public VoamDbContext(DbContextOptions<VoamDbContext> options) : base(options)
         { }
