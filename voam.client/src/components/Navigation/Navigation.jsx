@@ -47,34 +47,43 @@ function Navigation() {
             <Nav.Link as={Link} to={Path.Contacts} onClick={handleNavItemClick}>
               Contact
             </Nav.Link>
+          </Nav>
+          <Nav>
             {isAdmin && (
               <>
                 <Nav.Link
                   as={Link}
-                  to={Path.CreateProduct}
+                  to={Path.Admin}
                   onClick={handleNavItemClick}
                 >
-                  Create
+                  Admin panel
                 </Nav.Link>
               </>
             )}
-          </Nav>
-          <Nav>
             {isAuthenticated && (
               <>
-                <Nav.Link
-                  as={Link}
-                  to={Path.Profile}
-                  onClick={handleNavItemClick}
-                >
-                  Profile - {username}
-                </Nav.Link>
+                {!isAdmin && (
+                  <Nav.Link
+                    as={Link}
+                    to={Path.Profile}
+                    onClick={handleNavItemClick}
+                  >
+                    Profile - {username}
+                  </Nav.Link>
+                )}
                 <Nav.Link
                   as={Link}
                   to={Path.ShoppingCart}
                   onClick={handleNavItemClick}
                 >
                   ShoppingCart
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to={Path.Logout}
+                  onClick={handleNavItemClick}
+                >
+                  Logout
                 </Nav.Link>
               </>
             )}

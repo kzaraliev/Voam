@@ -20,7 +20,8 @@ import LoggedInGuard from "./guards/LoggedInGuard";
 import Logout from "./components/Logout/Logout.jsx";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart.jsx";
 import Checkout from "./components/Checkout/Checkout.jsx";
-import Profile from "./components/Profile/Profile.jsx"
+import Profile from "./components/Profile/Profile.jsx";
+import Admin from "./components/Admin/Admin.jsx";
 
 function App() {
   return (
@@ -40,11 +41,12 @@ function App() {
           <Route element={<AdminGuard />}>
             <Route path={Path.CreateProduct} element={<CreateProduct />} />
             <Route path={Path.EditProduct} element={<EditProduct />} />
+            <Route path={Path.Admin} element={<Admin />} />
           </Route>
           <Route element={<AuthGuard />}>
             <Route path={Path.ShoppingCart} element={<ShoppingCart />} />
             <Route path={Path.Checkout} element={<Checkout />} />
-            <Route path={Path.Profile} element={<Profile/>} />
+            <Route path={Path.Profile} element={<Profile />} />
             <Route path={Path.Logout} element={<Logout />}></Route>
           </Route>
           <Route path={Path.NotFound} element={<NotFound />} />

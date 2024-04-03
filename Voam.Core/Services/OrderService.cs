@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Voam.Core.Contracts;
@@ -120,6 +121,30 @@ namespace Voam.Core.Services
 
             return await repository.AllReadOnly<Order>()
                 .Where(o => o.CustomerId == userId)
+                .Select(o => new OrderHistory()
+                {
+                    Id = o.Id,
+                    OrderDate = o.OrderDate.ToString("dd.MM.yyyy"),
+                    EcontAddress = o.Econt,
+                    PaymentMethod = o.PaymentMethod,
+                    City = o.City,
+                    TotalPrice = o.TotalPrice,
+                    Products = o.Products
+                        .Select(p => new OrderItemHistory()
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            Quantity = p.Quantity,
+                            SizeChar = p.SizeChar,
+                        })
+                        .ToList()
+                })
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<OrderHistory>> GetAllOrdersAsync()
+        {
+            return await repository.AllReadOnly<Order>()
                 .Select(o => new OrderHistory()
                 {
                     Id = o.Id,

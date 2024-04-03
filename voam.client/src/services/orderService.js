@@ -12,3 +12,8 @@ export const get = async (userId) => {
     const result = await request.get(`${baseUrl}/GetAllOrdersForUser?id=${userId}`);
     return result;
 }
+
+export const getAll = async () => {
+    const result = await request.get(`${baseUrl}/GetAllOrders`);
+    return result;
+}

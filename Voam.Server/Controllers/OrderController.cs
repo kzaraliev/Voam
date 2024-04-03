@@ -32,5 +32,12 @@ namespace Voam.Server.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetAllOrders")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> GetAllOrders()
+        {
+            var result = await orderService.GetAllOrdersAsync();
+            return Ok(result);
+        }
     }
 }

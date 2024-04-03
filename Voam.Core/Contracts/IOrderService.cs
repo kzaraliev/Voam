@@ -6,5 +6,6 @@ namespace Voam.Core.Contracts
     {
         Task<string> PlaceOrderAsync(string userId, PlaceOrderModel model);
         Task<IEnumerable<OrderHistory>> GetAllOrdersForUserAsync(string userId);
+        Task<IEnumerable<OrderHistory>> GetAllOrdersAsync();
     }
 }
