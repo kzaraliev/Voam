@@ -109,5 +109,36 @@ namespace Voam.Core.Services
 
             return "Success";
         }
+
+        public async Task<IEnumerable<OrderHistory>> GetAllOrdersForUserAsync(string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                throw new Exception("No such user");
+            }
+
+            return await repository.AllReadOnly<Order>()
+                .Where(o => o.CustomerId == userId)
+                .Select(o => new OrderHistory()
+                {
+                    Id = o.Id,
+                    OrderDate = o.OrderDate.ToString("dd.MM.yyyy"),
+                    EcontAddress = o.Econt,
+                    PaymentMethod = o.PaymentMethod,
+                    City = o.City,
+                    TotalPrice = o.TotalPrice,
+                    Products = o.Products
+                        .Select(p => new OrderItemHistory()
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            Quantity = p.Quantity,
+                            SizeChar = p.SizeChar,
+                        })
+                        .ToList()
+                })
+                .ToListAsync();
+        }
     }
 }

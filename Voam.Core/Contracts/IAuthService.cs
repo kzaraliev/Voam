@@ -1,4 +1,5 @@
 ﻿using Voam.Core.Models.Identity;
+using Voam.Core.Models.Order;
 
 namespace Voam.Core.Contracts
 {
@@ -12,5 +13,6 @@ namespace Voam.Core.Contracts
         Task<bool> AddRole(string roleName);
         Task<bool> AddUserToRole(string userId, string roleName);
         Task<bool> CheckIsUserWithRole(string userEmail, string roleName);
+        Task<string> GetUserPhoneNumberAsync(string userId);
     }
 }

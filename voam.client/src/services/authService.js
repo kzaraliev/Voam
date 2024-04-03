@@ -25,3 +25,8 @@ export const getInformation = async (userId) => {
     const result = await request.get(`${baseUrl}/GetUserInformation?id=${userId}`);
     return result;
 };
+
+export const getUserPhoneNumber = async (userId) => {
+    const result = await request.get(`${baseUrl}/GetUserPhoneNumber?id=${userId}`);
+    return result;
+}

@@ -7,3 +7,8 @@ export const add = async (id, data) => {
 
     return result;
 };
+
+export const get = async (userId) => {
+    const result = await request.get(`${baseUrl}/GetAllOrdersForUser?id=${userId}`);
+    return result;
+}

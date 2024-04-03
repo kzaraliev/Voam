@@ -25,5 +25,12 @@ namespace Voam.Server.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetAllOrdersForUser")]
+        public async Task<IActionResult> GetAllOrdersForUser(string id)
+        {
+            var result = await orderService.GetAllOrdersForUserAsync(id);
+            return Ok(result);
+        }
+
     }
 }

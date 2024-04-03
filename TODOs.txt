@@ -1,11 +1,9 @@
 JWT Refresh tokens (low)
-User profile page - all orders, personal information... (high)
+User profile page - add style (medium)
 Admin page (profile page for admin user) - all orders, pending orders, create product, charts (high)
-Email notifications (medium)
 Add documentation for the whole project (medium)
 Unit Tests (high)
 Search functionality (low)
 Seed data (medium)
 Login register: (high)
 	Add message when user is already registered in the system
-	Change the rules for the password

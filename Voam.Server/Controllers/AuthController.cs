@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Identity;
 
@@ -67,6 +68,14 @@ namespace Voam.Server.Controllers
             var result = await authService.GetUserInformation(id);
 
             return Ok(result);
+        }
+
+        [HttpGet("GetUserPhoneNumber")]
+        public async Task<IActionResult> GetUserPhoneNumber(string id)
+        {
+            var result = await authService.GetUserPhoneNumberAsync(id);
+
+            return Ok(JsonSerializer.Serialize(result));
         }
 
         [Authorize(Roles = "Administrator")]

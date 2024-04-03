@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Identity;
+using Voam.Core.Models.Order;
 using Voam.Infrastructure.Data.Models;
 
 namespace Voam.Core.Services
@@ -171,6 +172,17 @@ namespace Voam.Core.Services
             }
 
             return false;
+        }
+
+        public async Task<string> GetUserPhoneNumberAsync(string userId)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                throw new Exception("No such user");
+            }
+
+            return user.PhoneNumber ?? "No phone number provided";
         }
     }
 }

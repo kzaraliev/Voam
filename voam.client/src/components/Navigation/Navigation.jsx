@@ -76,13 +76,6 @@ function Navigation() {
                 >
                   ShoppingCart
                 </Nav.Link>
-                <Nav.Link
-                  as={Link}
-                  to={Path.Logout}
-                  onClick={handleNavItemClick}
-                >
-                  Logout
-                </Nav.Link>
               </>
             )}
             {!isAuthenticated && (
