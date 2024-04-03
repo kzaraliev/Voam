@@ -9,8 +9,6 @@ import AuthContext from "../../../context/authContext.jsx";
 import Path from "../../../utils/paths.js";
 import logoImg from "../../../assets/logo.png";
 
-
-
 export default function StepTwo({ changeActiveStep }) {
   const [cartData, setCartData] = useState();
   const [billingDetails, setBillingDetails] = useState({});
@@ -29,17 +27,15 @@ export default function StepTwo({ changeActiveStep }) {
     const savedData = localStorage.getItem("checkout-data");
     if (savedData) {
       try {
-        // Parse the string back into an object
         const checkoutData = JSON.parse(savedData);
         setBillingDetails(checkoutData);
       } catch (error) {
-        // Handle errors if the stored string cannot be parsed into an object
         console.error("Failed to parse checkout data:", error);
       }
     }
   }, []);
 
-  function submitOrder(){
+  function submitOrder() {
     const data = {
       fullName: billingDetails.fullName,
       email: billingDetails.email,
@@ -48,10 +44,12 @@ export default function StepTwo({ changeActiveStep }) {
       city: billingDetails.city,
       paymentMethod: billingDetails.payment,
       products: cartData.cartItems,
-      totalPrice: cartData.totalPrice
-    }
+      totalPrice: cartData.totalPrice,
+    };
 
-    orderService.add(userId, data)
+    orderService
+      .add(userId, data)
+      .then(localStorage.removeItem("checkout-data"));
   }
 
   return (
@@ -90,7 +88,11 @@ export default function StepTwo({ changeActiveStep }) {
               </ul>
             </div>
             <div className={styles.logoContainer}>
-              <img className={styles.logo} src={logoImg} alt="Logo voam clothing" />
+              <img
+                className={styles.logo}
+                src={logoImg}
+                alt="Logo voam clothing"
+              />
             </div>
           </div>
           <ul className={styles.productsList}>
@@ -105,7 +107,10 @@ export default function StepTwo({ changeActiveStep }) {
                   productId={cartItem.productId}
                   quantity={cartItem.quantity}
                   sizeId={cartItem.sizeId}
-                  hasBorder={index !== cartData.cartItems.length - 1 && cartData.cartItems.length > 1}
+                  hasBorder={
+                    index !== cartData.cartItems.length - 1 &&
+                    cartData.cartItems.length > 1
+                  }
                 />
               ))
             )}
@@ -113,7 +118,10 @@ export default function StepTwo({ changeActiveStep }) {
           <button
             className={styles.submitButton}
             type="submit"
-            onClick={() => {changeActiveStep(3); submitOrder()}}
+            onClick={() => {
+              changeActiveStep(3);
+              submitOrder();
+            }}
           >
             Place order (
             {cartData === undefined ? "" : cartData.totalPrice.toFixed(2)} lv.)
