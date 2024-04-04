@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Voam.Infrastructure.Data.Models;
+using Voam.Infrastructure.Data.SeedDb;
 
 namespace Voam.Infrastructure.Data
 {
@@ -11,6 +12,12 @@ namespace Voam.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new ImagesConfiguration());
+            modelBuilder.ApplyConfiguration(new SizeConfiguration());
+            modelBuilder.ApplyConfiguration(new ShoppingCartConfiguration());
+
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<CartItem>()

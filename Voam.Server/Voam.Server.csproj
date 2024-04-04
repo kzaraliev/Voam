@@ -38,8 +38,4 @@
     <ProjectReference Include="..\Voam.Core\Voam.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
 </Project>

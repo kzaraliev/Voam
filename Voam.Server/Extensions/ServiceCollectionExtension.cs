@@ -53,6 +53,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
                 options.Password.RequiredLength = 5;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = true;
