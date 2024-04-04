@@ -4,6 +4,5 @@ Admin page (profile page for admin user) - all orders, pending orders, create pr
 Add documentation for the whole project (medium)
 Unit Tests (high)
 Search functionality (low)
-Seed data (medium)
 Login register: (high)
 	Add message when user is already registered in the system
