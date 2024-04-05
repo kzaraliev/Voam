@@ -23,12 +23,23 @@ namespace Voam.Server.Controllers
         public async Task<IActionResult> RegisterUser(LoginUser user)
         {
             var result = await authService.RegisterUser(user);
-            if (result)
+            if (result.Succeeded)
             {
                 return await Login(user);
             }
 
-            return BadRequest("Something went wrong");
+            if (result.Errors.Any(error => error.Code == "DuplicateEmail"))
+            {
+                return BadRequest(new { message = "Oops! That email is already connected to an account." });
+            }
+
+            if (result.Errors.Any())
+            {
+                var errorMessage = string.Join("; ", result.Errors.Select(error => error.Description));
+                return BadRequest(new { message = $"Something went wrong: {errorMessage}" });
+            }
+
+            return BadRequest(new { message = "Something went wrong" });
         }
 
         [AllowAnonymous]

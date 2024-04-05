@@ -1,5 +1,5 @@
-﻿using Voam.Core.Models.Identity;
-using Voam.Core.Models.Order;
+﻿using Microsoft.AspNetCore.Identity;
+using Voam.Core.Models.Identity;
 
 namespace Voam.Core.Contracts
 {
@@ -8,7 +8,7 @@ namespace Voam.Core.Contracts
         Task<UserPublicModel> GetUserPublicData(string email);
         Task<string> GenerateTokenString(LoginUser user);
         Task<bool> Login(LoginUser user);
-        Task<bool> RegisterUser(LoginUser user);
+        Task<IdentityResult> RegisterUser(LoginUser user);
         Task<OrderInformationModel> GetUserInformation(string id);
         Task<bool> AddRole(string roleName);
         Task<bool> AddUserToRole(string userId, string roleName);

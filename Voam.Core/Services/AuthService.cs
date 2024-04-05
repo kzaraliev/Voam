@@ -91,7 +91,7 @@ namespace Voam.Core.Services
             return await userManager.CheckPasswordAsync(identityUser, user.Password);
         }
 
-        public async Task<bool> RegisterUser(LoginUser user)
+        public async Task<IdentityResult> RegisterUser(LoginUser user)
         {
             var identityUser = new ApplicationUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.PhoneNumber, FirstName = user.FirstName.Trim(), LastName = user.LastName.Trim()};
 
@@ -102,7 +102,7 @@ namespace Voam.Core.Services
                 await shoppingCartService.CreateShoppingCartAsync(identityUser.Id);
             }
 
-            return result.Succeeded;
+            return result;
         }
 
         public async Task<OrderInformationModel> GetUserInformation(string id)
