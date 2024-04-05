@@ -25,11 +25,23 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
     [OrderKeys.PaymentMethod]: "",
   });
 
+  console.log(user);
+
   useEffect(() => {
     authService
       .getInformation(userId)
       .then((result) => {
         setUser(result);
+
+        const storedData = localStorage.getItem("checkout-data");
+        if (storedData) {
+          const parsedData = JSON.parse(storedData);
+          setUser((state) => ({
+            ...state,
+            [OrderKeys.EcontOffice]: parsedData[OrderKeys.EcontOffice],
+            [OrderKeys.City]: parsedData[OrderKeys.City],
+          }));
+        }
       })
       .catch((err) => {
         logoutHandler();
@@ -52,8 +64,8 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
       [OrderKeys.FirstName]: user[OrderKeys.FirstName] || "",
       [OrderKeys.LastName]: user[OrderKeys.LastName] || "",
       [OrderKeys.PhoneNumber]: user[OrderKeys.PhoneNumber] || "",
-      [OrderKeys.EcontOffice]: "",
-      [OrderKeys.City]: "",
+      [OrderKeys.EcontOffice]: user[OrderKeys.EcontOffice] || "",
+      [OrderKeys.City]: user[OrderKeys.City] || "",
       [OrderKeys.PaymentMethod]: "Upon delivery",
     },
     validationSchema: orderValidation,

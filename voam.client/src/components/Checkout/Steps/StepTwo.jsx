@@ -40,7 +40,7 @@ export default function StepTwo({ changeActiveStep }) {
       fullName: billingDetails.fullName,
       email: billingDetails.email,
       phoneNumber: billingDetails.phone,
-      EcontOffice: billingDetails.econt,
+      EcontOffice: billingDetails.econtOffice,
       city: billingDetails.city,
       paymentMethod: billingDetails.payment,
       products: cartData.cartItems,

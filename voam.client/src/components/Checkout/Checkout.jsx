@@ -21,7 +21,7 @@ export default function Checkout() {
       fullName: `${newFormData.firstName} ${newFormData.lastName}`,
       email: newFormData.email,
       phone: newFormData.phoneNumber,
-      econt: newFormData.econtOffice,
+      econtOffice: newFormData.econtOffice,
       city: newFormData.city,
       payment: newFormData.paymentMethod,
     }

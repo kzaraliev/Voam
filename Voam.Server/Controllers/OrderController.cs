@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Order;
 
@@ -22,7 +23,7 @@ namespace Voam.Server.Controllers
         public async Task<IActionResult> PlaceOrder(string id, PlaceOrderModel model)
         {
             var result = await orderService.PlaceOrderAsync(id, model);
-            return Ok(result);
+            return Ok(JsonSerializer.Serialize(result));
         }
 
         [HttpGet("GetAllOrdersForUser")]
