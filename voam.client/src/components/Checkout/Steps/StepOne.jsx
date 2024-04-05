@@ -2,6 +2,7 @@ import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import { useFormik } from "formik";
 import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import AuthContext from "../../../context/authContext";
 import * as authService from "../../../services/authService";
@@ -12,6 +13,7 @@ import Path from "../../../utils/paths";
 
 export default function StepOne({ changeActiveStep, onFormDataChange }) {
   const { userId, logoutHandler } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     [OrderKeys.Email]: "",
