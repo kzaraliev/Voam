@@ -19,9 +19,7 @@ export default function RecentlyAddedProduct({ id, name, price, image }) {
           <Card.Subtitle className={["mb-2", styles.cardPrice]}>
             Price: {price} lv.
           </Card.Subtitle>
-          <Button as={Link} to={`${Path.Items}/${id}`} variant="success">
-            View Details
-          </Button>
+          <Button variant="success">View Details</Button>
         </Card.Body>
       </Card>
     </Link>
