@@ -49,7 +49,7 @@ namespace Voam.Core.Services
                 }
 
                 var size = await repository.All<Size>()
-                        .Where(s => s.ProductId == product.Id)
+                        .Where(s => s.Id == item.SizeId)
                         .FirstOrDefaultAsync();
 
                 if (size == null)
