@@ -3,6 +3,6 @@
     public static class CacheConstants
     {
         public const string ProductsCacheKey = "ProductsCacheKey";
-        public const string RecntProductsCacheKey = "RecntProductsCacheKey";
+        public const string RecentProductsCacheKey = "RecentProductsCacheKey";
     }
 }

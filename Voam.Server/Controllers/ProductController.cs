@@ -45,18 +45,17 @@ namespace Voam.Server.Controllers
         public async Task<IActionResult> GetRecentlyAddedProducts()
         {
 
-            var products = memoryCache.Get<IEnumerable<DisplayProductModel>>(RecntProductsCacheKey);
+            var products = memoryCache.Get<IEnumerable<DisplayProductModel>>(RecentProductsCacheKey);
 
             if (products == null || products.Any() == false)
             {
-                products = await productService.GetAllProductsAsync();
+                products = await productService.GetRecentlyAddedProductsAsync();
 
                 var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(60));
 
-                memoryCache.Set(RecntProductsCacheKey, products, cacheOptions);
+                memoryCache.Set(RecentProductsCacheKey, products, cacheOptions);
             }
 
-            products = await productService.GetRecentlyAddedProductsAsync();
             return Ok(products);
         }
 

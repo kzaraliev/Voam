@@ -105,7 +105,7 @@ export default function ProductDetails() {
       .addToShoppingCart(data)
       .then((res) => {
         Swal.fire({
-          timer: 3000,
+          timer: 4000,
           title: "Added to Cart!",
           text: "Your item has been successfully added to the shopping cart. Ready to check out or keep shopping?",
           icon: "success",
@@ -120,15 +120,27 @@ export default function ProductDetails() {
   };
 
   const deleteButtonClickHandler = async () => {
-    const hasConfirmed = confirm(
-      `Are you sure you want to delete ${product.name}`
-    );
-
-    if (hasConfirmed) {
-      await productService.remove(id);
-
-      navigate(Path.Items);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        productService.remove(id).then(() => {
+          Swal.fire({
+            timer: 3000,
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+        });
+        navigate(Path.Items);
+      }
+    });
   };
 
   const initialValues = useMemo(

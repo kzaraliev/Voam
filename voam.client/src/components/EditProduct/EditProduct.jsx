@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
+import Swal from "sweetalert2";
 
 import { EditFormKeys } from "../../utils/constants";
 import editProductValidation from "./editProductValidation";
@@ -78,31 +79,56 @@ export default function EditProduct() {
 
   async function onSubmit() {
     try {
-      if (checkImagesLength()) {
-        return;
-      }
-
-      if (!Array.isArray(values.images)) {
-        let imagesArray = [];
-
-        for (let i = 0; i < values.images.length; i++) {
-          if (values.images[i].type !== "image/png") {
-            setFieldError(EditFormKeys.Images, "Only PNG images are allowed");
+      Swal.fire({
+        title: "Do you want to save the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+        denyButtonText: `Don't save`,
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          if (checkImagesLength()) {
             return;
           }
 
-          let result = await imageToBinary.toBase64(values.images[i]);
-          imagesArray.push(result);
+          if (!Array.isArray(values.images)) {
+            let imagesArray = [];
+
+            for (let i = 0; i < values.images.length; i++) {
+              if (values.images[i].type !== "image/png") {
+                setFieldError(
+                  EditFormKeys.Images,
+                  "Only PNG images are allowed"
+                );
+                return;
+              }
+
+              let result = await imageToBinary.toBase64(values.images[i]);
+              imagesArray.push(result);
+            }
+
+            values.images = imagesArray;
+          } else {
+            values.images = [];
+          }
+
+          await productService.edit(productId, values);
+
+          navigate(`${Path.Items}/${productId}`);
+          Swal.fire({
+            timer: 3000,
+            title: "Saved!",
+            icon: "success",
+          });
+        } else if (result.isDenied) {
+          Swal.fire({
+            timer: 3000,
+            title: "Changes are not saved",
+            icon: "info",
+          });
+          navigate(`${Path.Items}/${productId}`);
         }
-
-        values.images = imagesArray;
-      } else {
-        values.images = [];
-      }
-
-      await productService.edit(productId, values);
-
-      navigate(`${Path.Items}/${productId}`);
+      });
     } catch (error) {
       logoutHandler();
       navigate(Path.Login);

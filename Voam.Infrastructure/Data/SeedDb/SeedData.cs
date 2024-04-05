@@ -75,6 +75,7 @@ namespace Voam.Infrastructure.Data.SeedDb
                 NormalizedUserName = "ADMIN@MAIL.COM",
                 Email = "admin@mail.com",
                 NormalizedEmail = "ADMIN@MAIL.COM",
+                PhoneNumber = "0876933440",
                 FirstName = "Martin",
                 LastName = "Hristov"
             };
@@ -89,6 +90,7 @@ namespace Voam.Infrastructure.Data.SeedDb
                 NormalizedUserName = "KOSEBOSE@MAIL.COM",
                 Email = "kosebose@mail.com",
                 NormalizedEmail = "KOSEBOSE@MAIL.COM",
+                PhoneNumber = "0876933660",
                 FirstName = "Konstantin",
                 LastName = "Zaraliev"
             };
