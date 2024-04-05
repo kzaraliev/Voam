@@ -3,5 +3,3 @@ User profile page - add REAL pagination for orders (medium)
 Add documentation for the whole project (medium)
 Unit Tests (high)
 Search functionality (low)
-Login register: (high)
-	Add message when user is already registered in the system
