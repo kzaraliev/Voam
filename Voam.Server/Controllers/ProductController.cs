@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Product;
 using static Voam.Core.Utils.Constants;
+using static Voam.Core.Constants.CacheConstants;
 
 namespace Voam.Server.Controllers
 {
@@ -12,17 +14,29 @@ namespace Voam.Server.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService productService;
+        private readonly IMemoryCache memoryCache;
 
-        public ProductController(IProductService _productService)
+        public ProductController(IProductService _productService, IMemoryCache _memoryCache)
         {
             productService = _productService;
+            memoryCache = _memoryCache;
         }
 
         [AllowAnonymous]
         [HttpGet("GetAllProducts")]
         public async Task<IActionResult> GetAllProducts()
         {
-            IEnumerable<DisplayProductModel> products = await productService.GetAllProductsAsync();
+            var products = memoryCache.Get<IEnumerable<DisplayProductModel>>(ProductsCacheKey);
+
+            if (products == null || products.Any() == false)
+            {
+                products = await productService.GetAllProductsAsync();
+
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(60));
+
+                memoryCache.Set(ProductsCacheKey, products, cacheOptions);
+            }
+
             return Ok(products);
         }
 
@@ -30,7 +44,19 @@ namespace Voam.Server.Controllers
         [HttpGet("GetRecentlyAddedProducts")]
         public async Task<IActionResult> GetRecentlyAddedProducts()
         {
-            IEnumerable<DisplayProductModel> products = await productService.GetRecentlyAddedProductsAsync();
+
+            var products = memoryCache.Get<IEnumerable<DisplayProductModel>>(RecntProductsCacheKey);
+
+            if (products == null || products.Any() == false)
+            {
+                products = await productService.GetAllProductsAsync();
+
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(60));
+
+                memoryCache.Set(RecntProductsCacheKey, products, cacheOptions);
+            }
+
+            products = await productService.GetRecentlyAddedProductsAsync();
             return Ok(products);
         }
 
