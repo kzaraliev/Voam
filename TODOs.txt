@@ -1,5 +1,5 @@
 JWT Refresh tokens (low)
-User profile page - add style (medium)
+User profile page - add REAL pagination for orders (medium)
 Add documentation for the whole project (medium)
 Unit Tests (high)
 Search functionality (low)

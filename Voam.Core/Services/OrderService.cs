@@ -140,7 +140,6 @@ namespace Voam.Core.Services
                             SizeChar = p.SizeChar,
                         })
                         .ToList(),
-                    FullName = o.FullName,
                 })
                 .ToListAsync();
         }

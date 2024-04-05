@@ -8,7 +8,7 @@
         public required string PaymentMethod { get; set;}
         public required string City { get; set;}
         public decimal TotalPrice { get; set; }
-        public required string FullName { get; set;}
+        public string FullName { get; set;} = string.Empty;
         public IEnumerable<OrderItemHistory> Products { get; set; } = new List<OrderItemHistory>();
     }
 }
