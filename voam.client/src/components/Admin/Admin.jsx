@@ -14,12 +14,10 @@ export default function Admin() {
       .then(setOrders)
       .catch((err) => console.log(err));
   }, []);
-
-  console.log(orders)
-
   return (
     <div className={styles.adminPanelContainer}>
       <h1 className={styles.title}>Admin panel</h1>
+      <p className={styles.subtitle}>*All information is from one year ago</p>
       <section>
         <h2 className={styles.sectionTitle}>Orders:</h2>
         <OrdersList orders={orders} />

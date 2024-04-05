@@ -11,6 +11,11 @@
   margin-bottom: 32px;
 }
 
+.subtitle{
+  color: #aaabaa;
+  text-align: center;
+}
+
 .sectionTitle {
   font-size: 3rem;
 }

@@ -148,6 +148,7 @@ namespace Voam.Core.Services
         public async Task<IEnumerable<OrderHistory>> GetAllOrdersAsync()
         {
             return await repository.AllReadOnly<Order>()
+                .Where(o => o.OrderDate > DateTime.Now.AddYears(-1))
                 .Select(o => new OrderHistory()
                 {
                     Id = o.Id,
