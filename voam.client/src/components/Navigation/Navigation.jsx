@@ -47,6 +47,17 @@ function Navigation() {
             <Nav.Link as={Link} to={Path.Contacts} onClick={handleNavItemClick}>
               Contact
             </Nav.Link>
+            {isAdmin && (
+              <>
+                <Nav.Link
+                  as={Link}
+                  to={Path.CreateProduct}
+                  onClick={handleNavItemClick}
+                >
+                  Create Product
+                </Nav.Link>
+              </>
+            )}
           </Nav>
           <Nav>
             {isAdmin && (
@@ -56,7 +67,7 @@ function Navigation() {
                   to={Path.Admin}
                   onClick={handleNavItemClick}
                 >
-                  Admin panel
+                  Admin Panel
                 </Nav.Link>
               </>
             )}
@@ -76,7 +87,7 @@ function Navigation() {
                   to={Path.ShoppingCart}
                   onClick={handleNavItemClick}
                 >
-                  ShoppingCart
+                  Shopping Cart
                 </Nav.Link>
                 <Nav.Link
                   as={Link}
