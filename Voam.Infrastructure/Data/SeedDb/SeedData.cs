@@ -5,55 +5,55 @@ namespace Voam.Infrastructure.Data.SeedDb
 {
     internal class SeedData
     {
-        public ApplicationUser AdminUser { get; set; }
-        public ApplicationUser CustomerUser { get; set; }
+        public ApplicationUser AdminUser { get; set; } = null!;
+        public ApplicationUser CustomerUser { get; set; } = null!;
 
-        public Product BlackSheepHoodie { get; set; }
-        public Product DevotionBeanie { get; set; }
-        public Product DevotionTShirt { get; set; }
-        public Product MidnightGreenHoodie { get; set; }
-        public Product MidnightGreenPants { get; set; }
-        public Product VoamHoodie { get; set; }
+        public Product BlackSheepHoodie { get; set; } = null!;
+        public Product DevotionBeanie { get; set; } = null!;
+        public Product DevotionTShirt { get; set; } = null!;
+        public Product MidnightGreenHoodie { get; set; } = null!;
+        public Product MidnightGreenPants { get; set; } = null!;
+        public Product VoamHoodie { get; set; } = null!;
 
-        public ProductImage BlackSheepHoodieImg1 { get; set; }
-        public ProductImage BlackSheepHoodieImg2 { get; set; }
-        public ProductImage BlackSheepHoodieImg3 { get; set; }
+        public ProductImage BlackSheepHoodieImg1 { get; set; } = null!;
+        public ProductImage BlackSheepHoodieImg2 { get; set; } = null!;
+        public ProductImage BlackSheepHoodieImg3 { get; set; } = null!;
 
-        public ProductImage DevotionBeanieImg1 { get; set; }
-        public ProductImage DevotionBeanieImg2 { get; set; }
+        public ProductImage DevotionBeanieImg1 { get; set; } = null!;
+        public ProductImage DevotionBeanieImg2 { get; set; } = null!;
 
-        public ProductImage DevotionTShirtImg1 { get; set; }
-        public ProductImage DevotionTShirtImg2 { get; set; }
+        public ProductImage DevotionTShirtImg1 { get; set; } = null!;
+        public ProductImage DevotionTShirtImg2 { get; set; } = null!;
 
-        public ProductImage MidnightGreenHoodieImg1 { get; set; }
-        public ProductImage MidnightGreenHoodieImg2 { get; set; }
+        public ProductImage MidnightGreenHoodieImg1 { get; set; } = null!;
+        public ProductImage MidnightGreenHoodieImg2 { get; set; } = null!;
 
-        public ProductImage MidnightGreenPantsImg1 { get; set; }
-        public ProductImage MidnightGreenPantsImg2 { get; set; }
+        public ProductImage MidnightGreenPantsImg1 { get; set; } = null!;
+        public ProductImage MidnightGreenPantsImg2 { get; set; } = null!;
 
-        public ProductImage VoamHoodieImg1 { get; set; }
-        public ProductImage VoamHoodieImg2 { get; set; }
+        public ProductImage VoamHoodieImg1 { get; set; } = null!;
+        public ProductImage VoamHoodieImg2 { get; set; } = null!;
 
-        public Size BlackSheepHoodieSizeS {  get; set; }
-        public Size BlackSheepHoodieSizeM {  get; set; }
-        public Size BlackSheepHoodieSizeL {  get; set; }
+        public Size BlackSheepHoodieSizeS { get; set; } = null!;
+        public Size BlackSheepHoodieSizeM { get; set; } = null!;
+        public Size BlackSheepHoodieSizeL { get; set; } = null!;
 
-        public Size DevotionBeanieSizeM { get; set; }
+        public Size DevotionBeanieSizeM { get; set; } = null!;
 
-        public Size DevotionTShirtSizeS { get; set; }
-        public Size DevotionTShirtSizeM { get; set; }
-        public Size DevotionTShirtSizeL { get; set; }
+        public Size DevotionTShirtSizeS { get; set; } = null!;
+        public Size DevotionTShirtSizeM { get; set; } = null!;
+        public Size DevotionTShirtSizeL { get; set; } = null!;
 
-        public Size MidnightGreenHoodieSizeM { get; set; }
-        public Size MidnightGreenHoodieSizeL { get; set; }
+        public Size MidnightGreenHoodieSizeM { get; set; } = null!;
+        public Size MidnightGreenHoodieSizeL { get; set; } = null!;
 
-        public Size MidnightGreenPantsSizeM { get; set; }
-        public Size MidnightGreenPantsSizeL { get; set; }
+        public Size MidnightGreenPantsSizeM { get; set; } = null!;
+        public Size MidnightGreenPantsSizeL { get; set; } = null!;
 
-        public Size VoamHoodieSizeM { get; set; }
+        public Size VoamHoodieSizeM { get; set; } = null!;
 
-        public ShoppingCart ShoppingCartAdmin { get; set; }
-        public ShoppingCart ShoppingCartCustomer { get; set; }
+        public ShoppingCart ShoppingCartAdmin { get; set; } = null!;
+        public ShoppingCart ShoppingCartCustomer { get; set; } = null!;
 
         public SeedData()
         {
@@ -245,7 +245,7 @@ namespace Voam.Infrastructure.Data.SeedDb
         private byte[] ConvertImageToByteArray(string imageName)
         {
             var workingDirectory = Directory.GetCurrentDirectory();
-            var reletivePath = Directory.GetParent(workingDirectory).ToString() ?? throw new Exception("An error occurred during seeding");
+            var reletivePath = Directory.GetParent(workingDirectory)?.ToString() ?? throw new Exception("An error occurred during seeding");
             var filePath = Path.Combine(reletivePath, @"Voam.Infrastructure\Data\SeedDb\Images");
 
             string imagePath = Path.Combine(filePath, imageName);
