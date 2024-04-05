@@ -78,4 +78,16 @@
   .sections {
     width: 100%;
   }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 2.5rem;
+  }
+
+  .text{
+    font-size: 1.2rem;
+  }
 }

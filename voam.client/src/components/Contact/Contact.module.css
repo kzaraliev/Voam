@@ -1,102 +1,116 @@
 .contact {
-    height: fit-content;
-    max-width: 1400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #3b444b;
-    padding: 48px 0;
-    margin: 0 auto;
+  height: fit-content;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3b444b;
+  padding: 48px 0;
+  margin: 0 auto;
 }
 
 .title {
-    font-size: 5.5rem;
-    color: #ffffec;
+  font-size: 5.5rem;
+  color: #ffffec;
 }
 
 .subtitle {
-    font-size: 1.5rem;
-    color: #aaabaa;
-    width: 80%;
-    text-align: center;
-    margin: 24px 0;
+  font-size: 1.5rem;
+  color: #aaabaa;
+  width: 80%;
+  text-align: center;
+  margin: 24px 0;
 }
 
 .contacts {
-    list-style-type: none;
-    padding: 52px 0;
-    display: flex;
-    justify-content: space-between;
-    width: 60%;
+  list-style-type: none;
+  padding: 52px 0;
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
 }
 
 .contactElement {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon {
-    font-size: 125px;
-    padding: 25%;
-    background-color: #949494;
-    color: black;
-    border-radius: 100%;
-    transition: 0.3s;
-    opacity: 0.7;
+  font-size: 125px;
+  padding: 25%;
+  background-color: #949494;
+  color: black;
+  border-radius: 100%;
+  transition: 0.3s;
+  opacity: 0.7;
 }
 
 .icon:hover {
-    opacity: 1;
-    cursor: pointer;
+  opacity: 1;
+  cursor: pointer;
 }
 
 .contactTitle {
-    text-align: center;
-    margin: 18px 0;
-    color: #dbdbdb;
+  text-align: center;
+  margin: 18px 0;
+  color: #dbdbdb;
 }
 
 .accordion {
-    width: 65%;
+  width: 65%;
 }
 
 .accordionTitle {
-    font-size: 3rem;
-    text-align: center;
-    padding: 18px;
-    color: #ffffec;
+  font-size: 3rem;
+  text-align: center;
+  padding: 18px;
+  color: #ffffec;
 }
 
-@media screen and (max-width: 720px){
-    .title {
-        font-size: 2.5rem;
-    }
+@media screen and (max-width: 720px) {
+  .title {
+    font-size: 2.5rem;
+  }
 
-    .subtitle {
-        font-size: 1rem;
-    }
+  .subtitle {
+    font-size: 1rem;
+  }
 
-    .contacts{
-        width: 75%
-    }
+  .contacts {
+    width: 75%;
+  }
 
-    .icon {
-        font-size: 55px;
-        padding: 25%;
-    }
+  .icon {
+    font-size: 55px;
+    padding: 25%;
+  }
 
-    .contactTitle{
-        font-size: 1rem;
-    }
+  .contactTitle {
+    font-size: 1rem;
+  }
 
-    .accordionTitle {
-        font-size: 1.4rem;
-    }
+  .accordionTitle {
+    font-size: 1.4rem;
+  }
 
-    .accordion {
-        width: 80%;
-    }
+  .accordion {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .accordionTitle{
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+  }
 }
