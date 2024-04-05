@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using Voam.Core.Contracts;
 using Voam.Core.Models.ShoppingCart;
 using Voam.Core.Services;
@@ -34,7 +36,7 @@ namespace Voam.Server.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(JsonSerializer.Serialize("Success"));
         }
 
         [HttpPut("ChangeCartItemQuantity")]

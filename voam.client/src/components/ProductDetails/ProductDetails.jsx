@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo, useContext } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import useForm from "../../hooks/useForm";
+import Swal from "sweetalert2";
 
 import Figure from "react-bootstrap/Figure";
 import Carousel from "react-bootstrap/Carousel";
@@ -100,12 +101,22 @@ export default function ProductDetails() {
       quantity: values.amount,
     };
 
-    shoppingCartService.addToShoppingCart(data).catch((err) => {
-      console.log(err);
-      if (err.status === 400) {
-        setErrors(errorMessages.notEnoughQuantity);
-      }
-    });
+    shoppingCartService
+      .addToShoppingCart(data)
+      .then((res) => {
+        Swal.fire({
+          timer: 3000,
+          title: "Added to Cart!",
+          text: "Your item has been successfully added to the shopping cart. Ready to check out or keep shopping?",
+          icon: "success",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.status === 400) {
+          setErrors(errorMessages.notEnoughQuantity);
+        }
+      });
   };
 
   const deleteButtonClickHandler = async () => {
@@ -177,7 +188,7 @@ export default function ProductDetails() {
                     product.sizes
                       .filter((s) => s.quantity > 0)
                       .sort((a, b) => {
-                        const order = { 'S': 1, 'M': 2, 'L': 3 };
+                        const order = { S: 1, M: 2, L: 3 };
                         return order[a.sizeChar] - order[b.sizeChar];
                       })
                       .map((size) => {
