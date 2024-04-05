@@ -139,7 +139,8 @@ namespace Voam.Core.Services
                             Quantity = p.Quantity,
                             SizeChar = p.SizeChar,
                         })
-                        .ToList()
+                        .ToList(),
+                    FullName = o.FullName,
                 })
                 .ToListAsync();
         }
@@ -163,7 +164,8 @@ namespace Voam.Core.Services
                             Quantity = p.Quantity,
                             SizeChar = p.SizeChar,
                         })
-                        .ToList()
+                        .ToList(),
+                    FullName = o.FullName,
                 })
                 .ToListAsync();
         }

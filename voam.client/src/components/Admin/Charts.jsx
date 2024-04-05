@@ -16,6 +16,7 @@ Chart.register(
   Legend
 );
 import { Bar, Pie } from "react-chartjs-2";
+import styles from "./Admin.module.css";
 
 const options = {
   scales: {
@@ -34,8 +35,6 @@ const options = {
 };
 
 export default function Charts({ orders }) {
-  console.log(orders);
-
   //Orders by month - Bar
   const ordersByMonth = orders.reduce((acc, order) => {
     const monthYear = new Date(
@@ -112,11 +111,23 @@ export default function Charts({ orders }) {
   };
 
   return (
-    <>
-      <Bar data={ordersByMonthData} options={options} />
-      <Bar data={ordersByWeekDayData} options={options} />
-      <Pie data={ratioProductsData} />
-    </>
+    <div className={styles.chartsSquare}>
+      <div className={styles.chart}>
+        <p className={styles.totalOrders}>Total orders</p>
+        <h4 className={styles.totalOrdersNumber}>{orders.length}</h4>
+      </div>
+      <Pie className={styles.chart} data={ratioProductsData} />
+      <Bar
+        className={styles.chart}
+        data={ordersByMonthData}
+        options={options}
+      />
+      <Bar
+        className={styles.chart}
+        data={ordersByWeekDayData}
+        options={options}
+      />
+    </div>
   );
 }
 

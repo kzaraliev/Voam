@@ -1,6 +1,5 @@
 JWT Refresh tokens (low)
 User profile page - add style (medium)
-Admin page (profile page for admin user) - all orders, pending orders, create product, charts (high)
 Add documentation for the whole project (medium)
 Unit Tests (high)
 Search functionality (low)
