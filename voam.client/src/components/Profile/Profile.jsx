@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { FaUser, FaPhoneAlt } from "react-icons/fa";
+import { GiDesert } from "react-icons/gi";
+import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaClipboardUser } from "react-icons/fa6";
 
@@ -20,6 +20,7 @@ import * as authService from "../../services/authService";
 import * as orderService from "../../services/orderService";
 import AuthContext from "../../context/authContext";
 import styles from "./Profile.module.css";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { email, username, userId } = useContext(AuthContext);
@@ -92,20 +93,41 @@ export default function Profile() {
       </section>
       <section>
         <h2 className={styles.sectionTitle}>Order history:</h2>
-        <ul className={styles.ordersList}>
-          {orders.map((order) => (
-            <OrderDetails
-              key={order.id}
-              id={order.id}
-              date={order.orderDate}
-              city={order.city}
-              address={order.econtAddress}
-              payment={order.paymentMethod}
-              total={order.totalPrice}
-              items={order.products}
-            />
-          ))}
-        </ul>
+        {orders.length > 0 ? (
+          <ul className={styles.ordersList}>
+            {orders.map((order) => (
+              <OrderDetails
+                key={order.id}
+                id={order.id}
+                date={order.orderDate}
+                city={order.city}
+                address={order.econtAddress}
+                payment={order.paymentMethod}
+                total={order.totalPrice}
+                items={order.products}
+              />
+            ))}
+          </ul>
+        ) : (
+          <div className={styles.noOrders}>
+            <GiDesert className={styles.desertIcon} />
+            <p>
+              It looks like your order history is as untouched as a desert
+              landscape. But don't worry, this just means you're moments away
+              from discovering something wonderful. Our shop is brimming with
+              unique finds and must-have items waiting to be explored. Why not
+              take this opportunity to treat yourself or find the perfect gift
+              for a friend?
+            </p>
+            <p>
+              Dive into our collection and find your oasis today. With special
+              offers just a few clicks away, you're bound to find something that
+              quenches your thirst for the extraordinary. Let's turn this barren
+              desert into a fertile ground of delightful discoveries!
+            </p>
+            <Link to={Path.Items}>Go ahead & explore.</Link>
+          </div>
+        )}
       </section>
     </div>
   );
