@@ -26,7 +26,6 @@ namespace Voam.Core.Services
             sizeService = _sizeService;
             imageService = _imageService;
             context = _context;
-
         }
 
         public async Task<IEnumerable<DisplayProductModel>> GetAllProductsAsync()
@@ -260,7 +259,6 @@ namespace Voam.Core.Services
             {
                 throw new InvalidOperationException($"An error occurred while updating the product with ID {id}.", ex);
             }
-
         }
     }
 }

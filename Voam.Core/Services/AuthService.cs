@@ -6,7 +6,6 @@ using System.Security.Claims;
 using System.Text;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Identity;
-using Voam.Core.Models.Order;
 using Voam.Infrastructure.Data.Models;
 
 namespace Voam.Core.Services

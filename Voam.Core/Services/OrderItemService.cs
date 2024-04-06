@@ -33,7 +33,6 @@ namespace Voam.Core.Services
                 items.Add(orderItem);
             }
 
-
             await repository.AddRangeAsync(items);
             await repository.SaveChangesAsync();
 

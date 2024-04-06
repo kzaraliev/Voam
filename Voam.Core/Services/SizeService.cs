@@ -66,8 +66,6 @@ namespace Voam.Core.Services
                 var newSize = new Size { SizeChar = sizeChar, Quantity = quantity, ProductId = productId };
                 await repository.AddAsync(newSize);
             }
-            // Optionally, handle case where size exists but new quantity is 0
-            // This depends on whether you want to keep sizes with 0 quantity or not
         }
     }
 }

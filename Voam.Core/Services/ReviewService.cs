@@ -17,6 +17,11 @@ namespace Voam.Core.Services
 
         public async Task<bool> AddRatingAsync(int productId, string userId, double rating)
         {
+            if (rating < 1 || rating > 5)
+            {
+                throw new ArgumentOutOfRangeException(nameof(rating), "Rating must be between 1 and 5.");
+            }
+
             var review = await repository.All<Review>()
                             .Where(r => r.ProductId == productId && r.CustomerId == userId)
                             .FirstOrDefaultAsync();

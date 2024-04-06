@@ -36,8 +36,11 @@ namespace Voam.Core.Services
                 .Where(ci => ci.ShoppingCartId == shoopingCartId)
                 .ToListAsync();
 
-            repository.RemoveRange(cartItemsToRemove);
-            await repository.SaveChangesAsync();
+            if (cartItemsToRemove.Any())
+            {
+                repository.RemoveRange(cartItemsToRemove);
+                await repository.SaveChangesAsync();
+            }
         }
     }
 }

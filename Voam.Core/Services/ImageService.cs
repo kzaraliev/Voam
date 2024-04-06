@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Voam.Core.Contracts;
-using Voam.Infrastructure.Data;
 using Voam.Infrastructure.Data.Models;
 using Voam.Infrastucture.Data.Common;
 

@@ -62,11 +62,6 @@ namespace Voam.Core.Services
             {
                 var existingCartItem = shoppingCart.CartItems.Where(ci => ci.ProductId == productId).FirstOrDefault();
 
-                if (existingCartItem == null)
-                {
-                    return false;
-                }
-
                 if (size.Quantity < quantity + existingCartItem.Quantity)
                 {
                     return false;

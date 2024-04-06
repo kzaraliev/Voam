@@ -30,7 +30,7 @@ namespace Voam.Infrastructure.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Review> ProductReviews { get; set; }
+        public DbSet<Review> Reviews { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Order> Orders { get; set; }

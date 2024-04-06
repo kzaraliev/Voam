@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voam.Server", "Voam.Server\
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "voam.client", "voam.client\voam.client.esproj", "{80D91031-1DAD-448E-9CDD-E346B2B4EF7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voam.Infrastructure", "Voam.Infrastructure\Voam.Infrastructure.csproj", "{BCADEB57-6D31-43FC-87DE-1CD6EF05E033}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voam.Infrastructure", "Voam.Infrastructure\Voam.Infrastructure.csproj", "{BCADEB57-6D31-43FC-87DE-1CD6EF05E033}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voam.Core", "Voam.Core\Voam.Core.csproj", "{F91B3883-3633-4B72-8D02-D6CEF2EC0014}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Voam.Core", "Voam.Core\Voam.Core.csproj", "{F91B3883-3633-4B72-8D02-D6CEF2EC0014}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voam.Tests", "Voam.Tests\Voam.Tests.csproj", "{FA8EAF9F-FD90-4BBF-A3FC-74966E5D702C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{F91B3883-3633-4B72-8D02-D6CEF2EC0014}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F91B3883-3633-4B72-8D02-D6CEF2EC0014}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F91B3883-3633-4B72-8D02-D6CEF2EC0014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA8EAF9F-FD90-4BBF-A3FC-74966E5D702C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8EAF9F-FD90-4BBF-A3FC-74966E5D702C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8EAF9F-FD90-4BBF-A3FC-74966E5D702C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA8EAF9F-FD90-4BBF-A3FC-74966E5D702C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
