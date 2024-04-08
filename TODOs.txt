@@ -1,4 +1,3 @@
 JWT Refresh tokens (low)
-User profile page - add REAL pagination for orders (medium)
 Add documentation for the whole project (medium)
 Search functionality (low)

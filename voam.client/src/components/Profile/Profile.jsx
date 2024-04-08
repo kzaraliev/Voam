@@ -29,7 +29,7 @@ export default function Profile() {
   const [sortText, setSortText] = useState("");
   const [user, setUser] = useState({});
   const [orders, setOrders] = useState([]);
-  const [pageSize, setPageSize] = useState(2);
+  const [pageSize, setPageSize] = useState(3);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPageNumber, setTotalPageNumber] = useState(1);
 
