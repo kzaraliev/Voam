@@ -1,3 +1,5 @@
 JWT Refresh tokens (low)
-Add documentation for the whole project (medium)
+Documentation(medium):
+	User Setup
+	Environment and Database Setup
 Search functionality (low)
