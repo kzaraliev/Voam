@@ -150,7 +150,7 @@ namespace Voam.Tests
                             .ReturnsAsync((ApplicationUser)null); // Mock user not found
 
             // Act & Assert
-            Assert.ThrowsAsync<Exception>(() => _orderService.GetAllOrdersForUserAsync(userId));
+            Assert.ThrowsAsync<Exception>(() => _orderService.GetAllOrdersForUserAsync(userId, 5, 1));
         }
 
         [Test]
@@ -207,11 +207,11 @@ namespace Voam.Tests
             _repositoryMock.Setup(r => r.AllReadOnly<Order>()).Returns(query.Object);
 
             // Act
-            var result = await _orderService.GetAllOrdersForUserAsync(userId);
+            var result = await _orderService.GetAllOrdersForUserAsync(userId, 6, 1);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.Count());
+            Assert.That(result.Items.Count(), Is.EqualTo(2));
         }
 
         [Test]

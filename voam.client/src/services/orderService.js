@@ -8,12 +8,12 @@ export const add = async (id, data) => {
     return result;
 };
 
-export const get = async (userId) => {
-    const result = await request.get(`${baseUrl}/GetAllOrdersForUser?id=${userId}`);
+export const get = async (userId, pageSize, pageNumber) => {
+    const result = await request.get(`${baseUrl}/GetAllOrdersForUser?id=${userId}&pageSize=${pageSize}&pageNumber=${pageNumber}`);
     return result;
 }
 
-export const getAll = async () => {
+export const getAll = async (pageSize, pageNumber) => {
     const result = await request.get(`${baseUrl}/GetAllOrders`);
     return result;
 }

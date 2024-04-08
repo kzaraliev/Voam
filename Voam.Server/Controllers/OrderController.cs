@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 using Voam.Core.Contracts;
@@ -27,9 +26,9 @@ namespace Voam.Server.Controllers
         }
 
         [HttpGet("GetAllOrdersForUser")]
-        public async Task<IActionResult> GetAllOrdersForUser(string id)
+        public async Task<IActionResult> GetAllOrdersForUser(string id, int pageSize, int pageNumber)
         {
-            var result = await orderService.GetAllOrdersForUserAsync(id);
+            var result = await orderService.GetAllOrdersForUserAsync(id, pageSize, pageNumber);
             return Ok(result);
         }
 

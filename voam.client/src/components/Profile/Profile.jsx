@@ -13,6 +13,8 @@ import {
 
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
+import Pagination from "react-bootstrap/Pagination";
+import Dropdown from "react-bootstrap/Dropdown";
 
 import OrderDetails from "./OrderDetails";
 import Path from "../../utils/paths";
@@ -24,8 +26,12 @@ import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { email, username, userId } = useContext(AuthContext);
+  const [sortText, setSortText] = useState("");
   const [user, setUser] = useState({});
   const [orders, setOrders] = useState([]);
+  const [pageSize, setPageSize] = useState(2);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPageNumber, setTotalPageNumber] = useState(1);
 
   // List of icons
   const icons = [
@@ -58,10 +64,31 @@ export default function Profile() {
       .catch((err) => console.log(err));
 
     orderService
-      .get(userId)
-      .then(setOrders)
+      .get(userId, pageSize, pageNumber)
+      .then((res) => {
+        const { items, currentPage, totalPages, pageSize } = res;
+        setTotalPageNumber(totalPages);
+        setPageNumber(currentPage);
+        setPageSize(pageSize)
+
+        console.log(totalPageNumber);
+        console.log(pageNumber);
+        setOrders(items); // Set items separately
+      })
       .catch((err) => console.log(err));
-  }, [userId]);
+  }, [userId, pageNumber, pageSize]);
+
+  const handlePageSizeChange = (newSize) => {
+    if (newSize !== pageSize) {
+      setPageSize(newSize);
+      setPageNumber(1); // Reset to page 1 if page size changes
+      setSortText(newSize)
+    }
+  };
+
+  const handlePageNumberChange = (newPageNumber) => {
+    setPageNumber(newPageNumber);
+  };
 
   return (
     <div className={styles.container}>
@@ -94,20 +121,72 @@ export default function Profile() {
       <section>
         <h2 className={styles.sectionTitle}>Order history:</h2>
         {orders.length > 0 ? (
-          <ul className={styles.ordersList}>
-            {orders.map((order) => (
-              <OrderDetails
-                key={order.id}
-                id={order.id}
-                date={order.orderDate}
-                city={order.city}
-                address={order.econtAddress}
-                payment={order.paymentMethod}
-                total={order.totalPrice}
-                items={order.products}
+          <div className={styles.availableOrders}>
+            <Dropdown
+              className={styles.dropdown}
+              onSelect={handlePageSizeChange}
+              bg="dark"
+              data-bs-theme="dark"
+            >
+              <Dropdown.Toggle className={styles.dropdownButton}>
+                {sortText !== "" ? `Show by: ${sortText}` : "Show by"}
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item eventKey="3">3</Dropdown.Item>
+                <Dropdown.Item eventKey="5">5</Dropdown.Item>
+                <Dropdown.Item eventKey="8">8</Dropdown.Item>
+                <Dropdown.Item eventKey="10">10</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <ul className={styles.ordersList}>
+              {orders.map((order) => (
+                <OrderDetails
+                  key={order.id}
+                  id={order.id}
+                  date={order.orderDate}
+                  city={order.city}
+                  address={order.econtAddress}
+                  payment={order.paymentMethod}
+                  total={order.totalPrice}
+                  items={order.products}
+                />
+              ))}
+            </ul>
+            <Pagination bg="dark" data-bs-theme="dark">
+              <Pagination.First
+                onClick={() => handlePageNumberChange(1)}
+                disabled={pageNumber === 1}
               />
-            ))}
-          </ul>
+              <Pagination.Prev
+                onClick={() => handlePageNumberChange(pageNumber - 1)}
+                disabled={pageNumber === 1}
+              />
+              {pageNumber !== 1 && (
+                <Pagination.Item
+                  onClick={() => handlePageNumberChange(pageNumber - 1)}
+                >
+                  {pageNumber - 1}
+                </Pagination.Item>
+              )}
+              <Pagination.Item active>{pageNumber}</Pagination.Item>
+              {pageNumber !== totalPageNumber && (
+                <Pagination.Item
+                  onClick={() => handlePageNumberChange(pageNumber + 1)}
+                >
+                  {pageNumber + 1}
+                </Pagination.Item>
+              )}
+              <Pagination.Next
+                onClick={() => handlePageNumberChange(pageNumber + 1)}
+                disabled={pageNumber === totalPageNumber}
+              />
+              <Pagination.Last
+                onClick={() => handlePageNumberChange(totalPageNumber)}
+                disabled={pageNumber === totalPageNumber}
+              />
+            </Pagination>
+          </div>
         ) : (
           <div className={styles.noOrders}>
             <GiDesert className={styles.desertIcon} />

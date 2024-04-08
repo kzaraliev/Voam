@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing.Printing;
 using System.Text;
 using Voam.Core.Contracts;
+using Voam.Core.Helpers;
 using Voam.Core.Models.Order;
 using Voam.Infrastructure.Data.Models;
 using Voam.Infrastucture.Data.Common;
@@ -105,7 +106,7 @@ namespace Voam.Core.Services
             {
                 To = order.Email,
                 Subject = $"Order Confirmation from Voam - {order.Id}",
-                Body = $"<p><span style=\"font-size: 14pt;\">Dear {identityUser.FirstName} {identityUser.LastName},</span></p>\r\n<p><span style=\"font-size: 14pt;\">Thank you for choosing Voam! We are delighted to <strong>confirm your recent order</strong> with us. Below, you will find the <strong>details of your purchase</strong>:</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Order Number</strong>: {order.Id}</span></p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Order Date</strong>:<strong> </strong>{orderDate }</span></p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Shipping Address</strong> (Econt Office): {order.Econt}</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Order Summary</strong>:</span></p>\r\n<p><span style=\"font-size: 14pt;\">{sb.ToString().TrimEnd()}</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Total Price</strong>:<strong> </strong>{order.TotalPrice} lv.</span></p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Payment Method</strong>: {order.PaymentMethod}</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\">If you have any <strong>questions </strong>or need further assistance with your order, please do not hesitate to <strong>contact us</strong> - <a href=\"https://mail.google.com/mail/u/0/?fs=1&amp;tf=cm&amp;to=voaminfo@gmail.com\" target=\"_blank\" rel=\"noopener\">voaminfo@gmail.com</a>.</span></p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Thank you for choosing Voam</strong> for your fashion needs. We truly appreciate your support. We look forward to providing you with <strong>top-quality</strong> clothing that is as unique and stylish <strong>as you are</strong>!</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Best regards</strong>,</span></p>\r\n<p><span style=\"font-size: 14pt;\">Voam Clothing</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Where you can find us</strong>:</span></p>\r\n<p><span style=\"font-size: 14pt;\">Website: <a href=\"https://voamclothing.com/\">voamclothing.com</a></span></p>\r\n<p><span style=\"font-size: 14pt;\">Email: <a href=\"https://mail.google.com/mail/u/0/?fs=1&amp;tf=cm&amp;to=voaminfo@gmail.com\" target=\"_blank\" rel=\"noopener\">voaminfo@gmail.com</a></span></p>\r\n<p><span style=\"font-size: 14pt;\">Follow us on: <a href=\"https://www.tiktok.com/@voamclothing\">TikTok</a>, <a href=\"https://www.instagram.com/voamclothing_/\">Instagram</a></span></p>"
+                Body = $"<p><span style=\"font-size: 14pt;\">Dear {identityUser.FirstName} {identityUser.LastName},</span></p>\r\n<p><span style=\"font-size: 14pt;\">Thank you for choosing Voam! We are delighted to <strong>confirm your recent order</strong> with us. Below, you will find the <strong>details of your purchase</strong>:</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Order Number</strong>: {order.Id}</span></p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Order Date</strong>:<strong> </strong>{orderDate}</span></p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Shipping Address</strong> (Econt Office): {order.Econt}</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Order Summary</strong>:</span></p>\r\n<p><span style=\"font-size: 14pt;\">{sb.ToString().TrimEnd()}</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Total Price</strong>:<strong> </strong>{order.TotalPrice} lv.</span></p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Payment Method</strong>: {order.PaymentMethod}</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\">If you have any <strong>questions </strong>or need further assistance with your order, please do not hesitate to <strong>contact us</strong> - <a href=\"https://mail.google.com/mail/u/0/?fs=1&amp;tf=cm&amp;to=voaminfo@gmail.com\" target=\"_blank\" rel=\"noopener\">voaminfo@gmail.com</a>.</span></p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Thank you for choosing Voam</strong> for your fashion needs. We truly appreciate your support. We look forward to providing you with <strong>top-quality</strong> clothing that is as unique and stylish <strong>as you are</strong>!</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Best regards</strong>,</span></p>\r\n<p><span style=\"font-size: 14pt;\">Voam Clothing</span></p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"font-size: 14pt;\"><strong>Where you can find us</strong>:</span></p>\r\n<p><span style=\"font-size: 14pt;\">Website: <a href=\"https://voamclothing.com/\">voamclothing.com</a></span></p>\r\n<p><span style=\"font-size: 14pt;\">Email: <a href=\"https://mail.google.com/mail/u/0/?fs=1&amp;tf=cm&amp;to=voaminfo@gmail.com\" target=\"_blank\" rel=\"noopener\">voaminfo@gmail.com</a></span></p>\r\n<p><span style=\"font-size: 14pt;\">Follow us on: <a href=\"https://www.tiktok.com/@voamclothing\">TikTok</a>, <a href=\"https://www.instagram.com/voamclothing_/\">Instagram</a></span></p>"
             };
 
             emailService.SendEmail(customerEmail);
@@ -113,7 +114,7 @@ namespace Voam.Core.Services
             return "Success";
         }
 
-        public async Task<IEnumerable<OrderHistory>> GetAllOrdersForUserAsync(string userId)
+        public async Task<PaginatedList<OrderHistory>> GetAllOrdersForUserAsync(string userId, int pageSize, int pageNumber)
         {
             var user = await userManager.FindByIdAsync(userId);
             if (user == null)
@@ -121,7 +122,7 @@ namespace Voam.Core.Services
                 throw new Exception("No such user");
             }
 
-            return await repository.AllReadOnly<Order>()
+            var orders = repository.AllReadOnly<Order>()
                 .Where(o => o.CustomerId == userId)
                 .Select(o => new OrderHistory()
                 {
@@ -141,7 +142,10 @@ namespace Voam.Core.Services
                         })
                         .ToList(),
                 })
-                .ToListAsync();
+            .AsQueryable();
+
+            var paginatedList = await CollectionHelper<OrderHistory>.ToPaginatedList(orders, pageNumber, pageSize);
+            return paginatedList;
         }
 
         public async Task<IEnumerable<OrderHistory>> GetAllOrdersAsync()
