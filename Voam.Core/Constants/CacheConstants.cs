@@ -4,5 +4,7 @@
     {
         public const string ProductsCacheKey = "ProductsCacheKey";
         public const string RecentProductsCacheKey = "RecentProductsCacheKey";
+
+        public const string AllOrdersHistoryCache = "AllOrdersHistoryCache";
     }
 }

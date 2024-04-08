@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Order;
+using static Voam.Core.Constants.CacheConstants;
+
 
 namespace Voam.Server.Controllers
 {
@@ -12,10 +15,12 @@ namespace Voam.Server.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService orderService;
+        private readonly IMemoryCache memoryCache;
 
-        public OrderController(IOrderService _orderService)
+        public OrderController(IOrderService _orderService, IMemoryCache _memoryCache)
         {
             orderService = _orderService;
+            memoryCache = _memoryCache;
         }
 
         [HttpPost("PlaceOrder")]
@@ -36,8 +41,18 @@ namespace Voam.Server.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> GetAllOrders()
         {
-            var result = await orderService.GetAllOrdersAsync();
-            return Ok(result);
+            var orders = memoryCache.Get<IEnumerable<OrderHistory>>(AllOrdersHistoryCache);
+
+            if (orders == null || orders.Any() == false)
+            {
+                orders = await orderService.GetAllOrdersAsync();
+
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(3));
+
+                memoryCache.Set(AllOrdersHistoryCache, orders, cacheOptions);
+            }
+
+            return Ok(orders);
         }
     }
 }
