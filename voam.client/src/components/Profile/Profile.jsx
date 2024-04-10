@@ -23,15 +23,17 @@ import * as orderService from "../../services/orderService";
 import AuthContext from "../../context/authContext";
 import styles from "./Profile.module.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
-  const { email, username, userId } = useContext(AuthContext);
+  const { email, username, userId, logoutHandler } = useContext(AuthContext);
   const [sortText, setSortText] = useState("");
   const [user, setUser] = useState({});
   const [orders, setOrders] = useState([]);
   const [pageSize, setPageSize] = useState(3);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPageNumber, setTotalPageNumber] = useState(1);
+  const navigate = useNavigate();
 
   // List of icons
   const icons = [
@@ -61,7 +63,11 @@ export default function Profile() {
         });
         setCurrentIcon(getRandomIcon());
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        logoutHandler();
+        navigate(Path.Login);
+        alert("Ooops... Something went wrong. Try login again");
+      });
 
     orderService
       .get(userId, pageSize, pageNumber)
@@ -70,12 +76,13 @@ export default function Profile() {
         setTotalPageNumber(totalPages);
         setPageNumber(currentPage);
         setPageSize(pageSize)
-
-        console.log(totalPageNumber);
-        console.log(pageNumber);
         setOrders(items); // Set items separately
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        logoutHandler();
+        navigate(Path.Login);
+        alert("Ooops... Something went wrong. Try login again");
+      });
   }, [userId, pageNumber, pageSize]);
 
   const handlePageSizeChange = (newSize) => {

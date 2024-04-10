@@ -1,7 +1,5 @@
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 import styles from "./StepThree.module.css"
-import gif from "../../../assets/mouth_gif.gif";
-
 
 export default function StepThree() {
   return (
