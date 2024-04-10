@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Identity;
+using static Voam.Core.Constants.CacheConstants;
 
 namespace Voam.Server.Controllers
 {
@@ -12,10 +14,12 @@ namespace Voam.Server.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService authService;
+        private readonly IMemoryCache memoryCache;  
 
-        public AuthController(IAuthService _authService)
+        public AuthController(IAuthService _authService, IMemoryCache _memoryCache)
         {
             authService = _authService;
+            memoryCache = _memoryCache;
         }
 
         [AllowAnonymous]
@@ -84,9 +88,18 @@ namespace Voam.Server.Controllers
         [HttpGet("GetUserPhoneNumber")]
         public async Task<IActionResult> GetUserPhoneNumber(string id)
         {
-            var result = await authService.GetUserPhoneNumberAsync(id);
+            var phoneNumber = memoryCache.Get<string>(PhoneNumberCacheKey);
 
-            return Ok(JsonSerializer.Serialize(result));
+            if (phoneNumber == null || phoneNumber.Any() == false)
+            {
+                phoneNumber = await authService.GetUserPhoneNumberAsync(id);
+
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(60 ));
+
+                memoryCache.Set(PhoneNumberCacheKey, phoneNumber, cacheOptions);
+            }
+
+            return Ok(JsonSerializer.Serialize(phoneNumber));
         }
 
         [Authorize(Roles = "Administrator")]
