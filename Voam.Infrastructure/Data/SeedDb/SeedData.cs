@@ -55,6 +55,25 @@ namespace Voam.Infrastructure.Data.SeedDb
         public ShoppingCart ShoppingCartAdmin { get; set; } = null!;
         public ShoppingCart ShoppingCartCustomer { get; set; } = null!;
 
+        public OrderItem OrderItemDevotionTShirt { get; set; } = null!;
+        public OrderItem OrderItemDevotionBeanie1 { get; set; } = null!;
+        public OrderItem OrderItemDevotionBeanie2 { get; set; } = null!;
+        public OrderItem OrderItemMidnightGreenHoodie { get; set; } = null!;
+        public OrderItem OrderItemMidnightGreenPants { get; set; } = null!;
+        public OrderItem OrderItemBlackSheepHoodie1 { get; set; } = null!;
+        public OrderItem OrderItemBlackSheepHoodie2 { get; set; } = null!;
+        public OrderItem OrderItemVoamHoodie1 { get; set; } = null!;
+        public OrderItem OrderItemVoamHoodie2 { get; set; } = null!;
+
+
+        public Order OrderCustomerUser1 { get; set; } = null!;
+        public Order OrderCustomerUser2 { get; set; } = null!;
+        public Order OrderCustomerUser3 { get; set; } = null!;
+        public Order OrderCustomerUser4 { get; set; } = null!;
+        public Order OrderCustomerUser5 { get; set; } = null!;
+        public Order OrderCustomerUser6 { get; set; } = null!;
+        public Order OrderCustomerUser7 { get; set; } = null!;
+
         public SeedData()
         {
             SeedUsers();
@@ -62,6 +81,8 @@ namespace Voam.Infrastructure.Data.SeedDb
             SeedProducts();
             SeedImages();
             SeedSizes();
+            SeedOrderItems();
+            SeedOrders();
         }
 
         private void SeedUsers()
@@ -366,6 +387,200 @@ namespace Voam.Infrastructure.Data.SeedDb
             {
                 Id = 2,
                 CustomerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+            };
+        }
+
+        private void SeedOrderItems()
+        {
+            OrderItemDevotionTShirt = new OrderItem()
+            {
+                Id = 1,
+                Name = "“DEVOTION” T-SHIRT",
+                Quantity = 2,
+                SizeChar = 'S',
+                Price = 50M,
+                OrderId = 1,
+            };
+
+            OrderItemDevotionBeanie1 = new OrderItem()
+            {
+                Id = 2,
+                Name = "“DEVOTION” BEANIE",
+                Quantity = 1,
+                SizeChar = 'M',
+                Price = 25M,
+                OrderId = 1,
+            };
+
+            OrderItemDevotionBeanie2 = new OrderItem()
+            {
+                Id = 3,
+                Name = "“DEVOTION” BEANIE",
+                Quantity = 3,
+                SizeChar = 'M',
+                Price = 25M,
+                OrderId = 2,
+            };
+
+            OrderItemMidnightGreenHoodie = new OrderItem()
+            {
+                Id = 4,
+                Name = "MIDNIGHT GREEN HOODIE",
+                Quantity = 1,
+                SizeChar = 'L',
+                Price = 100M,
+                OrderId = 3,
+            };
+
+            OrderItemMidnightGreenPants = new OrderItem()
+            {
+                Id = 5,
+                Name = "MIDNIGHT GREEN PANTS",
+                Quantity = 1,
+                SizeChar = 'L',
+                Price = 100M,
+                OrderId = 3,
+            };
+
+            OrderItemBlackSheepHoodie1 = new OrderItem()
+            {
+                Id = 6,
+                Name = "“BLACK SHEEP” HOODIE",
+                Quantity = 2,
+                SizeChar = 'S',
+                Price = 80M,
+                OrderId = 4,
+            };
+
+            OrderItemBlackSheepHoodie2 = new OrderItem()
+            {
+                Id = 7,
+                Name = "“BLACK SHEEP” HOODIE",
+                Quantity = 1,
+                SizeChar = 'L',
+                Price = 80M,
+                OrderId = 5,
+            };
+
+            OrderItemVoamHoodie1 = new OrderItem()
+            {
+                Id = 8,
+                Name = "“VOAM*” EMBROIDERY HOODIE",
+                Quantity = 1,
+                SizeChar = 'L',
+                Price = 80M,
+                OrderId = 6,
+            };
+
+            OrderItemVoamHoodie2 = new OrderItem()
+            {
+                Id = 9,
+                Name = "“VOAM*” EMBROIDERY HOODIE",
+                Quantity = 1,
+                SizeChar = 'S',
+                Price = 80M,
+                OrderId = 7,
+            };
+        }
+
+        private void SeedOrders()
+        {
+            OrderCustomerUser1 = new Order()
+            {
+                Id = 1,
+                CustomerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                OrderDate = new DateTime(2024, 3, 8),
+                FullName = "Konstantin Zaraliev",
+                Email = "kosebose@mail.com",
+                PhoneNumber = "0876933660",
+                Econt = "булевард „Александър Стамболийски“ №215, 215 217, 1213 София",
+                PaymentMethod = "Upon delivery",
+                City = "София",
+                TotalPrice = 125M,
+            };
+
+            OrderCustomerUser2 = new Order()
+            {
+                Id = 2,
+                CustomerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                OrderDate = new DateTime(2024, 3, 10),
+                FullName = "Konstantin Zaraliev",
+                Email = "kosebose@mail.com",
+                PhoneNumber = "0876933660",
+                Econt = "ж.к. Сердика, ул. „Гюешево“ №83, 1000 София",
+                PaymentMethod = "Upon delivery",
+                City = "София",
+                TotalPrice = 75M,
+            };
+
+            OrderCustomerUser3 = new Order()
+            {
+                Id = 3,
+                CustomerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                OrderDate = new DateTime(2024, 3, 16),
+                FullName = "Konstantin Zaraliev",
+                Email = "kosebose@mail.com",
+                PhoneNumber = "0876933660",
+                Econt = "НПЗ Военна рампа, бул. „Илиянци“ №12, 1062 София",
+                PaymentMethod = "Upon delivery",
+                City = "София",
+                TotalPrice = 200M,
+            };
+
+            OrderCustomerUser4 = new Order()
+            {
+                Id = 4,
+                CustomerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                OrderDate = new DateTime(2024, 3, 16),
+                FullName = "Konstantin Zaraliev",
+                Email = "kosebose@mail.com",
+                PhoneNumber = "0876933660",
+                Econt = "Район, ул. „Беласица“ №49, 4000 Пловдив",
+                PaymentMethod = "Upon delivery",
+                City = "Пловдив",
+                TotalPrice = 160M,
+            };
+
+            OrderCustomerUser5 = new Order()
+            {
+                Id = 5,
+                CustomerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                OrderDate = new DateTime(2024, 3, 24),
+                FullName = "Konstantin Zaraliev",
+                Email = "kosebose@mail.com",
+                PhoneNumber = "0876933660",
+                Econt = "Район Южен, ул, Бл. „Кукленско шосе“ №11, 4004 Пловдив",
+                PaymentMethod = "Upon delivery",
+                City = "Пловдив",
+                TotalPrice = 80M,
+            };
+
+            OrderCustomerUser6 = new Order()
+            {
+                Id = 6,
+                CustomerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                OrderDate = new DateTime(2024, 4, 2),
+                FullName = "Konstantin Zaraliev",
+                Email = "kosebose@mail.com",
+                PhoneNumber = "0876933660",
+                Econt = "Район Западен, ул. „Мизия“ №28, 5002 Велико Търново",
+                PaymentMethod = "Upon delivery",
+                City = "Велико Търново",
+                TotalPrice = 80M,
+            };
+
+            OrderCustomerUser7 = new Order()
+            {
+                Id = 7,
+                CustomerId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                OrderDate = new DateTime(2024, 4, 6),
+                FullName = "Konstantin Zaraliev",
+                Email = "kosebose@mail.com",
+                PhoneNumber = "0876933660",
+                Econt = "ж.к. Зона Б, ул. „Стоян Коледаров“ №44, 5000 Велико Търново",
+                PaymentMethod = "Upon delivery",
+                City = "Велико Търново",
+                TotalPrice = 80M,
             };
         }
 
