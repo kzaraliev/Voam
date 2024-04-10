@@ -142,7 +142,7 @@ namespace Voam.Core.Services
         {
             try
             {
-                return await repository.AllReadOnly<ShoppingCart>()
+                var shoppingCart = await repository.AllReadOnly<ShoppingCart>()
                 .Where(sc => sc.CustomerId == userId)
                 .Select(sc => new DisplayShoppingCartModel()
                 {
@@ -158,6 +158,35 @@ namespace Voam.Core.Services
                     TotalPrice = sc.CartItems.Sum(sc => sc.Product.Price * sc.Quantity)
                 })
                 .FirstOrDefaultAsync();
+
+                if(shoppingCart == null)
+                {
+                    throw new InvalidOperationException("A problem occurred while fetching details for shopping cart");
+                }
+
+                var itemsToRemove = new List<CartItemsModel>();
+
+                foreach (var item in shoppingCart.CartItems)
+                {
+                    var sizeForProductInDatabase = await sizeService.GetSizeByIdAsync(item.SizeId);
+                    if (sizeForProductInDatabase == null)
+                    {
+                        throw new ArgumentNullException("No such size");
+                    }
+
+                    if (sizeForProductInDatabase.Quantity == 0 || sizeForProductInDatabase.Quantity < item.Quantity)
+                    {
+                        await DeleteCartItemAsyncByIdAsync(item.Id);
+                        itemsToRemove.Add(item);
+                    }
+                }
+
+                foreach (var item in itemsToRemove)
+                {
+                    shoppingCart.CartItems.Remove(item);
+                }
+
+                return shoppingCart;
             }
             catch (Exception ex)
             {
