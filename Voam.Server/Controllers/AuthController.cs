@@ -24,12 +24,12 @@ namespace Voam.Server.Controllers
 
         [AllowAnonymous]
         [HttpPost("Register")]
-        public async Task<IActionResult> RegisterUser(LoginUser user)
+        public async Task<IActionResult> RegisterUser(RegisterUser user)
         {
             var result = await authService.RegisterUser(user);
             if (result.Succeeded)
             {
-                return await Login(user);
+                return await Login(new LoginUser() { Email = user.Email, Password = user.Password});
             }
 
             if (result.Errors.Any(error => error.Code == "DuplicateEmail"))
@@ -57,24 +57,39 @@ namespace Voam.Server.Controllers
 
             var result = await authService.Login(user);
 
-            if (result == true)
+            if (result.IsSuccessful == true)
             {
-                var tokenString = await authService.GenerateTokenString(user);
-
+                var tokenString = await authService.GenerateTokenString(user.Email);
+                
                 var userDetails = await authService.GetUserPublicData(user.Email);
 
                 AuthenticationDetails response = new AuthenticationDetails()
                 {
                     AccessToken = tokenString,
+                    RefreshToken = result.RefreshToken,
                     Email = userDetails.Email,
                     Username = userDetails.Usernam,
                     UserId = userDetails.Id,
                     Roles = userDetails.Roles,
                 };
+
                 return Ok(response);
             }
 
             return Unauthorized(new { message = "Incorrect email or password" });
+        }
+
+        [AllowAnonymous]
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> RefreshToken(RefreshTokenModel model)
+        {
+            var loginResult = await authService.RefreshToken(model);
+            if (loginResult.IsLogedIn)
+            {
+                return Ok(loginResult);
+            }
+
+            return Unauthorized();
         }
 
         [HttpGet("GetUserInformation")]
@@ -94,7 +109,7 @@ namespace Voam.Server.Controllers
             {
                 phoneNumber = await authService.GetUserPhoneNumberAsync(id);
 
-                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(60 ));
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30));
 
                 memoryCache.Set(PhoneNumberCacheKey, phoneNumber, cacheOptions);
             }

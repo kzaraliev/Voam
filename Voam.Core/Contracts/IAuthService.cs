@@ -6,9 +6,10 @@ namespace Voam.Core.Contracts
     public interface IAuthService
     {
         Task<UserPublicModel> GetUserPublicData(string email);
-        Task<string> GenerateTokenString(LoginUser user);
-        Task<bool> Login(LoginUser user);
-        Task<IdentityResult> RegisterUser(LoginUser user);
+        Task<string> GenerateTokenString(string email);
+        Task<LoginResponse> RefreshToken(RefreshTokenModel model);
+        Task<LoginTransfer> Login(LoginUser user);
+        Task<IdentityResult> RegisterUser(RegisterUser user);
         Task<OrderInformationModel> GetUserInformation(string id);
         Task<bool> AddRole(string roleName);
         Task<bool> AddUserToRole(string userId, string roleName);

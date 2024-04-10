@@ -13,5 +13,8 @@ namespace Voam.Infrastructure.Data.Models
         [Required]
         [MaxLength(ApplicationUserConstants.FullNameMax)]
         public required string LastName { get; set; }
+
+        public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiry { get; set; }
     }
 }

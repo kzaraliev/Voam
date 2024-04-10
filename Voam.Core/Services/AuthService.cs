@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using Voam.Core.Contracts;
 using Voam.Core.Models.Identity;
@@ -34,7 +35,7 @@ namespace Voam.Core.Services
                 throw new Exception("No such user");
             }
 
-            var userRoles =  await userManager.GetRolesAsync(identityUser);
+            var userRoles = await userManager.GetRolesAsync(identityUser);
 
             var user = new UserPublicModel()
             {
@@ -47,16 +48,17 @@ namespace Voam.Core.Services
             return user;
         }
 
-        public async Task<string> GenerateTokenString(LoginUser user)
+        public async Task<string> GenerateTokenString(string email)
         {
-            var identityUser = await userManager.FindByEmailAsync(user.Email);
+            var identityUser = await userManager.FindByEmailAsync(email);
             if (identityUser == null) throw new Exception("User not found");
 
             var userRoles = await userManager.GetRolesAsync(identityUser);
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email,user.Email),
+                new Claim(ClaimTypes.Email,email),
+                new Claim(ClaimTypes.Name,email),
             };
 
             foreach (var role in userRoles)
@@ -79,20 +81,36 @@ namespace Voam.Core.Services
             return tokenString;
         }
 
-        public async Task<bool> Login(LoginUser user)
+        public async Task<LoginTransfer> Login(LoginUser user)
         {
+            bool result = true;
+            string refreshToken = string.Empty;
+
             var identityUser = await userManager.FindByEmailAsync(user.Email);
             if (identityUser is null)
             {
-                return false;
+                result = false;
             }
 
-            return await userManager.CheckPasswordAsync(identityUser, user.Password);
+            if (result)
+            {
+                result = await userManager.CheckPasswordAsync(identityUser, user.Password);
+                refreshToken = GenerateRefreshTokenString();
+                identityUser.RefreshToken = refreshToken;
+                identityUser.RefreshTokenExpiry = DateTime.Now.AddHours(12);
+                await userManager.UpdateAsync(identityUser);
+            }
+
+            return new LoginTransfer()
+            {
+                RefreshToken = refreshToken,
+                IsSuccessful = result,
+            };
         }
 
-        public async Task<IdentityResult> RegisterUser(LoginUser user)
+        public async Task<IdentityResult> RegisterUser(RegisterUser user)
         {
-            var identityUser = new ApplicationUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.PhoneNumber, FirstName = user.FirstName.Trim(), LastName = user.LastName.Trim()};
+            var identityUser = new ApplicationUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.PhoneNumber, FirstName = user.FirstName.Trim(), LastName = user.LastName.Trim() };
 
             var result = await userManager.CreateAsync(identityUser, user.Password);
 
@@ -182,6 +200,60 @@ namespace Voam.Core.Services
             }
 
             return user.PhoneNumber ?? "No phone number provided";
+        }
+
+        private string GenerateRefreshTokenString()
+        {
+            var randomNumber = new byte[64];
+
+            using (var numberGenerator = RandomNumberGenerator.Create())
+            {
+                numberGenerator.GetBytes(randomNumber);
+            }
+
+            return Convert.ToBase64String(randomNumber);
+        }
+
+        public async Task<LoginResponse> RefreshToken(RefreshTokenModel model)
+        {
+            var principal = GetTokenPrincipal(model.JwtToken);
+
+            var response = new LoginResponse();
+            if (principal?.Identity?.Name is null)
+            {
+                return response;
+            }
+
+            var identityUser = await userManager.FindByNameAsync(principal.Identity.Name);
+            if (identityUser is null || identityUser.RefreshToken != model.RefreshToken || identityUser.RefreshTokenExpiry < DateTime.Now)
+                return response;
+
+            response.IsLogedIn = true;
+            response.JwtToken = await GenerateTokenString(identityUser.Email);
+            response.RefreshToken = GenerateRefreshTokenString();
+
+            identityUser.RefreshToken = response.RefreshToken;
+            identityUser.RefreshTokenExpiry = DateTime.Now.AddHours(12);
+            await userManager.UpdateAsync(identityUser);
+
+            return response;
+        }
+
+        private ClaimsPrincipal? GetTokenPrincipal(string token)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key")
+                .Value ?? throw new ArgumentException("JWT Key is not configured properly.")));
+
+            var validation = new TokenValidationParameters
+            {
+                IssuerSigningKey = securityKey,
+                ValidateLifetime = false,
+                ValidateActor = false,
+                ValidateIssuer = false,
+                ValidateAudience = false,
+            };
+
+            return new JwtSecurityTokenHandler().ValidateToken(token, validation, out _);
         }
     }
 }

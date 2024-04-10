@@ -79,7 +79,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     ValidateAudience = true,
                     RequireExpirationTime = true,
                     ValidateIssuerSigningKey = true,
-
+                    ClockSkew = TimeSpan.Zero,
                     ValidIssuer = config.GetSection("Jwt:Issuer").Value,
                     ValidAudience = config.GetSection("Jwt:Audience").Value,
 
