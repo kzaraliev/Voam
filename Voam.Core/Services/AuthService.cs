@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Azure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -66,15 +67,15 @@ namespace Voam.Core.Services
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key").Value ?? throw new ArgumentException("JWT Key is not configured properly.")));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GetConfigurationValue("Jwt:Key")));
 
             var signingCred = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512Signature);
 
             var securityToken = new JwtSecurityToken(
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(60),
-                issuer: config.GetSection("Jwt:Issuer").Value,
-                audience: config.GetSection("Jwt:Audience").Value,
+                issuer: GetConfigurationValue("Jwt:Issuer"),
+                audience: GetConfigurationValue("Jwt:Audience"),
                 signingCredentials: signingCred);
 
             string tokenString = new JwtSecurityTokenHandler().WriteToken(securityToken);
@@ -96,9 +97,8 @@ namespace Voam.Core.Services
             {
                 result = await userManager.CheckPasswordAsync(identityUser, user.Password);
                 refreshToken = GenerateRefreshTokenString();
-                identityUser.RefreshToken = refreshToken;
-                identityUser.RefreshTokenExpiry = DateTime.Now.AddHours(12);
-                await userManager.UpdateAsync(identityUser);
+
+                await UpdateUserRefreshTokenAsync(identityUser, refreshToken, 12);
             }
 
             return new LoginTransfer()
@@ -232,17 +232,14 @@ namespace Voam.Core.Services
             response.JwtToken = await GenerateTokenString(identityUser.Email);
             response.RefreshToken = GenerateRefreshTokenString();
 
-            identityUser.RefreshToken = response.RefreshToken;
-            identityUser.RefreshTokenExpiry = DateTime.Now.AddHours(12);
-            await userManager.UpdateAsync(identityUser);
+            await UpdateUserRefreshTokenAsync(identityUser, response.RefreshToken, 12);
 
             return response;
         }
 
         private ClaimsPrincipal? GetTokenPrincipal(string token)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("Jwt:Key")
-                .Value ?? throw new ArgumentException("JWT Key is not configured properly.")));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GetConfigurationValue("Jwt:Key")));
 
             var validation = new TokenValidationParameters
             {
@@ -254,6 +251,18 @@ namespace Voam.Core.Services
             };
 
             return new JwtSecurityTokenHandler().ValidateToken(token, validation, out _);
+        }
+
+        private string GetConfigurationValue(string key)
+        {
+            return config.GetSection(key).Value ?? throw new ArgumentException($"Configuration for {key} is not set properly.");
+        }
+
+        private async Task UpdateUserRefreshTokenAsync(ApplicationUser user, string refreshToken, int hoursToAdd)
+        {
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiry = DateTime.Now.AddHours(hoursToAdd);
+            await userManager.UpdateAsync(user);
         }
     }
 }
