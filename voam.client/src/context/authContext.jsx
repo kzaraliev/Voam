@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
     setAuth(result);
 
     localStorage.setItem("accessToken", result.accessToken);
+    localStorage.setItem("refreshToken", result.refreshToken);
 
     navigate(Path.Home);
   };
@@ -33,6 +34,7 @@ export const AuthProvider = ({ children }) => {
     setAuth(result);
 
     localStorage.setItem("accessToken", result.accessToken);
+    localStorage.setItem("refreshToken", result.refreshToken);
 
     navigate(Path.Home);
   };
@@ -40,6 +42,7 @@ export const AuthProvider = ({ children }) => {
   const logoutHandler = () => {
     setAuth({});
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   };
 
   const values = {
