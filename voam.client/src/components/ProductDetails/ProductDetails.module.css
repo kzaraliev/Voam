@@ -19,6 +19,7 @@
   max-height: 800px;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .productDetails {
