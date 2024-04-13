@@ -185,10 +185,12 @@ export default function ProductDetails() {
               <b>Description</b>: {product.description}
             </p>
             <Form className={styles.formAddToCart} onSubmit={onSubmit}>
+              {(errors == errorMessages.invalidSize ||
+                errors === errorMessages.notEnoughQuantity ||
+                errors === errorMessages.zeroOrEmptyInput) && (
+                <p className={styles.invalid}>{errors}</p>
+              )}
               <div className={styles.sizeAndQuantityContainer}>
-                {errors == errorMessages.invalidSize && (
-                  <p className={styles.invalid}>{errors}</p>
-                )}
                 <Form.Select
                   name={OrderFormKeys.Size}
                   onChange={onChange}
@@ -215,10 +217,6 @@ export default function ProductDetails() {
                         );
                       })}
                 </Form.Select>
-                {(errors === errorMessages.notEnoughQuantity ||
-                  errors === errorMessages.zeroOrEmptyInput) && (
-                  <p className={styles.invalid}>{errors}</p>
-                )}
                 <Form.Control
                   type="number"
                   id={OrderFormKeys.Amount}
