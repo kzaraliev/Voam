@@ -25,8 +25,6 @@ export default function StepOne({ changeActiveStep, onFormDataChange }) {
     [OrderKeys.PaymentMethod]: "",
   });
 
-  console.log(user);
-
   useEffect(() => {
     authService
       .getInformation(userId)

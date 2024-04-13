@@ -4,7 +4,7 @@ import Image from "react-bootstrap/Image";
 import Path from "../../utils/paths";
 
 import styles from "./Home.module.css";
-import banner from "../../assets/banner-f.png";
+import banner from "../../assets/banner.png";
 import RecentlyAddedProducts from "./RecentlyAddedProducts/RecentlyAddedProducts";
 
 function Home() {
@@ -14,7 +14,9 @@ function Home() {
       <h2 className={styles.slogan}>
         Elevate Your Urban Vibe with Every Stride!
       </h2>
-      <Image className={styles.banner} src={banner} fluid />
+      <div className={styles.imageContainer}>
+        <Image className={styles.banner} src={banner} fluid alt="banner voam" width={850} height={600}/>
+      </div>
       <Link to={Path.Items} type="button" className={styles.shopNow}>
         Shop now
       </Link>

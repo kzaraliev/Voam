@@ -13,7 +13,7 @@ export default function RecentlyAddedProduct({ id, name, price, image }) {
   return (
     <Link to={`${Path.Items}/${id}`} className={styles.carouselItemContent}>
       <Card className={styles.card}>
-        <Card.Img variant="top" src={imgSrc} className={styles.img} />
+        <Card.Img variant="top" src={imgSrc} className={styles.img} loading="lazy" alt="product image"/>
         <Card.Body className={styles.cardBody}>
           <Card.Title className={styles.cardTitle}>{name}</Card.Title>
           <Card.Subtitle className={["mb-2", styles.cardPrice]}>
