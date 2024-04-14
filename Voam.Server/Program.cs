@@ -1,4 +1,6 @@
 using Voam.Server.Common;
+using Microsoft.AspNetCore.ResponseCompression;
+using System.IO.Compression;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,24 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationDbContext(builder.Configuration);
 builder.Services.AddApplicationIdentity(builder.Configuration);
 builder.Services.AddApplicationServices();
+
+builder.Services.AddResponseCompression(opts =>
+{
+    opts.EnableForHttps = true;
+    opts.Providers.Add<GzipCompressionProvider>();
+    opts.Providers.Add<BrotliCompressionProvider>();
+    opts.MimeTypes = ResponseCompressionDefaults.MimeTypes;
+});
+
+builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Optimal;
+});
+
+builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+{
+    options.Level = CompressionLevel.Optimal;
+});
 
 builder.Services.AddMemoryCache();
 
@@ -27,6 +47,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<AuthorizationResponseMiddleware>();
+
+app.UseResponseCompression();
 
 app.UseCors("AllowAll");
 
