@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
+import Swal from "sweetalert2";
 
 import { EditFormKeys } from "../../utils/constants";
 import registerValidation from "./createProductValidation";
@@ -44,33 +45,54 @@ export default function CreateProduct() {
   });
 
   async function onSubmit() {
-    if (checkImagesLength()) {
-      return;
-    }
+    Swal.fire({
+      title: "Do you want to create the product?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        if (checkImagesLength()) {
+          return;
+        }
 
-    let imagesArray = [];
+        let imagesArray = [];
 
-    for (let i = 0; i < values.images.length; i++) {
-      if (values.images[i].type !== "image/png") {
-        setFieldError(EditFormKeys.Images, "Only PNG images are allowed");
-        return;
+        for (let i = 0; i < values.images.length; i++) {
+          if (values.images[i].type !== "image/png") {
+            setFieldError(EditFormKeys.Images, "Only PNG images are allowed");
+            return;
+          }
+
+          let result = await imageToBinary.toBase64(values.images[i]);
+          imagesArray.push(result);
+        }
+
+        values.images = imagesArray;
+
+        try {
+          const { id } = await productService.create(values);
+          navigate(`${Path.Items}/${id}`);
+          Swal.fire({
+            timer: 3000,
+            title: "Saved!",
+            icon: "success",
+          });
+        } catch (error) {
+          logoutHandler();
+          navigate(Path.Login);
+          alert("Ooops... Something went wrong. Try login again");
+        }
+      } else if (result.isDenied) {
+        Swal.fire({
+          timer: 3000,
+          title: "The product was not created",
+          icon: "info",
+        });
+        navigate(`${Path.Items}`);
       }
-
-      let result = await imageToBinary.toBase64(values.images[i]);
-      imagesArray.push(result);
-    }
-
-    values.images = imagesArray;
-
-    try {
-      const { id } = await productService.create(values);
-
-      navigate(`${Path.Items}/${id}`);
-    } catch (error) {
-      logoutHandler();
-      navigate(Path.Login);
-      alert("Ooops... Something went wrong. Try login again");
-    }
+    });
   }
 
   function checkImagesLength() {
