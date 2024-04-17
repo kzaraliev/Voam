@@ -23,7 +23,7 @@ const orderValidation = Yup.object({
     .required("Enter your phone number")
     .matches(phoneNumberRules, "Phone number is not valid"),
   [OrderKeys.EcontOffice]: Yup.string()
-    .min(10, "Enter more than 5 characters")
+    .min(5, "Enter more than 5 characters")
     .required(),
   [OrderKeys.City]: Yup.string()
     .min(3, "Enter more than 5 characters")
