@@ -13,6 +13,7 @@ namespace Voam.Infrastructure.Data.Models
         [StringLength(ProductConstants.NameMaxLength)]
         public required string Name { get; set; }
 
+        [MaxLength(ProductConstants.DescriptionMaxLength)]
         public required string Description { get; set; }
 
         [Required]

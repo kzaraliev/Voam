@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Voam.Infrastructure.Data.Constants;
 
 namespace Voam.Infrastructure.Data.Models
 {
@@ -10,6 +10,7 @@ namespace Voam.Infrastructure.Data.Models
         public int Id { get; set; }
 
         [Required]
+        [Range(ReviewConstants.ReviewMinNumber, ReviewConstants.ReviewMaxNumber)]
         public double Rating { get; set; }
 
         [Required]
