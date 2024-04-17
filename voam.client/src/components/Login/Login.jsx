@@ -61,6 +61,7 @@ export default function Login() {
                             value={values[LoginFormKeys.Email]}
                             onBlur={handleBlur}
                             placeholder="name@example.com"
+                            required={true}
                         />
                     </FloatingLabel>
                 </Form.Group>
@@ -77,6 +78,7 @@ export default function Login() {
                             placeholder="Enter password"
                             onChange={handleChange}
                             value={values[LoginFormKeys.Password]}
+                            required={true}
                             />
                         </FloatingLabel>
                         <div
