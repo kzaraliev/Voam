@@ -32,7 +32,7 @@ namespace Voam.Server.Controllers
             {
                 products = await productService.GetAllProductsAsync();
 
-                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(3));
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1));
 
                 memoryCache.Set(ProductsCacheKey, products, cacheOptions);
             }
@@ -51,7 +51,7 @@ namespace Voam.Server.Controllers
             {
                 products = await productService.GetRecentlyAddedProductsAsync();
 
-                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(3));
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(1));
 
                 memoryCache.Set(RecentProductsCacheKey, products, cacheOptions);
             }

@@ -1,5 +1,0 @@
-JWT Refresh tokens (low)
-Documentation(medium):
-	User Setup
-	Environment and Database Setup
-Search functionality (low)

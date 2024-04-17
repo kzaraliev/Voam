@@ -109,7 +109,7 @@ namespace Voam.Server.Controllers
             {
                 phoneNumber = await authService.GetUserPhoneNumberAsync(id);
 
-                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30));
+                var cacheOptions = new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(10));
 
                 memoryCache.Set(PhoneNumberCacheKey, phoneNumber, cacheOptions);
             }
