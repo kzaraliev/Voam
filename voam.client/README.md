@@ -101,9 +101,9 @@
 	   "name": "string",
 	   "description": "string",
 	   "price": "decimal",
-      "sizeS": "integer number",
-      "sizeM": "integer number",
-      "sizeL": "integer number",
+       "sizeS": "integer number",
+       "sizeM": "integer number",
+       "sizeL": "integer number",
        "Images": "string[]"
 	}	
     ```
@@ -155,9 +155,9 @@
 	   "name": "string",
 	   "description": "string",
 	   "price": "decimal",
-      "sizeS": "integer number",
-      "sizeM": "integer number",
-      "sizeL": "integer number",
+       "sizeS": "integer number",
+       "sizeM": "integer number",
+       "sizeL": "integer number",
        "Images": "string[]"
 	}	
     ```
@@ -195,7 +195,7 @@
 	```json
 	{
 	   "Bearer": "accessToken"
-     "Content-Type": "application/json"
+ 	"Content-Type": "application/json"
 	}
     ```	
 	-   _URL: https://localhost:7097/api/Order/GetAllOrdersForUser?id={userId}&pageSize={pageSize}&pageNumber={pageNumber}_
@@ -204,7 +204,7 @@
   The Profile page is available only to admin users. This page displays a list of all orders and charts for statistics.
 
 <p align="center">
-		<img src="https://github.com/kzaraliev/Voam/blob/main/Images/AdminPage_1.png">
+	<img src="https://github.com/kzaraliev/Voam/blob/main/Images/AdminPage_1.png">
     <img src="https://github.com/kzaraliev/Voam/blob/main/Images/AdminPage_2.png">
 </p>
 
@@ -218,6 +218,47 @@
 }
   ```	
   -   _URL: https://localhost:7097/api/Order/GetAllOrders_
+
+15. **Shopping cart page:**
+	The shopping cart page is only available for logged-in users. The page has a list of all products in the shopping cart of the given user. The user can remove or change the quantity of products in his cart. The [Proceed to checkout] button opens the Checkout page.
+
+<p align="center">
+	<img src="https://github.com/kzaraliev/Voam/blob/main/Images/ShoppingCart_1.png">
+</p>
+
+**REST Service API Endpoint:**
+	-   _Method: GET_
+	-   _Request headers:_
+  ```json
+{
+	"Bearer": "accessToken"
+    "Content-Type": "application/json"
+}
+  ```	
+  -   _URL: https://localhost:7097/api/ShoppingCart/GetShoppingCart?userId={userId}_
+
+16. **Checkout page**
+The Checkout page consists of three steps:
+ - Billing Details
+	- In the first step, the user enters data relating to the delivery
+
+<p align="center">
+	<img src="https://github.com/kzaraliev/Voam/blob/main/Images/Checkout_1.png">
+</p>
+
+ - Review & Confirm
+	- The second step displays information about the overall order
+
+<p align="center">
+	<img src="https://github.com/kzaraliev/Voam/blob/main/Images/Checkout_2.png">
+</p>
+
+ - Confirmation
+	- The last step displays a message about a successfully placed order
+
+<p align="center">
+	<img src="https://github.com/kzaraliev/Voam/blob/main/Images/Checkout_3.png">
+</p>
 
 ## Project Structure
 
