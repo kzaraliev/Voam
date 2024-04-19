@@ -11,7 +11,7 @@ export default function ProductCard({ id, name, price, image }) {
   return (
     <Link to={`${Path.Items}/${id}`} className={styles.cardLink}>
       <Card className={styles.cardBackground}>
-        <Card.Img variant="top" src={imgSrc} className={styles.cardImg} />
+        <Card.Img variant="top" src={imgSrc} className={styles.cardImg} alt="card image"/>
         <Card.Body className={styles.cardBody}>
           <Card.Title className={styles.cardTitle}>{name}</Card.Title>
           <Card.Text className={styles.price}>Price: {price} lv.</Card.Text>

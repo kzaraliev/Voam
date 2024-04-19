@@ -18,10 +18,10 @@ export default function About() {
             a high-quality product representing the wave we are currently on.
           </p>
         </div>
-        <img className={styles.image} src={mouth} />
+        <img className={styles.image} src={mouth} alt="voam mouth"/>
       </div>
       <div className={styles.sections}>
-        <img className={styles.image} src={logo} />
+        <img className={styles.image} src={logo} alt="voam logo"/>
         <div className={styles.text}>
           <h2 className={styles.subtitle}>Our Mission</h2>
           <p className={styles.paragraph}>
